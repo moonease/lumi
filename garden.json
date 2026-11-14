@@ -1,22 +1,22 @@
 {
-  "updated": "2026-11-14T23:02+01:00",
+  "updated": "2026-11-14T23:29+01:00",
   "day": 2,
-  "hour": 0,
+  "hour": 1,
   "location": "shed",
   "weather": {
     "kind": "fog",
     "code": 45,
     "emoji": "🌫️",
     "label": "foggy",
-    "temp": -2.0,
+    "temp": -2.4,
     "precip": 0.0,
     "wind": 3,
-    "cloud": 60,
+    "cloud": 66,
     "heavy": false,
     "wet": false,
     "place": "Garching",
     "real": true,
-    "fetched": "2026-11-14T22:28"
+    "fetched": "2026-11-14T23:07"
   },
   "season": "autumn",
   "wet": false,
@@ -63,6 +63,13 @@
       "emoji": "✨",
       "text": "Lumi found a treasure: fallen leaf.",
       "kind": "treasure"
+    },
+    {
+      "day": 2,
+      "time": "00:00",
+      "emoji": "🗣️",
+      "text": "Fennel accused Tock of ‘wasting inventions on pointless rafts’ while Tock muttered, ‘you’d rather chase ghosts than fix the phone’s battery?’",
+      "kind": "gossip"
     }
   ],
   "treasures": [
@@ -89,8 +96,8 @@
       "name": "Tock",
       "trust": 0,
       "impression": "",
-      "mood": "determined, fidgety",
-      "busy_with": "building a 'seed elevator' from a pinecone and bottle cap",
+      "mood": "focused and chilly",
+      "busy_with": "building a tiny raft from the pencil shaving to ‘test the pond’s currents’",
       "caregiver": false
     },
     {
@@ -98,8 +105,8 @@
       "name": "Mrs. Bristle",
       "trust": 78,
       "impression": "she looks after me",
-      "mood": "gentle, worried",
-      "busy_with": "gathering thorny blackberries for Lumi's snack",
+      "mood": "calm and concerned",
+      "busy_with": "gently nudging Lumi’s nest to check for dampness",
       "caregiver": true
     }
   ],
@@ -128,11 +135,22 @@
       "when": "Day 1, 22:00 (night)",
       "text": "A fox came through the pond in the night.",
       "place": "pond"
+    },
+    {
+      "when": "Day 2, 00:00 (night)",
+      "text": "Fennel accused Tock of ‘wasting inventions on pointless rafts’ while Tock muttered, ‘you’d rather chase ghosts than fix the phone’s battery?’",
+      "place": null
     }
   ],
   "diary": [],
   "mind_changes": [],
-  "path": [],
+  "path": [
+    {
+      "day": 2,
+      "hour": 0,
+      "place": "shed"
+    }
+  ],
   "loose": {
     "pond": [
       "pencil shaving"
