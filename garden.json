@@ -1,22 +1,22 @@
 {
-  "updated": "2026-11-14T22:03+01:00",
+  "updated": "2026-11-14T22:23+01:00",
   "day": 1,
   "hour": 23,
-  "location": "shed",
+  "location": "hedge",
   "weather": {
     "kind": "fog",
     "code": 45,
     "emoji": "🌫️",
     "label": "foggy",
-    "temp": -1.6,
+    "temp": -1.9,
     "precip": 0.0,
     "wind": 4,
-    "cloud": 53,
+    "cloud": 58,
     "heavy": false,
     "wet": false,
     "place": "Garching",
     "real": true,
-    "fetched": "2026-11-14T21:30"
+    "fetched": "2026-11-14T22:00"
   },
   "season": "autumn",
   "wet": false,
@@ -123,6 +123,11 @@
       "when": "Day 1, 20:00 (evening)",
       "text": "The cat was prowling in the pond.",
       "place": "pond"
+    },
+    {
+      "when": "Day 1, 22:00 (night)",
+      "text": "A fox came through the pond in the night.",
+      "place": "pond"
     }
   ],
   "diary": [],
@@ -191,6 +196,16 @@
     {
       "day": 1,
       "hour": 21,
+      "place": "hedge"
+    },
+    {
+      "day": 1,
+      "hour": 22,
+      "place": "hedge"
+    },
+    {
+      "day": 1,
+      "hour": 22,
       "place": "hedge"
     },
     {
