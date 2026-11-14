@@ -1,8 +1,8 @@
 {
-  "updated": "2026-11-14T20:37+01:00",
+  "updated": "2026-11-14T20:54+01:00",
   "day": 1,
   "hour": 21,
-  "location": "flowerbed",
+  "location": "hedge",
   "weather": {
     "kind": "fog",
     "code": 45,
@@ -35,6 +35,27 @@
       "emoji": "🌫️",
       "text": "Fog rolled in over the garden. (real weather in Garching: foggy, -0.6°C)",
       "kind": "weather"
+    },
+    {
+      "day": 1,
+      "time": "20:00",
+      "emoji": "🗺️",
+      "text": "Lumi went to the vegetable patch for the very first time.",
+      "kind": "first"
+    },
+    {
+      "day": 1,
+      "time": "20:00",
+      "emoji": "🗺️",
+      "text": "Lumi went to under the garden shed for the very first time.",
+      "kind": "first"
+    },
+    {
+      "day": 1,
+      "time": "20:00",
+      "emoji": "🗺️",
+      "text": "Lumi went to the hedge for the very first time.",
+      "kind": "first"
     }
   ],
   "treasures": [],
@@ -81,6 +102,11 @@
     {
       "when": "Day 1, 19:00 (evening)",
       "text": "A giant dropped a pencil shaving in the pond.",
+      "place": "pond"
+    },
+    {
+      "when": "Day 1, 20:00 (evening)",
+      "text": "The cat was prowling in the pond.",
       "place": "pond"
     }
   ],
@@ -136,6 +162,16 @@
       "day": 1,
       "hour": 20,
       "place": "flowerbed"
+    },
+    {
+      "day": 1,
+      "hour": 20,
+      "place": "flowerbed"
+    },
+    {
+      "day": 1,
+      "hour": 20,
+      "place": "vegetable_patch"
     }
   ],
   "loose": {
