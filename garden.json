@@ -1,22 +1,22 @@
 {
-  "updated": "2026-11-14T23:29+01:00",
+  "updated": "2026-11-14T23:51+01:00",
   "day": 2,
-  "hour": 1,
+  "hour": 2,
   "location": "shed",
   "weather": {
     "kind": "fog",
     "code": 45,
     "emoji": "🌫️",
     "label": "foggy",
-    "temp": -2.4,
+    "temp": -2.6,
     "precip": 0.0,
     "wind": 3,
-    "cloud": 66,
+    "cloud": 68,
     "heavy": false,
     "wet": false,
     "place": "Garching",
     "real": true,
-    "fetched": "2026-11-14T23:07"
+    "fetched": "2026-11-14T23:34"
   },
   "season": "autumn",
   "wet": false,
@@ -68,7 +68,7 @@
       "day": 2,
       "time": "00:00",
       "emoji": "🗣️",
-      "text": "Fennel accused Tock of ‘wasting inventions on pointless rafts’ while Tock muttered, ‘you’d rather chase ghosts than fix the phone’s battery?’",
+      "text": "Fennel insisted the phone could track the cat, but Tock said 'inventions need focus, not magic' and accidentally knocked over his twig sketch.",
       "kind": "gossip"
     }
   ],
@@ -96,8 +96,8 @@
       "name": "Tock",
       "trust": 0,
       "impression": "",
-      "mood": "focused and chilly",
-      "busy_with": "building a tiny raft from the pencil shaving to ‘test the pond’s currents’",
+      "mood": "determined",
+      "busy_with": "building a raft from pencil shavings",
       "caregiver": false
     },
     {
@@ -105,8 +105,8 @@
       "name": "Mrs. Bristle",
       "trust": 78,
       "impression": "she looks after me",
-      "mood": "calm and concerned",
-      "busy_with": "gently nudging Lumi’s nest to check for dampness",
+      "mood": "worried",
+      "busy_with": "checking the hedge for Lumi",
       "caregiver": true
     }
   ],
@@ -138,7 +138,7 @@
     },
     {
       "when": "Day 2, 00:00 (night)",
-      "text": "Fennel accused Tock of ‘wasting inventions on pointless rafts’ while Tock muttered, ‘you’d rather chase ghosts than fix the phone’s battery?’",
+      "text": "Fennel insisted the phone could track the cat, but Tock said 'inventions need focus, not magic' and accidentally knocked over his twig sketch.",
       "place": null
     }
   ],
@@ -148,6 +148,11 @@
     {
       "day": 2,
       "hour": 0,
+      "place": "shed"
+    },
+    {
+      "day": 2,
+      "hour": 1,
       "place": "shed"
     }
   ],
