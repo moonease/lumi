@@ -1,0 +1,582 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lumi’s garden</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EEF3E6; --paper:#FBFAF3; --ink:#233A22; --soft:#5A6E57;
+  --leaf:#6E9A4F; --poppy:#C8322B; --marigold:#E3A33A; --pond:#5E93AD; --line:#C8D3BE;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#142019; --paper:#1D2B21; --ink:#E4EDDB; --soft:#A5B79F;
+    --leaf:#8DBA6A; --poppy:#E5574B; --marigold:#E9B055; --pond:#6FA6C0; --line:#34483A; color-scheme:dark}
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 "Atkinson Hyperlegible",system-ui,sans-serif}
+h1,h2{font-family:"Gaegu","Comic Sans MS",cursive;font-weight:700;margin:0}
+h1{font-size:clamp(2.4rem,6vw,3.6rem);line-height:1}
+h2{font-size:1.9rem;line-height:1.1;margin-bottom:.6rem}
+main{max-width:1100px;margin:0 auto;padding:1.5rem 1.2rem 4rem}
+header{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:.5rem 2rem;margin-bottom:1rem}
+#where{color:var(--soft);font-size:1.05rem}
+
+/* the 3D garden */
+.stage{position:relative;height:min(72vh,660px);min-height:380px;border-radius:28px;overflow:hidden;border:2px solid var(--line);background:#A9D6F5;cursor:grab;touch-action:none}
+.stage:active{cursor:grabbing}
+.stage canvas{display:block;width:100%;height:100%}
+.overlay{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.tag{position:absolute;transform:translate(-50%,-100%);font-family:"Gaegu",cursive;font-size:18px;color:#233A22;
+  background:rgba(251,250,243,.78);padding:0 .5rem;border-radius:8px;white-space:nowrap}
+.tag.creature{font-size:16px;background:rgba(251,250,243,.6)}
+.tag.speaking{white-space:normal;width:max-content;max-width:230px;font-size:18px;background:#FBFAF3;padding:.3rem .6rem;border-radius:12px;z-index:1}
+#bubble{position:absolute;z-index:2;transform:translate(-50%,-100%);max-width:260px;background:#FBFAF3;color:#233A22;
+  font-family:"Gaegu",cursive;font-size:21px;line-height:1.15;padding:.45rem .8rem;border-radius:16px;
+  box-shadow:0 2px 0 #C8D3BE;text-align:center}
+#bubble::after{content:"";position:absolute;left:50%;bottom:-9px;margin-left:-8px;border:8px solid transparent;border-top-color:#FBFAF3;border-bottom:0}
+.controls{position:absolute;right:12px;bottom:12px;display:flex;gap:.4rem}
+.controls button{pointer-events:auto}
+.hint{position:absolute;left:14px;bottom:12px;font-size:.85rem;color:#233A22;background:rgba(251,250,243,.7);padding:.15rem .6rem;border-radius:8px}
+
+.cols{display:grid;grid-template-columns:1fr 1.15fr;gap:2.5rem;margin-top:2.5rem}
+@media (max-width:760px){.cols{grid-template-columns:1fr}}
+.need{display:grid;grid-template-columns:6.5rem 1fr 2.2rem;align-items:center;gap:.6rem;margin:.35rem 0}
+.track{height:12px;border-radius:6px;background:var(--line);overflow:hidden}
+.fill{height:100%;border-radius:6px;background:var(--leaf);transition:width .8s}
+.fill.low{background:var(--poppy)}
+.need.joy .track{height:20px;border-radius:10px}
+.need.joy .fill{background:var(--marigold)}
+.num{text-align:right;color:var(--soft);font-variant-numeric:tabular-nums}
+#self{margin-top:1.4rem;font-style:italic}
+.diary{background:var(--paper);border-radius:6px 22px 22px 6px;padding:1.3rem 1.5rem;max-height:520px;overflow:auto;
+  border-left:6px double var(--line);font-family:"Gaegu",cursive;font-size:1.3rem;line-height:1.35;white-space:pre-wrap}
+.diary h3{font-size:1rem;font-family:"Atkinson Hyperlegible",sans-serif;color:var(--soft);margin:1.2rem 0 .2rem;font-weight:400}
+.diary h3:first-child{margin-top:0}
+section{margin-top:3rem}
+.lately li{margin:.25rem 0}
+.lately small{color:var(--soft)}
+ul{padding-left:1.2rem;margin:0}
+.projects a{color:var(--pond)}
+button{font:inherit;font-weight:700;border:0;border-radius:999px;padding:.5rem 1.1rem;cursor:pointer;background:#233A22;color:#FBFAF3}
+:focus-visible{outline:3px solid var(--pond);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){.fill{transition:none}}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Lumi’s garden</h1>
+    <div id="where">Waking up…</div>
+  </header>
+
+  <div class="stage" id="stage" aria-label="3D view of the garden with Lumi in it">
+    <div class="overlay" id="overlay"><div id="bubble" hidden></div></div>
+    <div class="hint">Drag to look around, scroll to zoom</div>
+    <div class="controls">
+      <button id="follow" type="button" aria-pressed="true">Follow Lumi</button>
+      <button id="overview" type="button">Whole garden</button>
+    </div>
+  </div>
+
+  <div class="cols">
+    <div>
+      <h2>How she’s feeling</h2>
+      <div id="needs"></div>
+      <p id="self"></p>
+      <p id="goals" style="color:var(--soft)"></p>
+    </div>
+    <div>
+      <h2>Her diary</h2>
+      <div class="diary" id="diary" tabindex="0">She hasn’t written anything yet.</div>
+    </div>
+  </div>
+
+  <section class="cols">
+    <div>
+      <h2>What she’s learned</h2>
+      <ul class="lately" id="learned"><li>Nothing yet.</li></ul>
+      <p id="wondering" style="color:var(--soft)"></p>
+    </div>
+    <div>
+      <h2>What she can do</h2>
+      <div id="skills"><p>She hasn’t practised anything yet.</p></div>
+    </div>
+  </section>
+
+  <section class="cols">
+    <div>
+      <h2>Lately</h2>
+      <ul class="lately" id="lately"><li>Nothing yet.</li></ul>
+    </div>
+    <div>
+      <h2>Things she made</h2>
+      <ul class="projects" id="projects"><li>No projects yet.</li></ul>
+    </div>
+  </section>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const STATIC = !/^(localhost|127\.0\.0\.1)$/.test(location.hostname);   // true on GitHub Pages
+const url = (api, file) => STATIC ? `${file}?t=${Date.now()}` : api;
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+/* ---------- where Lumi stands in each place (x, z, height) ---------- */
+const SPOTS = {
+  teapot:{x:-10.5,z:7,y:0},  flowerbed:{x:-2,z:2,y:0},  pond:{x:6.3,z:8,y:0},
+  vegetable_patch:{x:5.5,z:-2.5,y:0},  shed:{x:15,z:-7.5,y:0},  hedge:{x:-11,z:-4,y:0},
+  windowsill:{x:0.5,z:-13.4,y:5.15, via:[{x:-2.3,z:-13,y:0},{x:-2.3,z:-13.2,y:5.15}]},
+};
+const CREATURE_SPOTS = {fennel:[1.6,1.2], tock:[1.5,-1], crumb:[1.4,1.2], gorse:[2.4,1.6], bristle:[1.6,1.2]};
+
+/* ---------- scene ---------- */
+const stage = $("stage"), overlay = $("overlay");
+const renderer = new THREE.WebGLRenderer({antialias:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+stage.prepend(renderer.domElement);
+const scene = new THREE.Scene();
+scene.fog = new THREE.Fog(0xA9D6F5, 45, 110);
+const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 300);
+
+const hemi = new THREE.HemisphereLight(0xffffff, 0x5d7a3a, 0.7); scene.add(hemi);
+const sun = new THREE.DirectionalLight(0xfff1d6, 0.9);
+sun.castShadow = true; sun.shadow.mapSize.set(2048,2048);
+Object.assign(sun.shadow.camera, {left:-35,right:35,top:35,bottom:-35,near:1,far:120});
+scene.add(sun);
+
+const M = c => new THREE.MeshLambertMaterial({color:c, flatShading:true});
+function mesh(geo, color, x=0, y=0, z=0, parent=scene){
+  const m = new THREE.Mesh(geo, typeof color === "number" ? M(color) : color);
+  m.position.set(x,y,z); m.castShadow = m.receiveShadow = true; parent.add(m); return m;
+}
+const rnd = (a,b) => a + Math.random()*(b-a);
+
+/* ground + grass */
+const ground = mesh(new THREE.CircleGeometry(70, 40), 0x86B35A); ground.rotation.x = -Math.PI/2;
+for (let i=0;i<260;i++){
+  const x = rnd(-40,40), z = rnd(-12,40);
+  const t = mesh(new THREE.ConeGeometry(0.12, rnd(0.6,1.6), 4), [0x6E9A4F,0x7DAA55,0x5E8A42][i%3], x, 0.4, z);
+  t.rotation.z = rnd(-.25,.25);
+}
+
+/* giants' house wall with window, sill and ivy */
+mesh(new THREE.BoxGeometry(46,16,1), 0xE8DCC4, 0, 8, -14.6);
+mesh(new THREE.BoxGeometry(7,5,0.2), 0x9CC7DE, 0.5, 8.2, -14.05);
+mesh(new THREE.BoxGeometry(7.6,0.4,0.3), 0xFFFFFF, 0.5, 10.8, -14);
+mesh(new THREE.BoxGeometry(6,0.35,1.4), 0xF4F0E6, 0.5, 4.97, -13.5);
+const pot = mesh(new THREE.CylinderGeometry(0.6,0.45,0.9,8), 0xB86A45, 2.4, 5.6, -13.6);
+for (let i=0;i<7;i++) mesh(new THREE.SphereGeometry(0.28,6,5), 0x4F8A3A, 2.4+rnd(-.4,.4), 6.2+rnd(0,.5), -13.6+rnd(-.3,.3));
+for (let i=0;i<70;i++) mesh(new THREE.SphereGeometry(rnd(.25,.45),5,4), [0x3F6B2E,0x4F7F38][i%2], -2.3+rnd(-1.1,1.1), rnd(0,9), -14.05);
+
+/* teapot house under the rosemary */
+const teapot = new THREE.Group(); teapot.position.set(-13,1.3,9); teapot.rotation.set(0,0.6,Math.PI/2-0.15); scene.add(teapot);
+const body = mesh(new THREE.SphereGeometry(1.7,14,10), 0xF3F1EA, 0,0,0, teapot); body.scale.set(1,1.15,1);
+mesh(new THREE.TorusGeometry(1.75,0.12,6,20), 0x5E93AD, 0,0,0, teapot).rotation.x = Math.PI/2;
+mesh(new THREE.CylinderGeometry(0.75,0.75,0.3,12), 0xF3F1EA, 0,1.95,0, teapot);
+mesh(new THREE.SphereGeometry(0.2,8,6), 0x5E93AD, 0,2.2,0, teapot);
+const handle = mesh(new THREE.TorusGeometry(0.8,0.16,6,12,Math.PI), 0xF3F1EA, -1.7,0.2,0, teapot); handle.rotation.z = Math.PI/2;
+const door = mesh(new THREE.CircleGeometry(0.55,14), 0x3A2A20, 1.75,-0.5,0, teapot); door.rotation.y = Math.PI/2;
+const windowLight = mesh(new THREE.CircleGeometry(0.28,10), new THREE.MeshBasicMaterial({color:0x3A2A20}), 0.9,-0.4,1.55, teapot);
+for (let i=0;i<14;i++){ const c = mesh(new THREE.ConeGeometry(rnd(.5,.9), rnd(2.5,4.5), 5), 0x52704A, -15+rnd(-2.5,2.5), 1.6, 11+rnd(-1.5,2)); c.rotation.z = rnd(-.2,.2); }
+
+/* flowerbed: poppies, marigolds and a giant sunflower */
+mesh(new THREE.CylinderGeometry(6.5,6.8,0.2,20), 0x6B4A33, -2,0.05,2);
+function flower(x,z,h,petal,r){
+  mesh(new THREE.CylinderGeometry(0.07,0.09,h,5), 0x4F7F38, x,h/2,z);
+  const head = mesh(new THREE.SphereGeometry(r,8,6), petal, x,h,z); head.scale.y = 0.45;
+  mesh(new THREE.SphereGeometry(r*0.35,6,5), 0x2B2B2B, x,h+r*0.18,z);
+  mesh(new THREE.SphereGeometry(0.35,5,4), 0x4F7F38, x+0.3,h*0.4,z).scale.set(1.4,0.3,0.8);
+}
+for (let i=0;i<26;i++){
+  const a = rnd(0,Math.PI*2), d = rnd(2.2,6);
+  flower(-2+Math.cos(a)*d, 2+Math.sin(a)*d, rnd(1.8,4), [0xC8322B,0xE3A33A,0xD9572E][i%3], rnd(.5,.9));
+}
+mesh(new THREE.CylinderGeometry(0.2,0.28,12,6), 0x4F7F38, -6,6,-1);
+const sunHead = mesh(new THREE.CylinderGeometry(1.8,1.8,0.4,16), 0xF2C12E, -6,12,-0.6); sunHead.rotation.x = Math.PI/2.4;
+mesh(new THREE.CylinderGeometry(0.9,0.9,0.45,12), 0x5A3A1E, -6,12,-0.45).rotation.x = Math.PI/2.4;
+
+/* pond with lily pads and a stone for Old Gorse */
+const water = mesh(new THREE.CircleGeometry(6,30), new THREE.MeshLambertMaterial({color:0x5E93AD, transparent:true, opacity:.85}), 10.5,0.06,11.5);
+water.rotation.x = -Math.PI/2; water.scale.x = 1.4;
+for (const [x,z,r] of [[8.5,10,1.1],[12,13,0.9],[13.5,9.5,1.2],[9.5,14,0.7]]) mesh(new THREE.CylinderGeometry(r,r,0.06,12), 0x5E9A45, x,0.1,z);
+mesh(new THREE.DodecahedronGeometry(1.1,0), 0x9A9A8E, 8.7,0.5,9.6).scale.y = 0.6;
+for (let i=0;i<12;i++) mesh(new THREE.CylinderGeometry(0.06,0.06,rnd(2,4),4), 0x7A8F4A, 10.5+Math.cos(i)*8, 1.2, 11.5+Math.sin(i)*5.5);
+
+/* vegetable patch: lettuce rows and a pumpkin hill */
+for (let r=0;r<3;r++){
+  mesh(new THREE.BoxGeometry(9,0.3,1.4), 0x5C3F2B, 9,0.15,-5.2+r*-2.4+2.4);
+  for (let i=0;i<5;i++){ const l = mesh(new THREE.SphereGeometry(0.75,7,6), 0x8CC063, 5.5+i*1.8,0.65,-5.2+r*-2.4+2.4); l.scale.y = 0.75; }
+}
+const pumpkin = mesh(new THREE.SphereGeometry(2.4,14,10), 0xE07B24, 11.5,2,-1.3); pumpkin.scale.y = 0.75;
+mesh(new THREE.CylinderGeometry(0.2,0.3,0.8,6), 0x5A6B2E, 11.5,4,-1.3);
+const scare = new THREE.Group(); scare.position.set(14.5,0,-1.5); scene.add(scare);
+mesh(new THREE.CylinderGeometry(0.15,0.15,9,6), 0x8A6A44, 0,4.5,0, scare);
+mesh(new THREE.BoxGeometry(5,0.25,0.25), 0x8A6A44, 0,6.5,0, scare);
+mesh(new THREE.BoxGeometry(2.4,3,1), 0x4E5F7A, 0,5.6,0, scare);
+mesh(new THREE.SphereGeometry(0.8,8,6), 0xD9C08C, 0,7.8,0, scare);
+mesh(new THREE.CylinderGeometry(1.3,1.3,0.15,10), 0x3A2A20, 0,8.4,0, scare);
+
+/* the shed on its stilts (Lumi goes underneath) */
+mesh(new THREE.BoxGeometry(9,6,7), 0x9C7350, 16,4.8,-8);
+mesh(new THREE.BoxGeometry(9.6,0.4,7.6), 0x7A5638, 16,1.65,-8);
+const roof = mesh(new THREE.CylinderGeometry(0.1,6.3,2.4,4), 0x5A3E2C, 16,9,-8); roof.rotation.y = Math.PI/4; roof.scale.z = 0.8;
+for (const [x,z] of [[12,-5],[20,-5],[12,-11],[20,-11]]) mesh(new THREE.BoxGeometry(0.5,1.6,0.5), 0x6A4A30, x,0.8,z);
+for (let i=0;i<8;i++) mesh(new THREE.CylinderGeometry(0.05,0.05,rnd(.6,1.2),5), 0xB8B8B8, 13+rnd(0,6),0.4,-6-rnd(0,3)).rotation.z = Math.PI/2*rnd(0,1);
+mesh(new THREE.BoxGeometry(1.4,0.5,0.9), 0xD8B35A, 17.5,0.25,-6.5);
+
+/* the hedge city */
+for (let i=0;i<45;i++){
+  const a = rnd(0.6,5.7), d = rnd(2.5,5.5);
+  mesh(new THREE.SphereGeometry(rnd(1.4,2.6),7,6), [0x2F5A2B,0x3A6B32,0x2A4F26][i%3], -15+Math.cos(a)*d, rnd(1,4.5), -6+Math.sin(a)*d*0.8);
+}
+const phone = mesh(new THREE.BoxGeometry(1.4,0.12,2.6), 0x1E1E24, -12.3,0.08,-5.6); phone.rotation.y = 0.4;
+const screen = mesh(new THREE.PlaneGeometry(1.2,2.3), new THREE.MeshBasicMaterial({color:0x6FA6C0}), -12.3,0.15,-5.6);
+screen.rotation.set(-Math.PI/2,0,0.4);
+for (let i=0;i<10;i++) mesh(new THREE.SphereGeometry(0.22,6,5), 0x8E1F3E, -13+rnd(-1.5,1.5), rnd(1,3), -2.6+rnd(-.4,.4));
+
+/* ---------- Lumi ---------- */
+const lumi = new THREE.Group(); scene.add(lumi);
+const rig = new THREE.Group(); rig.scale.setScalar(0.75); lumi.add(rig);
+const skin = M(0xF4D2B4), dressM = M(0xC8322B), hairM = M(0x4A2E1F);
+function limb(len, rad, mat, x, y){
+  const pivot = new THREE.Group(); pivot.position.set(x,y,0); rig.add(pivot);
+  mesh(new THREE.CylinderGeometry(rad,rad,len,8), mat, 0,-len/2,0, pivot);
+  return pivot;
+}
+const legL = limb(0.4,0.065,skin,-0.09,0.42), legR = limb(0.4,0.065,skin,0.09,0.42);
+mesh(new THREE.SphereGeometry(0.085,8,6), 0x3A2A20, 0,-0.42,0.03, legL).scale.set(1,0.6,1.5);
+mesh(new THREE.SphereGeometry(0.085,8,6), 0x3A2A20, 0,-0.42,0.03, legR).scale.set(1,0.6,1.5);
+mesh(new THREE.ConeGeometry(0.34,0.55,14), dressM, 0,0.6,0, rig);
+mesh(new THREE.CylinderGeometry(0.12,0.17,0.25,10), dressM, 0,0.95,0, rig);
+const armL = limb(0.36,0.045,skin,-0.16,1.03), armR = limb(0.36,0.045,skin,0.16,1.03);
+armL.rotation.z = -0.25; armR.rotation.z = 0.25;
+const head = new THREE.Group(); head.position.y = 1.32; rig.add(head);
+mesh(new THREE.SphereGeometry(0.25,16,12), skin, 0,0,0, head);
+const cap = mesh(new THREE.SphereGeometry(0.27,16,12,0,Math.PI*2,0,Math.PI*0.55), hairM, 0,0.02,-0.03, head); cap.rotation.x = -0.35;
+mesh(new THREE.SphereGeometry(0.11,10,8), hairM, -0.24,0.14,-0.05, head);
+mesh(new THREE.SphereGeometry(0.11,10,8), hairM, 0.24,0.14,-0.05, head);
+for (const s of [-1,1]){
+  mesh(new THREE.SphereGeometry(0.032,8,6), 0x222222, s*0.08,0.02,0.225, head);
+  mesh(new THREE.SphereGeometry(0.045,8,6), 0xF2A3A3, s*0.14,-0.06,0.19, head).scale.z = 0.4;
+}
+lumi.traverse(o => { if (o.isMesh) o.castShadow = true; });
+
+/* ---------- creatures ---------- */
+function creature(id){
+  const g = new THREE.Group(); scene.add(g);
+  if (id === "fennel"){            // robin
+    mesh(new THREE.SphereGeometry(0.55,10,8), 0x7A5A3A, 0,0.75,0, g).scale.set(1,0.9,1.25);
+    mesh(new THREE.SphereGeometry(0.42,10,8), 0xD9572E, 0,0.68,0.3, g);
+    mesh(new THREE.SphereGeometry(0.36,10,8), 0x7A5A3A, 0,1.3,0.35, g);
+    mesh(new THREE.ConeGeometry(0.08,0.3,6), 0xE3A33A, 0,1.28,0.75, g).rotation.x = Math.PI/2;
+    for (const s of [-1,1]) mesh(new THREE.SphereGeometry(0.05,6,5), 0x111111, s*0.17,1.38,0.62, g);
+    mesh(new THREE.BoxGeometry(0.3,0.08,0.6), 0x5A4030, 0,0.8,-0.75, g).rotation.x = -0.4;
+  } else if (id === "tock"){       // beetle
+    mesh(new THREE.SphereGeometry(0.6,10,8), 0x2E8B57, 0,0.45,0, g).scale.set(1,0.6,1.3);
+    mesh(new THREE.SphereGeometry(0.28,8,6), 0x1E1E1E, 0,0.4,0.75, g);
+    for (let i=-1;i<=1;i++) for (const s of [-1,1]) mesh(new THREE.CylinderGeometry(0.03,0.03,0.5,4), 0x1E1E1E, s*0.55,0.2,i*0.35, g).rotation.z = s*1.1;
+  } else if (id === "crumb"){      // mouse
+    mesh(new THREE.SphereGeometry(0.5,10,8), 0x9A9590, 0,0.45,0, g).scale.set(0.9,0.8,1.3);
+    mesh(new THREE.ConeGeometry(0.28,0.6,10), 0x9A9590, 0,0.55,0.75, g).rotation.x = Math.PI/2;
+    for (const s of [-1,1]) mesh(new THREE.CircleGeometry(0.2,10), 0xF0B8B8, s*0.22,0.95,0.45, g);
+    mesh(new THREE.SphereGeometry(0.06,6,5), 0xE07A8A, 0,0.55,1.05, g);
+    mesh(new THREE.CylinderGeometry(0.025,0.015,1.1,4), 0xD6A0A0, 0,0.3,-1, g).rotation.x = 1.2;
+  } else if (id === "gorse"){      // toad
+    mesh(new THREE.SphereGeometry(0.9,10,8), 0x6B7A3A, 0,0.65,0, g).scale.set(1.2,0.7,1);
+    for (const s of [-1,1]){ mesh(new THREE.SphereGeometry(0.2,8,6), 0xC9B458, s*0.4,1.15,0.45, g);
+                             mesh(new THREE.SphereGeometry(0.1,6,5), 0x111111, s*0.42,1.2,0.6, g); }
+  } else if (id === "bristle"){    // hedgehog
+    mesh(new THREE.SphereGeometry(0.7,10,8,0,Math.PI*2,0,Math.PI/2), 0x5A4636, 0,0.05,0, g).scale.z = 1.3;
+    for (let i=0;i<40;i++){ const a = rnd(0,6.28), b = rnd(0.2,1.4);
+      const sp = mesh(new THREE.ConeGeometry(0.06,0.4,4), 0x3A2E24, Math.cos(a)*Math.sin(b)*0.7, 0.05+Math.cos(b)*0.7, Math.sin(a)*Math.sin(b)*0.9-0.1, g);
+      sp.lookAt(sp.position.x*3, sp.position.y*3, sp.position.z*3); sp.rotateX(Math.PI/2); }
+    mesh(new THREE.ConeGeometry(0.25,0.55,8), 0xC9A88A, 0,0.25,0.95, g).rotation.x = Math.PI/2;
+    mesh(new THREE.SphereGeometry(0.06,6,5), 0x111111, 0,0.27,1.22, g);
+  } else {                          // anyone new you add to world.json
+    mesh(new THREE.SphereGeometry(0.5,10,8), 0xC9A0DC, 0,0.5,0, g);
+  }
+  g.traverse(o => { if (o.isMesh) o.castShadow = true; });
+  return g;
+}
+
+/* ---------- overlay labels ---------- */
+const v3 = new THREE.Vector3();
+function tag(text, cls){ const d = document.createElement("div"); d.className = "tag " + (cls||""); d.textContent = text; overlay.appendChild(d); return d; }
+function place2D(el, pos){
+  v3.copy(pos).project(camera);
+  const hidden = v3.z > 1 || Math.abs(v3.x) > 1.1 || Math.abs(v3.y) > 1.1;
+  el.style.display = hidden ? "none" : "";
+  el.style.left = (v3.x*0.5+0.5)*stage.clientWidth + "px";
+  el.style.top = (-v3.y*0.5+0.5)*stage.clientHeight + "px";
+}
+
+/* ---------- state from the server ---------- */
+let mood = "", world = null, placeTags = {}, creatures = {}, path = [], current = null, lastHour = 12, asleep = false;
+const spot = id => {
+  if (SPOTS[id]) return SPOTS[id];
+  const ids = Object.keys(world.places), i = ids.indexOf(id);
+  return {x: 18*Math.cos(i/ids.length*6.28), z: 18*Math.sin(i/ids.length*6.28), y:0};
+};
+const P = s => new THREE.Vector3(s.x, s.y||0, s.z);
+
+function route(from, to){
+  const prev = {[from]: null}, queue = [from];
+  while (queue.length){ const p = queue.shift(); if (p === to) break;
+    for (const e of world.places[p]?.exits || []) if (!(e in prev) && world.places[e]){ prev[e] = p; queue.push(e); } }
+  if (!(to in prev)) return [to];
+  const chain = []; for (let p = to; p !== null; p = prev[p]) chain.unshift(p);
+  const pts = [];
+  for (let i=0;i<chain.length;i++){
+    const s = spot(chain[i]);
+    if (i > 0 && s.via) pts.push(...s.via.map(P));                 // climb in
+    if (i > 0) pts.push(P(s));
+    if (i < chain.length-1 && s.via) pts.push(...s.via.slice().reverse().map(P)); // climb out
+  }
+  return pts;
+}
+
+function setupWorld(places){
+  world = {places};
+  for (const [id,p] of Object.entries(places)){
+    const s = spot(id);
+    placeTags[id] = {el: tag(p.name.replace(/^The |^Lumi’s |^Lumi's /,"")), pos: new THREE.Vector3(s.x, (s.y||0)+3.2, s.z)};
+  }
+}
+
+function update(s){
+  if (!world) setupWorld(s.places);
+  if (current === null){ lumi.position.copy(P(spot(s.location))); current = s.location; }
+  lastHour = s.hour;
+  if (s.events) onEvents(s.events);
+  if (!busy && !queue.length && s.location !== current){ path = route(current, s.location); current = s.location; }
+  asleep = s.location === "teapot" && (s.hour >= 22 || s.hour < 6);
+  $("bubble").hidden = false;
+  mood = s.mood;
+  for (const n of s.npcs){
+    if (!creatures[n.id]){
+      const g = creature(n.id), base = spot(n.location), off = CREATURE_SPOTS[n.id] || [1.5,1.2];
+      g.position.set(base.x+off[0], base.y||0, base.z+off[1]);
+      creatures[n.id] = {g, label: tag(n.name, "creature")};
+    }
+    creatures[n.id].g.visible = n.present;
+    creatures[n.id].label.style.visibility = n.present ? "visible" : "hidden";
+  }
+}
+
+/* ---------- watching her live: replay each action ---------- */
+let lastSeq = null, queue = [], busy = false, gesture = null, gestureUntil = 0, faceTarget = null;
+let sayText = "", sayUntil = 0, nextWander = 0;
+const nowS = () => performance.now() / 1000;
+const wait = ms => new Promise(r => setTimeout(r, reduceMotion ? ms / 3 : ms));
+const arrived = () => new Promise(r => { const chk = () => path.length ? setTimeout(chk, 100) : r(); chk(); });
+function say(text, ms = 3500){ sayText = text; sayUntil = nowS() + ms / 1000; }
+function gest(name, ms){ gesture = name; gestureUntil = nowS() + ms / 1000; }
+function hash(str){ let h = 0; for (const c of str) h = (h * 31 + c.charCodeAt(0)) | 0; return Math.abs(h); }
+function near(placeId, key, radius){
+  const s = spot(placeId), h = hash(key);
+  if (s.y) return new THREE.Vector3(s.x + ((h % 300) / 100 - 1.5), s.y, s.z);      // narrow ledge: along it only
+  const a = (h % 360) * Math.PI / 180, r = radius ?? 1.2 + (h % 100) / 80;
+  return new THREE.Vector3(s.x + Math.cos(a) * r, 0, s.z + Math.sin(a) * r);
+}
+function onEvents(events){
+  if (lastSeq === null){ lastSeq = events.length ? events[events.length - 1].seq : 0; return; }  // don't replay old ones
+  for (const e of events) if (e.seq > lastSeq){ queue.push(e); lastSeq = e.seq; }
+  if (queue.length > 12) queue = queue.slice(-12);
+  runQueue();
+}
+async function runQueue(){
+  if (busy) return; busy = true;
+  while (queue.length){ try { await perform(queue.shift()); } catch (err) { console.error(err); } }
+  busy = false;
+}
+async function walkTo(points){ path = points; await arrived(); }
+async function perform(e){
+  const c = e.person && creatures[e.person];
+  switch (e.type){
+    case "move":
+      await walkTo(route(current, e.place)); current = e.place; break;
+    case "look":
+      await walkTo([near(current, e.thing)]); say(`Ooh… the ${e.thing}`); gest("look", 2500); await wait(2600); break;
+    case "eat":
+      await walkTo([near(current, e.thing)]); say(`Mmm, ${e.thing}!`); gest("eat", 2500); await wait(2600); break;
+    case "leave":
+      await walkTo([near(current, e.thing)]); say(`I'll leave a ${e.thing} here`); gest("look", 2200); await wait(2300); break;
+    case "talk": case "together": {
+      if (c){ const p = c.g.position, d = lumi.position.clone().sub(p).setY(0).normalize().multiplyScalar(1.6);
+              await walkTo([p.clone().add(d).setY(spot(current).y || 0)]); faceTarget = p; }
+      say(e.text, 4200); gest(e.type === "talk" ? "wave" : "hop", 4000); await wait(4300);
+      if (c && e.reply){ const name = c.label.textContent; c.label.textContent = `${name}: ${e.reply}`; c.label.classList.add("speaking");
+                         await wait(Math.min(9000, 2500 + e.reply.length * 45)); c.label.textContent = name; c.label.classList.remove("speaking"); }
+      faceTarget = null; break; }
+    case "try":
+      say(e.text, 4000); gest("hop", 3500); await wait(3800); break;
+    case "write":
+      say("✏️ writing in my journal", 3000); gest("write", 3000); await wait(3100); break;
+    case "phone":
+      say("📱 " + e.text, 3500); gest("write", 3500); await wait(3600); break;
+    case "think":
+      say("💭 " + e.text, Math.min(7000, 2000 + e.text.length * 40)); await wait(1800); break;
+  }
+}
+
+/* ---------- camera ---------- */
+let yaw = 0.6, pitch = 0.42, dist = 9, follow = true;
+const target = new THREE.Vector3(), overviewTarget = new THREE.Vector3(1,0,0);
+let drag = null;
+stage.addEventListener("pointerdown", e => { if (e.target.closest("button")) return; drag = [e.clientX, e.clientY]; stage.setPointerCapture(e.pointerId); });
+stage.addEventListener("pointermove", e => { if (!drag) return;
+  yaw -= (e.clientX-drag[0])*0.006; pitch = Math.min(1.35, Math.max(0.08, pitch + (e.clientY-drag[1])*0.004)); drag = [e.clientX, e.clientY]; });
+stage.addEventListener("pointerup", () => drag = null);
+stage.addEventListener("wheel", e => { e.preventDefault(); dist = Math.min(70, Math.max(3, dist*(1+e.deltaY*0.001))); }, {passive:false});
+function setFollow(on){ follow = on; $("follow").setAttribute("aria-pressed", on); dist = on ? 9 : 48; pitch = on ? 0.42 : 0.85; }
+$("follow").onclick = () => setFollow(true);
+$("overview").onclick = () => setFollow(false);
+
+/* ---------- see-through when something hides her ---------- */
+const ray = new THREE.Raycaster(); let faded = [];
+const lumiParts = new Set(); lumi.traverse(o => lumiParts.add(o));
+function fadeBlockers(){
+  for (const m of faded){ m.material.opacity = 1; m.material.transparent = false; }
+  faded = [];
+  const head = lumi.position.clone().add(new THREE.Vector3(0, 0.8, 0));
+  const dir = head.clone().sub(camera.position), len = dir.length();
+  ray.set(camera.position, dir.normalize()); ray.far = len - 0.3;
+  for (const hit of ray.intersectObjects(scene.children, true)){
+    const m = hit.object;
+    if (!m.isMesh || lumiParts.has(m) || m === ground || faded.includes(m)) continue;
+    m.material.transparent = true; m.material.opacity = 0.18; faded.push(m);
+  }
+}
+
+/* ---------- day and night ---------- */
+const SKY = [[0,0x0E1A2B],[5,0x1C2A44],[7,0xF4C38E],[9,0xA9D6F5],[17,0xA9D6F5],[19,0xF2A07B],[21,0x2A2F52],[24,0x0E1A2B]];
+function skyAt(h){
+  for (let i=0;i<SKY.length-1;i++) if (h >= SKY[i][0] && h <= SKY[i+1][0]){
+    const t = (h-SKY[i][0])/(SKY[i+1][0]-SKY[i][0]);
+    return new THREE.Color(SKY[i][1]).lerp(new THREE.Color(SKY[i+1][1]), t);
+  }
+  return new THREE.Color(0xA9D6F5);
+}
+let shownHour = 12;
+function lightUp(dt){
+  shownHour += (lastHour - shownHour) * Math.min(1, dt*0.5);
+  if (Math.abs(lastHour - shownHour) > 12) shownHour = lastHour;
+  const h = shownHour, sky = skyAt(h);
+  scene.background = sky; scene.fog.color = sky; stage.style.background = "#" + sky.getHexString();
+  const day = Math.max(0, Math.sin((h-6)/12*Math.PI));
+  sun.intensity = 0.3 + day*0.7; hemi.intensity = 0.55 + day*0.3;
+  sun.position.set(Math.cos((h-6)/12*Math.PI)*40, 10 + day*40, 20);
+  windowLight.material.color.set(day < 0.2 ? 0xFFD27A : 0x3A2A20);
+}
+
+/* ---------- animation ---------- */
+const clock = new THREE.Clock();
+const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+function frame(){
+  const dt = Math.min(clock.getDelta(), 0.1), t = clock.elapsedTime;
+  let walking = false;
+  if (path.length){
+    const next = path[0], d = next.clone().sub(lumi.position);
+    const climbing = Math.abs(d.y) > 0.01 && Math.hypot(d.x, d.z) < 0.5;
+    const step = (climbing ? 1.6 : 2.8) * dt * (reduceMotion ? 6 : 1);
+    if (d.length() <= step){ lumi.position.copy(next); path.shift(); }
+    else {
+      lumi.position.add(d.normalize().multiplyScalar(step));
+      if (!climbing) lumi.rotation.y = Math.atan2(d.x, d.z);
+    }
+    walking = true;
+  }
+  // idle: little wanders around where she is, like a child who can't stand still
+  if (!busy && !queue.length && !path.length && !asleep && current && nowS() > nextWander){
+    path = [near(current, "wander" + Math.floor(t), 0.4 + Math.random() * 1.6)];
+    nextWander = nowS() + 5 + Math.random() * 7;
+  }
+  const g = nowS() < gestureUntil && !walking ? gesture : null;
+  if (faceTarget && !walking) lumi.rotation.y = Math.atan2(faceTarget.x - lumi.position.x, faceTarget.z - lumi.position.z);
+  const swing = walking ? Math.sin(t*10)*0.6 : 0;
+  legL.rotation.x = swing; legR.rotation.x = -swing;
+  armL.rotation.x = -swing*0.8; armR.rotation.x = swing*0.8;
+  armL.rotation.z = -0.25; armR.rotation.z = 0.25; head.rotation.x = 0;
+  if (asleep && !walking && !busy){
+    rig.rotation.x = -Math.PI/2; rig.position.set(0, 0.18, 0.5);
+  } else {
+    rig.rotation.x = 0; rig.position.z = 0;
+    rig.position.y = walking ? Math.abs(Math.sin(t*10))*0.05 : Math.sin(t*2)*0.015;
+    head.rotation.y = walking || g ? 0 : Math.sin(t*0.5)*0.4;
+    if (g === "look"){ head.rotation.x = 0.35; rig.rotation.x = 0.15; armR.rotation.x = -0.6; }
+    if (g === "eat"){ armR.rotation.x = -1.9; armL.rotation.x = -1.6; head.rotation.x = 0.15 + Math.sin(t*14)*0.12; }
+    if (g === "wave"){ armR.rotation.z = 2.6 + Math.sin(t*9)*0.35; }
+    if (g === "write"){ head.rotation.x = 0.5; armR.rotation.x = -1.1; armL.rotation.x = -1.0; }
+    if (g === "hop"){ rig.position.y = Math.abs(Math.sin(t*6))*0.45; armL.rotation.z = -2.4; armR.rotation.z = 2.4;
+                      legL.rotation.x = Math.sin(t*12)*0.3; legR.rotation.x = -Math.sin(t*12)*0.3; }
+  }
+  for (const [id,c] of Object.entries(creatures)) if (c.g.visible){
+    c.g.position.y = Math.abs(Math.sin(t*1.5 + id.length))*0.08;
+    c.g.rotation.y = Math.atan2(lumi.position.x - c.g.position.x, lumi.position.z - c.g.position.z) * 0.6;
+  }
+  lightUp(dt);
+
+  const goal = follow ? lumi.position.clone().add(new THREE.Vector3(0,0.7,0)) : overviewTarget;
+  target.lerp(goal, Math.min(1, dt*3));
+  camera.position.set(target.x + Math.sin(yaw)*Math.cos(pitch)*dist, target.y + Math.sin(pitch)*dist, target.z + Math.cos(yaw)*Math.cos(pitch)*dist);
+  camera.lookAt(target);
+  fadeBlockers();
+  renderer.render(scene, camera);
+
+  const lying = asleep && !walking && !busy;
+  const line = nowS() < sayUntil ? sayText : lying ? "Zzz…" : mood;
+  if ($("bubble").textContent !== line) $("bubble").textContent = line;
+  place2D($("bubble"), lumi.position.clone().add(new THREE.Vector3(0, lying ? 0.9 : 1.6, 0)));
+  for (const p of Object.values(placeTags)) place2D(p.el, p.pos);
+  for (const c of Object.values(creatures)) if (c.g.visible) place2D(c.label, c.g.position.clone().add(new THREE.Vector3(0,1.9,0)));
+  requestAnimationFrame(frame);
+}
+function resize(){ const w = stage.clientWidth, h = stage.clientHeight; renderer.setSize(w,h,false); camera.aspect = w/h; camera.updateProjectionMatrix(); }
+new ResizeObserver(resize).observe(stage); resize();
+target.copy(overviewTarget);
+requestAnimationFrame(frame);
+
+/* ---------- the rest of the page ---------- */
+function bar(label, v, joy){
+  return `<div class="need${joy?" joy":""}"><span>${label}</span>
+    <div class="track" role="meter" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${v}" aria-label="${label}">
+    <div class="fill${!joy && v<30?" low":""}" style="width:${v}%"></div></div><span class="num">${v}</span></div>`;
+}
+async function refresh(){
+  try{
+    const s = await (await fetch(url("/api/state", "state.json"))).json();
+    if (!s.awake){ $("where").textContent = STATIC ? "Lumi hasn’t woken up yet." : "Lumi hasn’t woken up yet. Start agent.py."; if (!world) setupWorld(s.places); return; }
+    update(s);
+    $("learned").innerHTML = (s.knowledge||[]).slice().reverse().map(k =>
+      `<li>${esc(k.belief)} <small>${esc(k.source)}</small></li>`).join("") || "<li>Nothing yet.</li>";
+    $("wondering").textContent = (s.questions||[]).length ? "She’s wondering: " + s.questions.join(" ") : "";
+    const sk = Object.entries(s.skills||{}).sort((a,b) => b[1]-a[1]);
+    $("skills").innerHTML = sk.length ? sk.map(([k,v]) => bar(k[0].toUpperCase()+k.slice(1), Math.round(v*10)).replace(" low","").replace(/>\d+<\/span><\/div>$/, `>${v.toFixed(1)}</span></div>`)).join("")
+                                      : "<p>She hasn’t practised anything yet.</p>";
+    $("where").textContent = `${s.name}, ${Math.floor(s.age||5)} years old. Day ${s.day}, ${String(s.hour).padStart(2,"0")}:00, at ${s.place}` +
+      (s.company.length ? ` with ${s.company.join(" and ")}` : "");
+    const N = {energy:"Energy", fullness:"Fullness", social:"Friends", fun:"Fun", wonder:"Wonder", comfort:"Feeling safe", competence:"Feeling capable"};
+    $("needs").innerHTML = bar("Happiness", s.happiness, true) +
+      Object.entries(s.needs).map(([k,v]) => bar(N[k]||k, v)).join("") + bar("Boredom", s.boredom).replace(" low","");
+    $("self").textContent = s.self ? `“${s.self}”` : "";
+    $("goals").textContent = s.goals.length ? "Right now she wants to: " + s.goals.join("; ") + "." : "";
+    $("lately").innerHTML = s.memories.slice().reverse().map(m =>
+      `<li>${esc(m.summary)} <small>${esc(m.when)}, ${esc(m.where)}</small></li>`).join("") || "<li>Nothing yet.</li>";
+    $("projects").innerHTML = s.projects.map(p =>
+      `<li>${p.url ? `<a href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.name)}</a>` : esc(p.name)}: ${esc(p.description)}</li>`
+    ).join("") || "<li>No projects yet.</li>";
+    const j = (await (await fetch(url("/api/journal", "journal.json"))).json()).journal;
+    if (j.trim()) $("diary").innerHTML = esc(j).split(/\n(?=#{2,3} )/).reverse().map(part =>
+      part.replace(/^#{2,3} (.*)$/m, "<h3>$1</h3>").replace(/^_(.*)_$/m, "<em>$1</em>").trim()).join("\n\n");
+  }catch(e){ $("where").textContent = STATIC ? "Can’t reach the garden right now. Try again in a moment." : "Can’t reach the garden right now. Is server.py running?"; }
+}
+refresh(); setInterval(refresh, STATIC ? 60000 : 3000);
+</script>
+</body>
+</html>
