@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-14T21:25+01:00",
+  "updated": "2026-11-14T21:47+01:00",
   "day": 1,
   "hour": 23,
   "location": "hedge",
@@ -8,15 +8,15 @@
     "code": 45,
     "emoji": "🌫️",
     "label": "foggy",
-    "temp": -1.1,
+    "temp": -1.6,
     "precip": 0.0,
     "wind": 4,
-    "cloud": 35,
+    "cloud": 53,
     "heavy": false,
     "wet": false,
     "place": "Garching",
     "real": true,
-    "fetched": "2026-11-14T20:55"
+    "fetched": "2026-11-14T21:30"
   },
   "season": "autumn",
   "wet": false,
@@ -191,6 +191,16 @@
     {
       "day": 1,
       "hour": 21,
+      "place": "hedge"
+    },
+    {
+      "day": 1,
+      "hour": 22,
+      "place": "hedge"
+    },
+    {
+      "day": 1,
+      "hour": 22,
       "place": "hedge"
     },
     {
