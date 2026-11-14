@@ -57,6 +57,12 @@ header{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-be
 .diary h3{font-size:1rem;font-family:"Atkinson Hyperlegible",sans-serif;color:var(--soft);margin:1.2rem 0 .2rem;font-weight:400}
 .diary h3:first-child{margin-top:0}
 section{margin-top:3rem}
+.fridge{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:1.4rem;margin-top:.8rem}
+.fridge figure{margin:0;background:#fff;padding:.5rem .5rem .3rem;border-radius:4px;box-shadow:0 3px 0 var(--line)}
+.fridge figure:nth-child(odd){transform:rotate(-1.5deg)} .fridge figure:nth-child(even){transform:rotate(1.2deg)}
+.fridge img{display:block;width:100%;height:auto}
+.fridge figcaption{font-family:"Gaegu",cursive;font-size:1.15rem;color:#233A22;line-height:1.2;margin-top:.3rem}
+.fridge small{display:block;font-family:"Atkinson Hyperlegible",sans-serif;font-size:.78rem;color:#5A6E57}
 .lately li{margin:.25rem 0}
 .lately small{color:var(--soft)}
 ul{padding-left:1.2rem;margin:0}
@@ -105,6 +111,11 @@ button{font:inherit;font-weight:700;border:0;border-radius:999px;padding:.5rem 1
       <h2>What she can do</h2>
       <div id="skills"><p>She hasn’t practised anything yet.</p></div>
     </div>
+  </section>
+
+  <section>
+    <h2>Her drawings</h2>
+    <div class="fridge" id="fridge"><p>She hasn’t drawn anything yet.</p></div>
   </section>
 
   <section class="cols">
@@ -184,6 +195,19 @@ const handle = mesh(new THREE.TorusGeometry(0.8,0.16,6,12,Math.PI), 0xF3F1EA, -1
 const door = mesh(new THREE.CircleGeometry(0.55,14), 0x3A2A20, 1.75,-0.5,0, teapot); door.rotation.y = Math.PI/2;
 const windowLight = mesh(new THREE.CircleGeometry(0.28,10), new THREE.MeshBasicMaterial({color:0x3A2A20}), 0.9,-0.4,1.55, teapot);
 for (let i=0;i<14;i++){ const c = mesh(new THREE.ConeGeometry(rnd(.5,.9), rnd(2.5,4.5), 5), 0x52704A, -15+rnd(-2.5,2.5), 1.6, 11+rnd(-1.5,2)); c.rotation.z = rnd(-.2,.2); }
+
+/* her easel next to the teapot: shows her newest drawing */
+const easel = new THREE.Group(); easel.position.set(-12.2,0,4.6); easel.rotation.y = 0.6; scene.add(easel);
+for (const x of [-0.75,0.75]) mesh(new THREE.BoxGeometry(0.08,2.6,0.08), 0x8A6A44, x,1.2,0, easel).rotation.x = -0.12;
+mesh(new THREE.BoxGeometry(0.08,2.6,0.08), 0x8A6A44, 0,1.2,-0.45, easel).rotation.x = 0.35;
+mesh(new THREE.BoxGeometry(1.8,1.4,0.06), 0xD9C08C, 0,1.75,0.06, easel).rotation.x = -0.12;
+const canvasMat = new THREE.MeshBasicMaterial({color:0xffffff});
+const easelPic = new THREE.Mesh(new THREE.PlaneGeometry(1.6,1.2), canvasMat);
+easelPic.position.set(0,1.75,0.1); easelPic.rotation.x = -0.12; easel.add(easelPic);
+let easelFile = null;
+function showOnEasel(url){
+  new THREE.TextureLoader().load(url, tex => { canvasMat.map = tex; canvasMat.needsUpdate = true; });
+}
 
 /* flowerbed: poppies, marigolds and a giant sunflower */
 mesh(new THREE.CylinderGeometry(6.5,6.8,0.2,20), 0x6B4A33, -2,0.05,2);
@@ -416,6 +440,8 @@ async function perform(e){
       faceTarget = null; break; }
     case "try":
       say(e.text, 4000); gest("hop", 3500); await wait(3800); break;
+    case "draw":
+      say("🖍️ drawing " + e.text, 5500); gest("write", 5500); await wait(5600); break;
     case "write":
       say("✏️ writing in my journal", 3000); gest("write", 3000); await wait(3100); break;
     case "phone":
@@ -571,6 +597,12 @@ async function refresh(){
     $("projects").innerHTML = s.projects.map(p =>
       `<li>${p.url ? `<a href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.name)}</a>` : esc(p.name)}: ${esc(p.description)}</li>`
     ).join("") || "<li>No projects yet.</li>";
+    const pics = (s.drawings||[]).slice().reverse();
+    const picURL = f => (STATIC ? "drawings/" : "/drawings/") + encodeURIComponent(f);
+    $("fridge").innerHTML = pics.length ? pics.map(d => `<figure><img src="${picURL(d.file)}" alt="Lumi’s drawing: ${esc(d.title)}" loading="lazy">
+      <figcaption>${esc(d.title)}<small>${esc(d.when)}, at ${esc(d.place)}</small></figcaption></figure>`).join("")
+      : "<p>She hasn’t drawn anything yet.</p>";
+    if (pics.length && pics[0].file !== easelFile){ easelFile = pics[0].file; showOnEasel(picURL(easelFile)); }
     const j = (await (await fetch(url("/api/journal", "journal.json"))).json()).journal;
     if (j.trim()) $("diary").innerHTML = esc(j).split(/\n(?=#{2,3} )/).reverse().map(part =>
       part.replace(/^#{2,3} (.*)$/m, "<h3>$1</h3>").replace(/^_(.*)_$/m, "<em>$1</em>").trim()).join("\n\n");
