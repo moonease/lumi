@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-14T18:27+01:00",
+  "updated": "2026-11-14T18:57+01:00",
   "day": 1,
   "hour": 20,
   "location": "teapot",
@@ -8,7 +8,7 @@
     "code": 0,
     "emoji": "☀️",
     "label": "clear sky",
-    "temp": 0.9,
+    "temp": 0.5,
     "precip": 0.0,
     "wind": 8,
     "cloud": 0,
@@ -16,7 +16,7 @@
     "wet": false,
     "place": "Garching",
     "real": true,
-    "fetched": "2026-11-14T18:02"
+    "fetched": "2026-11-14T18:32"
   },
   "season": "autumn",
   "wet": false,
@@ -33,7 +33,13 @@
   "treasures": [],
   "interests": [],
   "fears": [],
-  "favours": [],
+  "favours": [
+    {
+      "who": "Mrs. Bristle",
+      "ask": "find me a sturdy twig from near the hedge so we can use it to knock down the berries",
+      "done": false
+    }
+  ],
   "friends": [
     {
       "id": "tock",
@@ -47,7 +53,7 @@
     {
       "id": "bristle",
       "name": "Mrs. Bristle",
-      "trust": 70,
+      "trust": 74,
       "impression": "she looks after me",
       "mood": "gentle, worried",
       "busy_with": "gathering thorny blackberries for Lumi's snack",
