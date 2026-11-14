@@ -1,22 +1,22 @@
 {
-  "updated": "2026-11-14T20:17+01:00",
+  "updated": "2026-11-14T20:37+01:00",
   "day": 1,
   "hour": 21,
-  "location": "teapot",
+  "location": "flowerbed",
   "weather": {
-    "kind": "clear",
-    "code": 0,
-    "emoji": "☀️",
-    "label": "clear sky",
-    "temp": -0.3,
+    "kind": "fog",
+    "code": 45,
+    "emoji": "🌫️",
+    "label": "foggy",
+    "temp": -0.6,
     "precip": 0.0,
-    "wind": 8,
-    "cloud": 0,
+    "wind": 6,
+    "cloud": 8,
     "heavy": false,
     "wet": false,
     "place": "Garching",
     "real": true,
-    "fetched": "2026-11-14T19:49"
+    "fetched": "2026-11-14T20:22"
   },
   "season": "autumn",
   "wet": false,
@@ -32,10 +32,9 @@
     {
       "day": 1,
       "time": "20:00",
-      "emoji": "🖍️",
-      "text": "Lumi drew: crayon stubs",
-      "kind": "drawing",
-      "file": "0003-crayon-stubs.svg"
+      "emoji": "🌫️",
+      "text": "Fog rolled in over the garden. (real weather in Garching: foggy, -0.6°C)",
+      "kind": "weather"
     }
   ],
   "treasures": [],
@@ -127,6 +126,16 @@
       "day": 1,
       "hour": 20,
       "place": "teapot"
+    },
+    {
+      "day": 1,
+      "hour": 20,
+      "place": "teapot"
+    },
+    {
+      "day": 1,
+      "hour": 20,
+      "place": "flowerbed"
     }
   ],
   "loose": {
