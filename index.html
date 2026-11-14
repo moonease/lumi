@@ -106,6 +106,8 @@ button{font:inherit;font-weight:700;border:0;border-radius:999px;padding:.5rem 1
       <h2>What she’s learned</h2>
       <ul class="lately" id="learned"><li>Nothing yet.</li></ul>
       <p id="wondering" style="color:var(--soft)"></p>
+      <h2 style="margin-top:1.6rem">Moments she’ll never forget</h2>
+      <ul class="lately" id="core"><li>None yet. She picks one each night while she sleeps.</li></ul>
     </div>
     <div>
       <h2>What she can do</h2>
@@ -383,10 +385,11 @@ function update(s){
   $("bubble").hidden = false;
   mood = s.mood;
   for (const n of s.npcs){
-    if (!creatures[n.id]){
-      const g = creature(n.id), base = spot(n.location), off = CREATURE_SPOTS[n.id] || [1.5,1.2];
-      g.position.set(base.x+off[0], base.y||0, base.z+off[1]);
-      creatures[n.id] = {g, label: tag(n.name, "creature")};
+    if (!creatures[n.id]) creatures[n.id] = {g: creature(n.id), label: tag(n.name, "creature"), loc: null};
+    if (creatures[n.id].loc !== n.location){
+      const base = spot(n.location), off = CREATURE_SPOTS[n.id] || [1.5,1.2];
+      creatures[n.id].g.position.set(base.x+off[0], base.y||0, base.z+off[1]);
+      creatures[n.id].loc = n.location;
     }
     creatures[n.id].g.visible = n.present;
     creatures[n.id].label.style.visibility = n.present ? "visible" : "hidden";
@@ -581,6 +584,9 @@ async function refresh(){
     update(s);
     $("learned").innerHTML = (s.knowledge||[]).slice().reverse().map(k =>
       `<li>${esc(k.belief)} <small>${esc(k.source)}</small></li>`).join("") || "<li>Nothing yet.</li>";
+    $("core").innerHTML = (s.core_memories||[]).slice().reverse().map(c =>
+      `<li>⭐ ${esc(c.moment)} <small>${esc(c.when)}${c.feeling ? ", " + esc(c.feeling) : ""}</small></li>`).join("")
+      || "<li>None yet. She picks one each night while she sleeps.</li>";
     $("wondering").textContent = (s.questions||[]).length ? "She’s wondering: " + s.questions.join(" ") : "";
     const sk = Object.entries(s.skills||{}).sort((a,b) => b[1]-a[1]);
     $("skills").innerHTML = sk.length ? sk.map(([k,v]) => bar(k[0].toUpperCase()+k.slice(1), Math.round(v*10)).replace(" low","").replace(/>\d+<\/span><\/div>$/, `>${v.toFixed(1)}</span></div>`)).join("")

@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <rect width="400" height="300" fill="white"/>
+  <!-- Sun with face -->
+  <circle cx="60" cy="60" r="40" fill="yellow" stroke="orange" stroke-width="8" stroke-linecap="round"/>
+  <path d="M60,60 L80,40 L100,60 L80,80 Z" fill="orange"/>
+  <circle cx="70" cy="70" r="5" fill="black"/>
+  <circle cx="85" cy="70" r="5" fill="black"/>
+  <path d="M70,85 Q80,95 85,85" stroke="black" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <!-- Teapot -->
+  <circle cx="200" cy="150" r="60" fill="saddlebrown" stroke="sienna" stroke-width="10" stroke-linecap="round"/>
+  <path d="M200,90 Q230,60 260,90" fill="saddlebrown" stroke="sienna" stroke-width="10" stroke-linecap="round"/>
+  <path d="M200,150 Q170,180 140,150" fill="saddlebrown" stroke="sienna" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="200" cy="90" r="15" fill="tan" stroke="peru" stroke-width="6" stroke-linecap="round"/>
+  <!-- Crayon stubs -->
+  <rect x="100" y="100" width="40" height="120" fill="red" rx="10" stroke="maroon" stroke-width="6" stroke-linecap="round"/>
+  <rect x="260" y="100" width="40" height="120" fill="blue" rx="10" stroke="navy" stroke-width="6" stroke-linecap="round"/>
+  <rect x="180" y="200" width="40" height="60" fill="green" rx="10" stroke="darkgreen" stroke-width="6" stroke-linecap="round"/>
+  <!-- People -->
+  <circle cx="120" cy="120" r="15" fill="pink" stroke="hotpink" stroke-width="4" stroke-linecap="round"/>
+  <line x1="120" y1="135" x2="120" y2="170" stroke="hotpink" stroke-width="6" stroke-linecap="round"/>
+  <line x1="120" y1="135" x2="100" y2="150" stroke="hotpink" stroke-width="6" stroke-linecap="round"/>
+  <line x1="120" y1="135" x2="140" y2="150" stroke="hotpink" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="280" cy="120" r="15" fill="lightblue" stroke="skyblue" stroke-width="4" stroke-linecap="round"/>
+  <line x1="280" y1="135" x2="280" y2="170" stroke="skyblue" stroke-width="6" stroke-linecap="round"/>
+  <line x1="280" y1="135" x2="260" y2="150" stroke="skyblue" stroke-width="6" stroke-linecap="round"/>
+  <line x1="280" y1="135" x2="300" y2="150" stroke="skyblue" stroke-width="6" stroke-linecap="round"/>
+  <!-- Floating objects -->
+  <circle cx="150" cy="50" r="10" fill="orange" stroke="darkorange" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="250" cy="50" r="10" fill="purple" stroke="indigo" stroke-width="4" stroke-linecap="round"/>
+  <!-- Name -->
+  <path d="M300,250 C310,240 320,230 330,220 C340,210 350,200 360,190" fill="none" stroke="black" stroke-width="6" stroke-linecap="round"/>
+  <path d="M300,250 C310,260 320,270 330,280 C340,290 350,300 360,310" fill="none" stroke="black" stroke-width="6" stroke-linecap="round"/>
+  <path d="M300,250 C310,255 320,260 330,265 C340,270 350,275 360,280" fill="none" stroke="black" stroke-width="6" stroke-linecap="round"/>
+  <path d="M300,250 C310,245 320,240 330,235 C340,230 350,225 360,220" fill="none" stroke="black" stroke-width="6" stroke-linecap="round"/>
+</svg>
