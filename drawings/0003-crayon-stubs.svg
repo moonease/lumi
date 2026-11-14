@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <rect width="400" height="300" fill="white"/>
+  <!-- Teapot body -->
+  <circle cx="200" cy="150" r="60" fill="#FF69B4" stroke="#FF1493" stroke-width="10" stroke-linecap="round"/>
+  <!-- Teapot spout -->
+  <path d="M160,150 Q140,120 130,100" fill="none" stroke="#FF6347" stroke-width="12" stroke-linecap="round"/>
+  <!-- Teapot handle -->
+  <path d="M240,150 Q270,130 280,110" fill="none" stroke="#8A2BE2" stroke-width="12" stroke-linecap="round"/>
+  <!-- Teapot lid -->
+  <circle cx="200" cy="90" r="15" fill="#FFD700" stroke="#FFA500" stroke-width="8" stroke-linecap="round"/>
+  <!-- Crayon stubs -->
+  <rect x="100" y="100" width="30" height="60" fill="#FF4500" rx="10" ry="10" stroke="#FF6347" stroke-width="6" stroke-linecap="round"/>
+  <rect x="250" y="120" width="30" height="60" fill="#00BFFF" rx="10" ry="10" stroke="#1E90FF" stroke-width="6" stroke-linecap="round"/>
+  <rect x="160" y="200" width="30" height="60" fill="#32CD32" rx="10" ry="10" stroke="#228B22" stroke-width="6" stroke-linecap="round"/>
+  <!-- Beetle -->
+  <ellipse cx="220" cy="180" rx="40" ry="20" fill="#8B4513" stroke="#A0522D" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="220" cy="170" r="10" fill="#8B0000" stroke="#8B0000" stroke-width="4" stroke-linecap="round"/>
+  <line x1="200" y1="180" x2="190" y2="195" stroke="#8B4513" stroke-width="6" stroke-linecap="round"/>
+  <line x1="200" y1="180" x2="195" y2="200" stroke="#8B4513" stroke-width="6" stroke-linecap="round"/>
+  <line x1="200" y1="180" x2="205" y2="200" stroke="#8B4513" stroke-width="6" stroke-linecap="round"/>
+  <line x1="220" y1="180" x2="210" y2="195" stroke="#8B4513" stroke-width="6" stroke-linecap="round"/>
+  <line x1="220" y1="180" x2="215" y2="200" stroke="#8B4513" stroke-width="6" stroke-linecap="round"/>
+  <line x1="220" y1="180" x2="225" y2="200" stroke="#8B4513" stroke-width="6" stroke-linecap="round"/>
+  <!-- Sun -->
+  <circle cx="350" cy="50" r="30" fill="#FFD700" stroke="#FFA500" stroke-width="8" stroke-linecap="round"/>
+  <path d="M350,50 L380,60 M350,50 L370,30 M350,50 L360,80 M350,50 L340,30 M350,50 L330,60" fill="none" stroke="#FFD700" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="350" cy="50" r="10" fill="#FF4500" stroke="#FF6347" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="365" cy="55" r="5" fill="#000000" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="335" cy="55" r="5" fill="#000000" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+  <path d="M350,65 Q355,75 350,85" fill="none" stroke="#000000" stroke-width="4" stroke-linecap="round"/>
+  <!-- LUMI -->
+  <path d="M100,250 C110,240 120,230 130,220 C140,210 150,200 160,190" fill="none" stroke="#000000" stroke-width="6" stroke-linecap="round"/>
+  <path d="M160,190 C170,180 180,170 190,160" fill="none" stroke="#000000" stroke-width="6" stroke-linecap="round"/>
+  <path d="M190,160 C200,150 210,140 220,130" fill="none" stroke="#000000" stroke-width="6" stroke-linecap="round"/>
+</svg>

@@ -1,22 +1,22 @@
 {
-  "updated": "2026-11-14T19:54+01:00",
+  "updated": "2026-11-14T20:17+01:00",
   "day": 1,
-  "hour": 20,
+  "hour": 21,
   "location": "teapot",
   "weather": {
     "kind": "clear",
     "code": 0,
     "emoji": "☀️",
     "label": "clear sky",
-    "temp": 0.2,
+    "temp": -0.3,
     "precip": 0.0,
-    "wind": 9,
+    "wind": 8,
     "cloud": 0,
     "heavy": false,
     "wet": false,
     "place": "Garching",
     "real": true,
-    "fetched": "2026-11-14T19:02"
+    "fetched": "2026-11-14T19:49"
   },
   "season": "autumn",
   "wet": false,
@@ -28,6 +28,14 @@
       "emoji": "🗣️",
       "text": "Fennel insisted the phone 'knows where the cat is,' but Tock refused to look, saying 'inventions need focus, not magic.'",
       "kind": "gossip"
+    },
+    {
+      "day": 1,
+      "time": "20:00",
+      "emoji": "🖍️",
+      "text": "Lumi drew: crayon stubs",
+      "kind": "drawing",
+      "file": "0003-crayon-stubs.svg"
     }
   ],
   "treasures": [],
@@ -70,6 +78,11 @@
       "when": "Day 1, 19:00 (evening)",
       "text": "The cat was prowling in the flowerbed.",
       "place": "flowerbed"
+    },
+    {
+      "when": "Day 1, 19:00 (evening)",
+      "text": "A giant dropped a pencil shaving in the pond.",
+      "place": "pond"
     }
   ],
   "diary": [],
@@ -104,7 +117,21 @@
       "day": 1,
       "hour": 19,
       "place": "teapot"
+    },
+    {
+      "day": 1,
+      "hour": 19,
+      "place": "teapot"
+    },
+    {
+      "day": 1,
+      "hour": 20,
+      "place": "teapot"
     }
   ],
-  "loose": {}
+  "loose": {
+    "pond": [
+      "pencil shaving"
+    ]
+  }
 }
