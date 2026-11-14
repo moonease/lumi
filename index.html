@@ -75,25 +75,60 @@ ul{padding-left:1.2rem;margin:0}
 button{font:inherit;font-weight:700;border:0;border-radius:999px;padding:.5rem 1.1rem;cursor:pointer;background:#233A22;color:#FBFAF3}
 :focus-visible{outline:3px solid var(--pond);outline-offset:2px}
 @media (prefers-reduced-motion:reduce){.fill{transition:none}}
+.sky{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem 1rem;color:var(--soft)}
+#weather{font-size:1.05rem}
+#sound{background:var(--paper);color:var(--ink);border:2px solid var(--line);padding:.35rem .9rem}
+#sound[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.bits{list-style:none;margin:.6rem 0 0;padding:0 0 .6rem;display:flex;gap:1rem;overflow-x:auto;scroll-snap-type:x proximity}
+.bits li{flex:0 0 min(78vw,270px);scroll-snap-align:start;background:var(--paper);border-radius:4px 18px 18px 18px;
+  padding:.7rem .9rem;line-height:1.35;border-top:4px solid var(--line)}
+.bits li.world,.bits li.fear{border-top-color:var(--poppy)} .bits li.weather{border-top-color:var(--pond)}
+.bits li.treasure,.bits li.gift,.bits li.interest{border-top-color:var(--marigold)} .bits li.first,.bits li.brave,.bits li.friend{border-top-color:var(--leaf)}
+.bits .em{font-size:1.6rem;line-height:1;display:block;margin-bottom:.2rem}
+.bits time{display:block;font-size:.8rem;color:var(--soft);font-variant-numeric:tabular-nums}
+.bits img{display:block;width:100%;border-radius:4px;margin-top:.4rem;background:#fff}
+.shelf{margin-top:.8rem;position:relative;padding-bottom:14px}
+.shelf ul{list-style:none;margin:0;padding:0 .6rem;display:flex;flex-wrap:wrap;align-items:flex-end;gap:.5rem .7rem;min-height:3rem}
+.shelf li{font-family:"Gaegu",cursive;font-size:1.2rem;background:var(--paper);padding:.15rem .6rem;border-radius:10px 10px 3px 3px;cursor:help}
+.shelf li:nth-child(3n){transform:rotate(-3deg)} .shelf li:nth-child(3n+1){transform:rotate(2deg)}
+.shelf::after{content:"";position:absolute;left:0;right:0;bottom:0;height:12px;border-radius:3px;background:#A57A50;box-shadow:0 4px 0 #7A5638}
+.friend{margin:.9rem 0}
+.friend .need{grid-template-columns:8.5rem 1fr 2.2rem}
+.controls #pathbtn[aria-pressed="true"]{background:#C8322B}
+.friend .how{color:var(--soft);font-size:.92rem;margin:.1rem 0 0}
+.extra{color:var(--soft);margin:.4rem 0}
+.diary img{width:150px;background:#fff;border-radius:3px;display:block;margin:.4rem 0;transform:rotate(-1.5deg)}
+.diary .dream{display:block;color:var(--soft);margin-top:.3rem}
 </style>
 </head>
 <body>
 <main>
   <header>
     <h1>Lumi’s garden</h1>
-    <div id="where">Waking up…</div>
+    <div class="sky">
+      <div id="where">Waking up…</div>
+      <div id="weather" title="Lumi’s garden has the same weather as Garching, right now"></div>
+      <div id="fresh"></div>
+      <button id="sound" type="button" aria-pressed="false">🔈 Turn on garden sounds</button>
+    </div>
   </header>
 
   <div class="stage" id="stage" aria-label="3D view of the garden with Lumi in it">
     <div class="overlay" id="overlay"><div id="bubble" hidden></div></div>
     <div class="hint">Drag to look around, scroll to zoom</div>
     <div class="controls">
+      <button id="pathbtn" type="button" aria-pressed="false">Her path today</button>
       <button id="follow" type="button" aria-pressed="true">Follow Lumi</button>
       <button id="overview" type="button">Whole garden</button>
     </div>
   </div>
 
   <section style="margin-top:2rem">
+    <h2>Today’s best bits</h2>
+    <ol class="bits" id="bits"><li>Nothing much has happened yet today.</li></ol>
+  </section>
+
+  <section>
     <h2>What she’s doing</h2>
     <ul class="feed" id="feed"><li>Waiting for her next move…</li></ul>
   </section>
@@ -104,6 +139,9 @@ button{font:inherit;font-weight:700;border:0;border-radius:999px;padding:.5rem 1
       <div id="needs"></div>
       <p id="self"></p>
       <p id="goals" style="color:var(--soft)"></p>
+      <p class="extra" id="loves"></p>
+      <p class="extra" id="scared"></p>
+      <p class="extra" id="asked"></p>
     </div>
     <div>
       <h2>Her diary</h2>
@@ -122,6 +160,18 @@ button{font:inherit;font-weight:700;border:0;border-radius:999px;padding:.5rem 1
     <div>
       <h2>What she can do</h2>
       <div id="skills"><p>She hasn’t practised anything yet.</p></div>
+    </div>
+  </section>
+
+  <section class="cols">
+    <div>
+      <h2>Her treasure shelf</h2>
+      <div class="shelf"><ul id="shelf"><li>Empty for now.</li></ul></div>
+      <p class="extra" id="pocket"></p>
+    </div>
+    <div>
+      <h2>Her garden friends</h2>
+      <div id="friends"><p>She hasn’t met anyone yet.</p></div>
     </div>
   </section>
 
@@ -422,6 +472,11 @@ function eventText(e, names){
     case "write": return "✏️ wrote in her diary";
     case "phone": return "📱 " + esc(e.text);
     case "leave": return `🎁 left a ${esc(e.thing)}`;
+    case "world": return `‼️ ${esc(e.text)}`;
+    case "weather": return `🌦️ ${esc(e.text)}`;
+    case "pickup": return `✨ picked up the ${esc(e.thing)}`;
+    case "shelf": return `🧺 put her treasures on the shelf: ${esc(e.text)}`;
+    case "give": return `🎁 gave ${esc(who)} the ${esc(e.thing)}` + (e.reply ? `<br>&nbsp;&nbsp;&nbsp;${esc(who)}: ${q(e.reply)}` : "");
     case "sleep": return {night: "😴 went to sleep for the night", nap: "💤 had a nap in her teapot",
                           rest: "🌿 sat down for a rest", collapse: "🥱 got so tired she fell asleep right where she was"}[e.kind] || "😴 slept";
   }
@@ -492,6 +547,20 @@ async function perform(e){
       say("📱 " + e.text, 3500); gest("write", 3500); await wait(3600); break;
     case "think":
       say("💭 " + e.text, Math.min(7000, 2000 + e.text.length * 40)); await wait(1800); break;
+    case "world": case "weather":
+      say({cat: "Eek! The CAT!", fox: "A f-f-fox…", owl: "Who’s there?", mower: "So LOUD!", ball: "WHOA!", magpie: "Hey! Shoo!",
+           drop: "What fell down?", watering: "Splooosh!", rain: "It’s raining!", snow: "SNOW!!", thunder: "*hides*"}[e.kind] || "Ooh!", 3200);
+      gest(["cat", "fox", "thunder", "mower"].includes(e.kind) ? "stretch" : "look", 2500); await wait(3000); break;
+    case "pickup":
+      await walkTo([near(current, e.thing)]); say(`A ${e.thing}! Mine now.`); gest("eat", 1800); await wait(2400); break;
+    case "shelf":
+      say("On my shelf you go!", 2500); gest("write", 2500); await wait(2600); break;
+    case "give":
+      if (c){ faceTarget = c.g.position; }
+      say(`This is for you!`, 3000); gest("wave", 2500); await wait(3100);
+      if (c && e.reply){ const name = c.label.textContent; c.label.textContent = `${name}: ${e.reply}`; c.label.classList.add("speaking");
+                         await wait(Math.min(9000, 2500 + e.reply.length * 45)); c.label.textContent = name; c.label.classList.remove("speaking"); }
+      faceTarget = null; break;
     case "sleep": {
       if (e.kind === "night" || e.kind === "nap") await walkTo(route(current, "teapot").concat(
         current === "teapot" ? [P(spot("teapot"))] : []));
@@ -514,6 +583,36 @@ stage.addEventListener("pointerup", () => drag = null);
 stage.addEventListener("wheel", e => { e.preventDefault(); dist = Math.min(70, Math.max(3, dist*(1+e.deltaY*0.001))); }, {passive:false});
 function setFollow(on){ follow = on; $("follow").setAttribute("aria-pressed", on); dist = on ? 9 : 48; pitch = on ? 0.42 : 0.85; }
 $("follow").onclick = () => setFollow(true);
+let pathLine = null, showPath = false;
+const stepGeo = new THREE.CircleGeometry(0.19, 8), stepMat = new THREE.MeshBasicMaterial({color: 0xC8322B});
+function drawPath(){
+  if (pathLine){ scene.remove(pathLine); pathLine = null; }
+  if (!showPath || !world || !garden?.path?.length) return;
+  const pts = [P(spot(garden.path[0].place))]; let prev = garden.path[0].place;
+  for (const p of garden.path.slice(1).concat([{place: current}])){
+    if (!p.place || p.place === prev || !world.places[p.place]) continue;
+    pts.push(...route(prev, p.place)); prev = p.place;
+  }
+  if (pts.length < 2) return;
+  pathLine = new THREE.Group();                 // little red footprints along the way she went today
+  let side = 1;
+  for (let i = 1; i < pts.length; i++){
+    const a = pts[i - 1], b = pts[i], d = b.clone().sub(a), len = d.length();
+    if (Math.abs(d.y) > 0.5) continue;          // climbing the ivy: no footprints on the wall
+    const across = new THREE.Vector3(-d.z, 0, d.x).normalize().multiplyScalar(0.14);
+    for (let k = 0.4; k < len; k += 0.55){
+      const f = new THREE.Mesh(stepGeo, stepMat);
+      f.position.copy(a).addScaledVector(d, k / len).addScaledVector(across, side).setY(a.y + 0.09);
+      f.rotation.x = -Math.PI / 2; f.scale.set(0.7, 1.2, 1); side = -side; pathLine.add(f);
+    }
+  }
+  scene.add(pathLine);
+}
+$("pathbtn").onclick = () => {
+  showPath = !showPath; $("pathbtn").setAttribute("aria-pressed", showPath);
+  if (showPath) setFollow(false);
+  drawPath();
+};
 $("overview").onclick = () => setFollow(false);
 
 /* ---------- see-through when something hides her ---------- */
@@ -564,33 +663,115 @@ for (let i = 0; i < 36; i++){
   f.userData = {base, phase: rnd(0, 6.28), speed: rnd(0.3, 0.8)}; scene.add(f); flies.push(f);
 }
 
+/* ---------- weather: the real weather in Garching ---------- */
+let wx = null, garden = null, wetGround = false, flashUntil = 0, nextThunder = 0, rainAmt = 0;
+const WET = ["rain", "drizzle", "thunder"];
+const RAIN_N = 2600, rainPos = new Float32Array(RAIN_N * 6);
+function seedDrop(i, top){
+  const x = rnd(-28, 28), z = rnd(-28, 28), y = top ? rnd(24, 30) : rnd(0, 30);
+  rainPos.set([x, y, z, x, y + 0.75, z], i * 6);
+}
+for (let i = 0; i < RAIN_N; i++) seedDrop(i, false);
+const rainGeo = new THREE.BufferGeometry(); rainGeo.setAttribute("position", new THREE.BufferAttribute(rainPos, 3));
+const rain = new THREE.LineSegments(rainGeo, new THREE.LineBasicMaterial({color: 0xC9DCEB, transparent: true, opacity: 0.55}));
+rain.frustumCulled = false; rain.visible = false; scene.add(rain);
+const SNOW_N = 1600, snowPos = new Float32Array(SNOW_N * 3), snowPhase = new Float32Array(SNOW_N);
+for (let i = 0; i < SNOW_N; i++){ snowPos.set([rnd(-28, 28), rnd(0, 26), rnd(-28, 28)], i * 3); snowPhase[i] = rnd(0, 6.28); }
+const snowGeo = new THREE.BufferGeometry(); snowGeo.setAttribute("position", new THREE.BufferAttribute(snowPos, 3));
+const snow = new THREE.Points(snowGeo, new THREE.PointsMaterial({color: 0xFFFFFF, size: 0.22, transparent: true, opacity: 0.9}));
+snow.frustumCulled = false; snow.visible = false; scene.add(snow);
+const puddleMat = new THREE.MeshLambertMaterial({color: 0x6F8FA6, transparent: true, opacity: 0});
+for (const [x, z, r] of [[-4.5, 6.5, 1.3], [1.5, -1, 0.9], [6, 4.5, 1.6], [3, -6.5, 1.1], [-8, 1, 0.8], [13, 3.5, 1.2], [-6, -9, 1]]){
+  const pd = new THREE.Mesh(new THREE.CircleGeometry(r, 18), puddleMat); pd.rotation.x = -Math.PI / 2;
+  pd.position.set(x, 0.07, z); pd.scale.x = 1.5; scene.add(pd);
+}
+const GRASS = new THREE.Color(0x86B35A), WET_GRASS = new THREE.Color(0x67894A), SNOWY = new THREE.Color(0xDDE6EC);
+let snowCover = 0;
+function overcast(){
+  if (!wx) return 0;
+  return Math.min(1, (wx.cloud || 0) / 100 * 0.45 + (WET.includes(wx.kind) || wx.kind === "snow" ? 0.35 : 0) + (wx.kind === "fog" ? 0.35 : 0));
+}
+function weatherFrame(dt, t){
+  const kind = wx?.kind || "clear";
+  rainAmt = WET.includes(kind) ? Math.min(1, (kind === "drizzle" ? 0.15 : 0.3) + (wx.precip || 0) / 4) : 0;
+  const n = Math.round(RAIN_N * rainAmt * (reduceMotion ? 0.35 : 1));
+  rain.visible = n > 0;
+  if (n){
+    const sp = 26 * dt, drift = Math.min(1.2, (wx.wind || 0) / 30) * sp * 0.3;
+    for (let i = 0; i < n; i++){
+      const o = i * 6; rainPos[o + 1] -= sp; rainPos[o + 4] -= sp; rainPos[o] += drift; rainPos[o + 3] += drift;
+      if (rainPos[o + 1] < 0) seedDrop(i, true);
+    }
+    rainGeo.setDrawRange(0, n * 2); rainGeo.attributes.position.needsUpdate = true;
+    rain.position.set(target.x, 0, target.z); rain.material.opacity = 0.3 + rainAmt * 0.4;
+  }
+  const snowing = kind === "snow";
+  snow.visible = snowing;
+  if (snowing){
+    const m = reduceMotion ? 400 : SNOW_N;
+    for (let i = 0; i < m; i++){
+      const o = i * 3; snowPos[o + 1] -= 1.6 * dt; snowPos[o] += Math.sin(t + snowPhase[i]) * 0.4 * dt;
+      if (snowPos[o + 1] < 0){ snowPos[o + 1] = 26; snowPos[o] = rnd(-28, 28); snowPos[o + 2] = rnd(-28, 28); }
+    }
+    snowGeo.setDrawRange(0, m); snowGeo.attributes.position.needsUpdate = true; snow.position.set(target.x, 0, target.z);
+  }
+  snowCover += ((snowing && (wx.temp ?? 5) <= 1.5 ? 0.6 : 0) - snowCover) * Math.min(1, dt * 0.05);
+  puddleMat.opacity += ((wetGround ? 0.6 : 0) - puddleMat.opacity) * Math.min(1, dt * 0.3);
+  ground.material.color.copy(GRASS).lerp(WET_GRASS, wetGround ? 1 : 0).lerp(SNOWY, snowCover);
+  const fogNear = kind === "fog" ? 4 : rainAmt ? 22 : 45, fogFar = kind === "fog" ? 30 : rainAmt ? 80 : 110;
+  scene.fog.near += (fogNear - scene.fog.near) * Math.min(1, dt); scene.fog.far += (fogFar - scene.fog.far) * Math.min(1, dt);
+  if (kind === "thunder" && t > nextThunder){
+    flashUntil = t + (reduceMotion ? 0 : 0.14); nextThunder = t + rnd(7, 20); Sound.thunder(rnd(0.6, 2.8));
+  }
+}
+const CODES = {0:["clear","☀️","clear sky"],1:["clear","🌤️","mostly clear"],2:["cloudy","⛅","partly cloudy"],3:["cloudy","☁️","grey and cloudy"],
+  45:["fog","🌫️","foggy"],48:["fog","🌫️","frosty fog"],51:["drizzle","🌦️","light drizzle"],53:["drizzle","🌦️","drizzle"],55:["drizzle","🌧️","thick drizzle"],
+  61:["rain","🌧️","light rain"],63:["rain","🌧️","rain"],65:["rain","🌧️","heavy rain"],71:["snow","🌨️","light snow"],73:["snow","🌨️","snow"],
+  75:["snow","❄️","heavy snow"],80:["rain","🌦️","rain showers"],81:["rain","🌧️","heavy showers"],82:["rain","🌧️","pouring showers"],
+  85:["snow","🌨️","snow showers"],86:["snow","❄️","heavy snow showers"],95:["thunder","⛈️","thunderstorm"],96:["thunder","⛈️","thunderstorm with hail"],99:["thunder","⛈️","thunderstorm with hail"]};
+let liveWx = null, liveWxAt = 0;
+async function liveWeather(){        // if the agent hasn't sent any weather yet, ask Open-Meteo ourselves
+  if (liveWx && Date.now() - liveWxAt < 15 * 60000) return liveWx;
+  try {
+    const r = await (await fetch("https://api.open-meteo.com/v1/forecast?latitude=48.2489&longitude=11.6532&timezone=auto&current=temperature_2m,precipitation,weather_code,cloud_cover,wind_speed_10m")).json();
+    const c = r.current, [kind, emoji, label] = CODES[c.weather_code] || ["cloudy", "☁️", "cloudy"];
+    liveWx = {kind, emoji, label, temp: c.temperature_2m, precip: c.precipitation, wind: c.wind_speed_10m, cloud: c.cloud_cover, place: "Garching", wet: WET.includes(kind)};
+    liveWxAt = Date.now();
+  } catch (e) { /* no weather today */ }
+  return liveWx;
+}
+
 let shownHour = 12;
 const C = h => new THREE.Color(h);
 function lightUp(dt){
   shownHour += (lastHour - shownHour) * Math.min(1, dt*0.5);
   if (Math.abs(lastHour - shownHour) > 12) shownHour = lastHour;
   const h = shownHour, sky = skyAt(h), t = clock.elapsedTime;
-  scene.background = sky; scene.fog.color = sky; stage.style.background = "#" + sky.getHexString();
   const day = Math.max(0, Math.sin((h-5)/15*Math.PI));                 // 0 at night, 1 around midday (light from 5 to 20)
   const night = Math.max(0, Math.min(1, (0.25 - day) / 0.25));          // fades in after sunset
   const golden = Math.max(0, 1 - Math.abs(day - 0.15) / 0.15) * (day > 0 ? 1 : 0);  // sunrise / sunset glow
+  const ov = overcast(), flash = t < flashUntil;
+  sky.lerp(night > 0.5 ? C(0x0B0F17) : C(0x8E99A3), ov * 0.75);           // clouds and rain grey the sky
+  if (flash) sky.lerp(C(0xE6EAFF), 0.75);
+  scene.background = sky; scene.fog.color = sky; stage.style.background = "#" + sky.getHexString();
   // the sun by day (warm at sunrise and sunset), cool blue moonlight by night
   sun.color.copy(C(0xFFF1D6).lerp(C(0xFFA15C), golden).lerp(C(0x8FA8E8), night));
-  sun.intensity = 0.12 + day * 0.88 + night * 0.18;
+  sun.intensity = (0.12 + day * 0.88 + night * 0.18) * (1 - ov * 0.55);
   sun.position.set(night > 0.5 ? 30 : Math.cos((h-5)/15*Math.PI)*40, 10 + Math.max(day, night*0.8)*40, 20);
   hemi.color.copy(C(0xFFFFFF).lerp(C(0x5A6FA8), night));
   hemi.groundColor.copy(C(0x5D7A3A).lerp(C(0x1A2A22), night));
-  hemi.intensity = 0.28 + day * 0.5;
-  stars.material.opacity = night * 0.9;
+  hemi.intensity = 0.28 + day * 0.5 + (flash ? 1.3 : 0);
+  stars.material.opacity = night * 0.9 * (1 - ov);
   overlay.style.setProperty("--tagfade", String(1 - night * 0.45));
-  moon.material.opacity = night;
+  moon.material.opacity = night * (1 - ov * 0.9);
+  const warm = !wx || ((wx.temp ?? 15) >= 12 && !WET.includes(wx.kind));   // no fireflies in the cold or the rain
   homeGlow.intensity = night * 1.6;
   windowLight.material.color.set(night > 0.3 ? 0xFFD27A : 0x3A2A20);
   for (const f of flies){                                                 // fireflies drift and blink
     const u = f.userData;
     f.position.set(u.base.x + Math.sin(t*u.speed + u.phase)*1.2, u.base.y + Math.sin(t*u.speed*1.7 + u.phase)*0.4,
                    u.base.z + Math.cos(t*u.speed + u.phase)*1.2);
-    f.material.opacity = night * (0.35 + 0.65 * Math.max(0, Math.sin(t*2 + u.phase*3)));
+    f.material.opacity = (warm ? night : 0) * (0.35 + 0.65 * Math.max(0, Math.sin(t*2 + u.phase*3)));
   }
 }
 
@@ -643,6 +824,7 @@ function frame(){
     c.g.position.y = Math.abs(Math.sin(t*1.5 + id.length))*0.08;
     c.g.rotation.y = Math.atan2(lumi.position.x - c.g.position.x, lumi.position.z - c.g.position.z) * 0.6;
   }
+  weatherFrame(dt, t);
   lightUp(dt);
 
   const goal = follow ? lumi.position.clone().add(new THREE.Vector3(0,0.7,0)) : overviewTarget;
@@ -670,6 +852,49 @@ function bar(label, v, joy){
   return `<div class="need${joy?" joy":""}"><span>${label}</span>
     <div class="track" role="meter" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${v}" aria-label="${label}">
     <div class="fill${!joy && v<30?" low":""}" style="width:${v}%"></div></div><span class="num">${v}</span></div>`;
+}
+async function loadGarden(){
+  for (const u of STATIC ? ["garden.json"] : ["/api/garden", "/garden.json"]){
+    try { const r = await fetch(`${u}?t=${Date.now()}`); if (r.ok) return await r.json(); } catch (e) {}
+  }
+  return null;
+}
+const plural = (n, w) => `${n} ${w}${n === 1 ? "" : "s"}`;
+function renderGarden(s, g){
+  wx = g?.weather || wx;
+  wetGround = !!(g ? g.wet_ground : wx?.wet);
+  if (wx) $("weather").textContent = `${wx.emoji} ${wx.label}, ${Math.round(wx.temp)}°C in ${wx.place || "Garching"}`;
+  Sound.set({hour: s.hour, place: s.location, kind: wx?.kind, precip: wx?.precip || 0, wind: wx?.wind || 0,
+             temp: wx?.temp ?? 12, wetGround});
+  if (!g) return;
+  if (STATIC && g.updated){                      // GitHub only gets a new snapshot every few minutes
+    const mins = Math.max(0, Math.round((Date.now() - new Date(g.updated)) / 60000));
+    $("fresh").textContent = mins < 2 ? "Updated just now" : mins < 90 ? `Updated ${mins} min ago` : `Updated ${Math.round(mins / 60)} h ago`;
+  }
+  garden = g; drawPath();
+  const today = g.highlights.filter(h => h.day === g.day);
+  const bits = (today.length ? today : g.highlights.slice(-8)).slice().sort((a, b) => b.day - a.day || b.time.localeCompare(a.time));
+  const picURL = f => (STATIC ? "drawings/" : "/drawings/") + encodeURIComponent(f);
+  $("bits").innerHTML = bits.length ? bits.map(h => `<li class="${esc(h.kind)}"><span class="em" aria-hidden="true">${esc(h.emoji)}</span>
+    <time>Day ${h.day}, ${esc(h.time)}</time>${esc(h.text)}${h.file ? `<img src="${picURL(h.file)}" alt="" loading="lazy">` : ""}</li>`).join("")
+    : "<li>Nothing much has happened yet today.</li>";
+  const loves = g.interests.filter(i => i.obsession).map(i => i.topic), into = g.interests.filter(i => !i.obsession).slice(0, 3).map(i => i.topic);
+  $("loves").textContent = loves.length ? `💛 She’s obsessed with ${loves.join(" and ")}.` + (into.length ? ` Also into: ${into.join(", ")}.` : "")
+                                        : into.length ? `💛 Lately she’s into: ${into.join(", ")}.` : "";
+  $("scared").textContent = g.fears.length ? "😨 Scared of: " + g.fears.map(f => f.what + (f.strength >= 0.6 ? " (a lot)" : "")).join(", ") + "." : "";
+  const open = g.favours.filter(f => !f.done);
+  $("asked").textContent = open.length ? "🤲 Asked to help: " + open.map(f => `${f.who} wants her to ${f.ask.replace(/^(can you|could you|please)\s+/i, "")}`).join("; ") : "";
+  const shelf = g.treasures.filter(t => t.on_shelf), pocket = g.treasures.filter(t => !t.on_shelf);
+  $("shelf").innerHTML = shelf.length ? shelf.map(t => `<li title="${esc(t.desc)}. Found at ${esc(t.where)}, ${esc(t.found)}" tabindex="0">${esc(t.name)}</li>`).join("")
+                                      : "<li>Empty for now.</li>";
+  $("pocket").textContent = pocket.length ? `In her pocket: ${pocket.map(t => t.name).join(", ")}.` : "";
+  $("friends").innerHTML = g.friends.length ? g.friends.sort((a, b) => b.trust - a.trust).map(f => `<div class="friend">
+    ${bar(f.name + (f.caregiver ? " 🏡" : ""), f.trust).replace(" low", "")}
+    <p class="how">${f.mood ? `Feeling ${esc(f.mood)} today${f.busy_with ? `, busy with ${esc(f.busy_with.replace(/\.$/, ""))}` : ""}. ` : ""}${f.impression ? `Lumi thinks: “${esc(f.impression)}”` : ""}</p></div>`).join("")
+    : "<p>She hasn’t met anyone yet.</p>";
+  if (g.diary?.length) $("diary").innerHTML = g.diary.slice().reverse().map(d => `<h3>Day ${d.day}, ${esc(d.weather)}</h3>${esc(d.text)}` +
+    (d.drawing ? `<img src="${picURL(d.drawing)}" alt="A drawing from that day">` : "") +
+    (d.dream ? `<span class="dream">💤 ${d.dream.kind === "scary" ? "A bad dream: " : ""}${esc(d.dream.text)}</span>` : "")).join("\n\n");
 }
 async function refresh(){
   try{
@@ -704,11 +929,129 @@ async function refresh(){
       <figcaption>${esc(d.title)}<small>${esc(d.when)}, at ${esc(d.place)}</small>${d.seen ? `<small><em>She thinks it shows: ${esc(d.seen)}</em></small>` : ""}</figcaption></figure>`).join("")
       : "<p>She hasn’t drawn anything yet.</p>";
     if (pics.length && pics[0].file !== easelFile){ easelFile = pics[0].file; showOnEasel(picURL(easelFile)); }
-    const j = (await (await fetch(url("/api/journal", "journal.json"))).json()).journal;
+    const g = await loadGarden();
+    if (!g?.weather) wx = await liveWeather() || wx;
+    renderGarden(s, g);
+    const j = g?.diary?.length ? "" : (await (await fetch(url("/api/journal", "journal.json"))).json()).journal;
     if (j.trim()) $("diary").innerHTML = esc(j).split(/\n(?=#{2,3} )/).reverse().map(part =>
       part.replace(/^#{2,3} (.*)$/m, "<h3>$1</h3>").replace(/^_(.*)_$/m, "<em>$1</em>").trim()).join("\n\n");
   }catch(e){ $("where").textContent = STATIC ? "Can’t reach the garden right now. Try again in a moment." : "Can’t reach the garden right now. Is server.py running?"; }
 }
+/* ---------- garden sounds: made live in the browser, they follow the weather, the time and where she is ---------- */
+const Sound = (() => {
+  let ctx = null, master, muffle, rainG, rainF, windG, timer = null, on = false, noise;
+  const env = {hour: 12, kind: "clear", precip: 0, wind: 5, temp: 12, place: "teapot", wetGround: false};
+  const pick = a => a[Math.floor(Math.random() * a.length)];
+  const pan = () => Math.random() * 1.6 - 0.8;
+  function makeNoise(){
+    const len = ctx.sampleRate * 4, b = ctx.createBuffer(1, len, ctx.sampleRate), d = b.getChannelData(0);
+    let brown = 0;
+    for (let i = 0; i < len; i++){ const w = Math.random() * 2 - 1; brown = (brown + 0.02 * w) / 1.02; d[i] = w * 0.35 + brown * 2.5; }
+    return b;
+  }
+  function out(p, dest = master){
+    const g = ctx.createGain(); g.gain.value = 0;
+    if (ctx.createStereoPanner){ const sp = ctx.createStereoPanner(); sp.pan.value = p; g.connect(sp).connect(dest); } else g.connect(dest);
+    return g;
+  }
+  function shape(g, t, a, peak, d){
+    g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(peak, t + a); g.gain.exponentialRampToValueAtTime(0.0001, t + a + d);
+  }
+  function bed(type, freq, q){
+    const src = ctx.createBufferSource(); src.buffer = noise; src.loop = true;
+    const f = ctx.createBiquadFilter(); f.type = type; f.frequency.value = freq; f.Q.value = q;
+    const g = ctx.createGain(); g.gain.value = 0; src.connect(f).connect(g).connect(master); src.start(0, Math.random() * 3);
+    return [g, f];
+  }
+  function tone(t, f0, f1, dur, vol, p, type = "sine"){
+    const o = ctx.createOscillator(); o.type = type;
+    o.frequency.setValueAtTime(f0, t); o.frequency.exponentialRampToValueAtTime(f1, t + dur);
+    const g = out(p); shape(g, t, Math.min(0.012, dur / 4), vol, dur); o.connect(g); o.start(t); o.stop(t + dur + 0.05);
+  }
+  function burst(t, type, freq, q, a, vol, d, p){
+    const src = ctx.createBufferSource(); src.buffer = noise;
+    const f = ctx.createBiquadFilter(); f.type = type; f.frequency.value = freq; f.Q.value = q;
+    const g = out(p); shape(g, t, a, vol, d); src.connect(f).connect(g); src.start(t, Math.random() * 2); src.stop(t + a + d + 0.1);
+  }
+  const birds = {
+    robin(t, p){ let x = t; for (let i = 0, n = 5 + Math.random() * 6; i < n; i++){ const f = 2600 + Math.random() * 3200;
+      tone(x, f, f * (0.75 + Math.random() * 0.6), 0.05 + Math.random() * 0.1, 0.045, p); x += 0.08 + Math.random() * 0.13; } },
+    blackbird(t, p){ let x = t; const base = 1400 + Math.random() * 600; for (let i = 0, n = 4 + Math.random() * 4; i < n; i++){
+      const f = base * (1 + Math.random() * 0.9); tone(x, f, f * (0.85 + Math.random() * 0.35), 0.14 + Math.random() * 0.2, 0.05, p); x += 0.17 + Math.random() * 0.16; } },
+    tit(t, p){ for (let i = 0; i < 3; i++){ tone(t + i * 0.36, 5200, 4900, 0.09, 0.035, p); tone(t + i * 0.36 + 0.13, 3600, 3450, 0.12, 0.035, p); } },
+  };
+  function cricket(t, p, v){ for (let i = 0; i < 3; i++) tone(t + i * 0.045, 4700, 4640, 0.025, v, p, "triangle"); }
+  function frog(t, p, v){
+    const o = ctx.createOscillator(); o.type = "sawtooth"; o.frequency.setValueAtTime(140, t); o.frequency.linearRampToValueAtTime(92, t + 0.3);
+    const lp = ctx.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 650;
+    const g = out(p); shape(g, t, 0.02, v, 0.32);
+    const am = ctx.createOscillator(), amG = ctx.createGain(); am.frequency.value = 26; amG.gain.value = v * 0.8;
+    am.connect(amG).connect(g.gain); o.connect(lp).connect(g);
+    o.start(t); o.stop(t + 0.42); am.start(t); am.stop(t + 0.42);
+  }
+  function owl(t, p){ tone(t, 440, 405, 0.5, 0.05, p); tone(t + 1.1, 430, 400, 0.18, 0.04, p); tone(t + 1.45, 420, 360, 0.8, 0.05, p); }
+  function bee(t, p){
+    const o = ctx.createOscillator(); o.type = "sawtooth"; o.frequency.value = 200 + Math.random() * 40;
+    const vib = ctx.createOscillator(), vg = ctx.createGain(); vib.frequency.value = 7; vg.gain.value = 14; vib.connect(vg).connect(o.frequency);
+    const lp = ctx.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 900;
+    const g = out(p); shape(g, t, 1.2, 0.025, 1.8); o.connect(lp).connect(g);
+    o.start(t); vib.start(t); o.stop(t + 3.2); vib.stop(t + 3.2);
+  }
+  function thunder(delay = 1){
+    if (!ctx || !on) return;
+    const t = ctx.currentTime + delay;
+    burst(t, "lowpass", 160, 0.7, 0.08, 0.9, 3.8, pan());
+    if (delay < 1.2) burst(t, "highpass", 1400, 0.5, 0.005, 0.25, 0.35, pan());
+  }
+  function start(){
+    ctx = new (window.AudioContext || window.webkitAudioContext)();
+    noise = makeNoise();
+    muffle = ctx.createBiquadFilter(); muffle.type = "lowpass"; muffle.frequency.value = 16000;
+    const end = ctx.createGain(); end.gain.value = 0.85;
+    master = ctx.createGain(); master.gain.value = 1;
+    master.connect(muffle).connect(end).connect(ctx.destination);
+    [rainG, rainF] = bed("bandpass", 2200, 0.4);
+    let windF; [windG, windF] = bed("lowpass", 420, 0.6);
+    const lfo = ctx.createOscillator(), lg = ctx.createGain(); lfo.frequency.value = 0.07; lg.gain.value = 260;
+    lfo.connect(lg).connect(windF.frequency); lfo.start();
+    timer = setInterval(tick, 250);
+  }
+  function tick(){
+    if (!ctx || !on) return;
+    const t = ctx.currentTime + 0.05, h = env.hour, dt = 0.25, k = ctx.currentTime;
+    const night = h >= 21 || h < 5, dawn = h >= 5 && h < 9, dusk = h >= 18 && h < 21, day = !night;
+    const wet = ["rain", "drizzle", "thunder"].includes(env.kind), heavy = wet && env.precip >= 2.5;
+    const inside = env.place === "teapot", under = env.place === "shed";
+    rainG.gain.setTargetAtTime(wet ? Math.min(0.5, 0.1 + env.precip * 0.09) * (inside ? 0.7 : 1) : 0, k, 2);
+    rainF.frequency.setTargetAtTime(heavy ? 1100 : 2400, k, 2);
+    windG.gain.setTargetAtTime(0.02 + Math.min(0.22, env.wind / 140), k, 3);
+    muffle.frequency.setTargetAtTime(inside ? 1500 : under ? 3200 : 16000, k, 0.8);   // inside the teapot, the world sounds far away
+    const p = r => Math.random() < r * dt, mild = env.temp >= 6, warm = env.temp >= 12;
+    if (day && !heavy && env.kind !== "thunder" && p((dawn ? 0.55 : dusk ? 0.22 : 0.17) * (wet ? 0.25 : 1) * (mild ? 1 : 0.5)))
+      birds[pick(["robin", "robin", "blackbird", "tit"])](t, pan());
+    if ((night || dusk) && warm && !wet && p(2.2)) cricket(t, pan(), 0.016);
+    if ((dusk || night) && env.temp >= 8 && p(env.place === "pond" ? 0.5 : 0.1)) frog(t, pan(), env.place === "pond" ? 0.08 : 0.03);
+    if (day && warm && !wet && env.place === "flowerbed" && p(0.07)) bee(t, pan());
+    if (night && !heavy && p(0.035)) owl(t, pan());
+    if ((wet || env.wetGround) && !inside && p(wet ? 1.2 : 0.4)){ const f = 1500 + Math.random() * 2000; tone(t, f, f * 0.55, 0.06, 0.03, pan()); }
+    if (wet && inside && p(2.5 + env.precip)){ const f = 2800 + Math.random() * 2200; tone(t, f, f * 0.985, 0.28, 0.03, pan()); }   // rain pinging on porcelain
+    if (env.wind >= 18 && !inside && p(0.25)) burst(t, "bandpass", 3000, 0.7, 0.15, Math.min(0.07, env.wind / 600), 0.4, pan());
+  }
+  return {
+    set(e){ Object.assign(env, e); },
+    thunder,
+    async toggle(){
+      if (!ctx) start(); else if (on){ await ctx.suspend(); on = false; return false; } else await ctx.resume();
+      on = true; return true;
+    },
+  };
+})();
+$("sound").onclick = async () => {
+  const playing = await Sound.toggle();
+  $("sound").setAttribute("aria-pressed", playing);
+  $("sound").textContent = playing ? "🔊 Garden sounds on" : "🔈 Turn on garden sounds";
+};
+
 refresh(); setInterval(refresh, STATIC ? 60000 : 3000);
 </script>
 </body>
