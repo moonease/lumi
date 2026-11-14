@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-14T19:21+01:00",
+  "updated": "2026-11-14T19:54+01:00",
   "day": 1,
   "hour": 20,
   "location": "teapot",
@@ -75,6 +75,16 @@
   "diary": [],
   "mind_changes": [],
   "path": [
+    {
+      "day": 1,
+      "hour": 19,
+      "place": "teapot"
+    },
+    {
+      "day": 1,
+      "hour": 19,
+      "place": "teapot"
+    },
     {
       "day": 1,
       "hour": 19,
