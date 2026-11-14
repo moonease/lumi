@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-14T23:51+01:00",
+  "updated": "2026-11-15T00:15+01:00",
   "day": 2,
   "hour": 2,
   "location": "shed",
@@ -148,6 +148,16 @@
     {
       "day": 2,
       "hour": 0,
+      "place": "shed"
+    },
+    {
+      "day": 2,
+      "hour": 1,
+      "place": "shed"
+    },
+    {
+      "day": 2,
+      "hour": 1,
       "place": "shed"
     },
     {

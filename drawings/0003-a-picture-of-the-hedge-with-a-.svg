@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <rect width="400" height="300" fill="white"/>
+  <!-- Sun with face -->
+  <circle cx="350" cy="50" r="30" fill="yellow" stroke="orange" stroke-width="6" stroke-linecap="round"/>
+  <path d="M350,50 m-20,0 a20,20 0 1,1 40,0 a20,20 0 1,1 -40,0" fill="none" stroke="orange" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="340" cy="45" r="5" fill="black"/>
+  <circle cx="360" cy="45" r="5" fill="black"/>
+  <path d="M345,55 Q350,65 355,55" fill="none" stroke="black" stroke-width="4" stroke-linecap="round"/>
+  <!-- Hedge (big, wobbly green shapes) -->
+  <path d="M50,150 Q150,100 250,150 Q350,200 250,250 Q150,300 50,250 Z" fill="green" stroke="black" stroke-width="6" stroke-linecap="round"/>
+  <path d="M60,160 Q160,110 260,160 Q360,210 260,260 Q160,310 60,260 Z" fill="green" stroke="black" stroke-width="6" stroke-linecap="round"/>
+  <!-- Path (wavy line) -->
+  <path d="M100,200 Q150,220 200,200 Q250,180 300,200" fill="none" stroke="brown" stroke-width="10" stroke-linecap="round"/>
+  <!-- Garden shed (big rectangle with roof) -->
+  <rect x="100" y="180" width="200" height="80" fill="saddlebrown" stroke="black" stroke-width="6" stroke-linecap="round"/>
+  <polygon points="100,180 200,180 150,100" fill="saddlebrown" stroke="black" stroke-width="6" stroke-linecap="round"/>
+  <!-- LUMI in wobbly letters -->
+  <path d="M100,100 Q120,80 140,100 Q160,120 180,100 Q200,80 220,100" fill="none" stroke="black" stroke-width="6" stroke-linecap="round"/>
+  <path d="M100,120 Q120,100 140,120 Q160,140 180,120 Q200,100 220,120" fill="none" stroke="black" stroke-width="6" stroke-linecap="round"/>
+  <path d="M100,140 Q120,120 140,140 Q160,160 180,140 Q200,120 220,140" fill="none" stroke="black" stroke-width="6" stroke-linecap="round"/>
+  <path d="M100,160 Q120,140 140,160 Q160,180 180,160 Q200,140 220,160" fill="none" stroke="black" stroke-width="6" stroke-linecap="round"/>
+  <path d="M100,180 Q120,160 140,180 Q160,200 180,180 Q200,160 220,180" fill="none" stroke="black" stroke-width="6" stroke-linecap="round"/>
+</svg>
