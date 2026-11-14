@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-14T18:57+01:00",
+  "updated": "2026-11-14T19:21+01:00",
   "day": 1,
   "hour": 20,
   "location": "teapot",
@@ -8,15 +8,15 @@
     "code": 0,
     "emoji": "☀️",
     "label": "clear sky",
-    "temp": 0.5,
+    "temp": 0.2,
     "precip": 0.0,
-    "wind": 8,
+    "wind": 9,
     "cloud": 0,
     "heavy": false,
     "wet": false,
     "place": "Garching",
     "real": true,
-    "fetched": "2026-11-14T18:32"
+    "fetched": "2026-11-14T19:02"
   },
   "season": "autumn",
   "wet": false,
@@ -53,7 +53,7 @@
     {
       "id": "bristle",
       "name": "Mrs. Bristle",
-      "trust": 74,
+      "trust": 78,
       "impression": "she looks after me",
       "mood": "gentle, worried",
       "busy_with": "gathering thorny blackberries for Lumi's snack",
@@ -75,6 +75,16 @@
   "diary": [],
   "mind_changes": [],
   "path": [
+    {
+      "day": 1,
+      "hour": 19,
+      "place": "teapot"
+    },
+    {
+      "day": 1,
+      "hour": 19,
+      "place": "teapot"
+    },
     {
       "day": 1,
       "hour": 19,
