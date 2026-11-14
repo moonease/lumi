@@ -1,0 +1,84 @@
+{
+  "updated": "2026-11-14T18:27+01:00",
+  "day": 1,
+  "hour": 20,
+  "location": "teapot",
+  "weather": {
+    "kind": "clear",
+    "code": 0,
+    "emoji": "☀️",
+    "label": "clear sky",
+    "temp": 0.9,
+    "precip": 0.0,
+    "wind": 8,
+    "cloud": 0,
+    "heavy": false,
+    "wet": false,
+    "place": "Garching",
+    "real": true,
+    "fetched": "2026-11-14T18:02"
+  },
+  "season": "autumn",
+  "wet": false,
+  "wet_ground": false,
+  "highlights": [
+    {
+      "day": 1,
+      "time": "19:00",
+      "emoji": "🗣️",
+      "text": "Fennel insisted the phone 'knows where the cat is,' but Tock refused to look, saying 'inventions need focus, not magic.'",
+      "kind": "gossip"
+    }
+  ],
+  "treasures": [],
+  "interests": [],
+  "fears": [],
+  "favours": [],
+  "friends": [
+    {
+      "id": "tock",
+      "name": "Tock",
+      "trust": 0,
+      "impression": "",
+      "mood": "determined, fidgety",
+      "busy_with": "building a 'seed elevator' from a pinecone and bottle cap",
+      "caregiver": false
+    },
+    {
+      "id": "bristle",
+      "name": "Mrs. Bristle",
+      "trust": 70,
+      "impression": "she looks after me",
+      "mood": "gentle, worried",
+      "busy_with": "gathering thorny blackberries for Lumi's snack",
+      "caregiver": true
+    }
+  ],
+  "news": [
+    {
+      "when": "Day 1, 19:00 (evening)",
+      "text": "Fennel insisted the phone 'knows where the cat is,' but Tock refused to look, saying 'inventions need focus, not magic.'",
+      "place": null
+    },
+    {
+      "when": "Day 1, 19:00 (evening)",
+      "text": "The cat was prowling in the flowerbed.",
+      "place": "flowerbed"
+    }
+  ],
+  "diary": [],
+  "mind_changes": [],
+  "path": [
+    {
+      "day": 1,
+      "hour": 19,
+      "place": "teapot"
+    },
+    {
+      "day": 1,
+      "hour": 19,
+      "place": "teapot"
+    }
+  ],
+  "loose": {}
+}
