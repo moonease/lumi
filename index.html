@@ -600,7 +600,7 @@ async function refresh(){
     const pics = (s.drawings||[]).slice().reverse();
     const picURL = f => (STATIC ? "drawings/" : "/drawings/") + encodeURIComponent(f);
     $("fridge").innerHTML = pics.length ? pics.map(d => `<figure><img src="${picURL(d.file)}" alt="Lumi’s drawing: ${esc(d.title)}" loading="lazy">
-      <figcaption>${esc(d.title)}<small>${esc(d.when)}, at ${esc(d.place)}</small></figcaption></figure>`).join("")
+      <figcaption>${esc(d.title)}<small>${esc(d.when)}, at ${esc(d.place)}</small>${d.seen ? `<small><em>She thinks it shows: ${esc(d.seen)}</em></small>` : ""}</figcaption></figure>`).join("")
       : "<p>She hasn’t drawn anything yet.</p>";
     if (pics.length && pics[0].file !== easelFile){ easelFile = pics[0].file; showOnEasel(picURL(easelFile)); }
     const j = (await (await fetch(url("/api/journal", "journal.json"))).json()).journal;
