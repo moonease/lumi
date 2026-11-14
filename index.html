@@ -30,7 +30,7 @@ header{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-be
 .stage:active{cursor:grabbing}
 .stage canvas{display:block;width:100%;height:100%}
 .overlay{position:absolute;inset:0;pointer-events:none;overflow:hidden}
-.tag{position:absolute;transform:translate(-50%,-100%);font-family:"Gaegu",cursive;font-size:18px;color:#233A22;
+.tag{opacity:var(--tagfade,1);position:absolute;transform:translate(-50%,-100%);font-family:"Gaegu",cursive;font-size:18px;color:#233A22;
   background:rgba(251,250,243,.78);padding:0 .5rem;border-radius:8px;white-space:nowrap}
 .tag.creature{font-size:16px;background:rgba(251,250,243,.6)}
 .tag.speaking{white-space:normal;width:max-content;max-width:230px;font-size:18px;background:#FBFAF3;padding:.3rem .6rem;border-radius:12px;z-index:1}
@@ -64,6 +64,11 @@ section{margin-top:3rem}
 .fridge figcaption{font-family:"Gaegu",cursive;font-size:1.15rem;color:#233A22;line-height:1.2;margin-top:.3rem}
 .fridge small{display:block;font-family:"Atkinson Hyperlegible",sans-serif;font-size:.78rem;color:#5A6E57}
 .lately li{margin:.25rem 0}
+.feed{list-style:none;padding:0;margin:.8rem 0 0;max-height:340px;overflow:auto;border-left:3px solid var(--line)}
+.feed li{padding:.3rem 0 .3rem .9rem;line-height:1.4}
+.feed li:first-child{font-weight:700}
+.feed time{display:inline-block;min-width:6.6rem;color:var(--soft);font-variant-numeric:tabular-nums;font-weight:400}
+.feed q{font-family:"Gaegu",cursive;font-size:1.2rem}
 .lately small{color:var(--soft)}
 ul{padding-left:1.2rem;margin:0}
 .projects a{color:var(--pond)}
@@ -87,6 +92,11 @@ button{font:inherit;font-weight:700;border:0;border-radius:999px;padding:.5rem 1
       <button id="overview" type="button">Whole garden</button>
     </div>
   </div>
+
+  <section style="margin-top:2rem">
+    <h2>What she’s doing</h2>
+    <ul class="feed" id="feed"><li>Waiting for her next move…</li></ul>
+  </section>
 
   <div class="cols">
     <div>
@@ -141,11 +151,11 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":
 
 /* ---------- where Lumi stands in each place (x, z, height) ---------- */
 const SPOTS = {
-  teapot:{x:-10.5,z:7,y:0},  flowerbed:{x:-2,z:2,y:0},  pond:{x:6.3,z:8,y:0},
+  teapot:{x:-10.5,z:7,y:0},  flowerbed:{x:-2,z:2,y:0},  pond:{x:3.6,z:7,y:0},
   vegetable_patch:{x:5.5,z:-2.5,y:0},  shed:{x:15,z:-7.5,y:0},  hedge:{x:-11,z:-4,y:0},
   windowsill:{x:0.5,z:-13.4,y:5.15, via:[{x:-2.3,z:-13,y:0},{x:-2.3,z:-13.2,y:5.15}]},
 };
-const CREATURE_SPOTS = {fennel:[1.6,1.2], tock:[1.5,-1], crumb:[1.4,1.2], gorse:[2.4,1.6], bristle:[1.6,1.2]};
+const CREATURE_SPOTS = {fennel:[1.6,1.2], tock:[1.5,-1], crumb:[1.4,1.2], gorse:[5.1,2.6], bristle:[1.6,1.2]};
 
 /* ---------- scene ---------- */
 const stage = $("stage"), overlay = $("overlay");
@@ -203,7 +213,7 @@ const easel = new THREE.Group(); easel.position.set(-12.2,0,4.6); easel.rotation
 for (const x of [-0.75,0.75]) mesh(new THREE.BoxGeometry(0.08,2.6,0.08), 0x8A6A44, x,1.2,0, easel).rotation.x = -0.12;
 mesh(new THREE.BoxGeometry(0.08,2.6,0.08), 0x8A6A44, 0,1.2,-0.45, easel).rotation.x = 0.35;
 mesh(new THREE.BoxGeometry(1.8,1.4,0.06), 0xD9C08C, 0,1.75,0.06, easel).rotation.x = -0.12;
-const canvasMat = new THREE.MeshBasicMaterial({color:0xffffff});
+const canvasMat = new THREE.MeshLambertMaterial({color:0xffffff});
 const easelPic = new THREE.Mesh(new THREE.PlaneGeometry(1.6,1.2), canvasMat);
 easelPic.position.set(0,1.75,0.1); easelPic.rotation.x = -0.12; easel.add(easelPic);
 let easelFile = null;
@@ -396,9 +406,39 @@ function update(s){
   }
 }
 
+/* ---------- a friendly feed of her recent actions ---------- */
+function eventText(e, names){
+  const who = e.person ? (names[e.person] || e.person) : "";
+  const q = t => `<q>${esc(t)}</q>`;
+  switch (e.type){
+    case "think": return "💭 " + q(e.text);
+    case "move": return `🚶 walked to ${esc(world?.places[e.place]?.name || e.place)}`;
+    case "look": return `👀 looked closely at the ${esc(e.thing)}`;
+    case "eat": return `🍓 ate ${esc(e.thing)}`;
+    case "talk": return `💬 to ${esc(who)}: ${q(e.text)}` + (e.reply ? `<br>&nbsp;&nbsp;&nbsp;${esc(who)}: ${q(e.reply)}` : "");
+    case "together": return e.text === "hug" ? `🤗 cuddled up to ${esc(who)}` : `🤝 ${esc(e.text)}, together with ${esc(who)}`;
+    case "try": return `🤸 tried: ${esc(e.text)}`;
+    case "draw": return `🖍️ drew: ${esc(e.text)}`;
+    case "write": return "✏️ wrote in her diary";
+    case "phone": return "📱 " + esc(e.text);
+    case "leave": return `🎁 left a ${esc(e.thing)}`;
+    case "sleep": return {night: "😴 went to sleep for the night", nap: "💤 had a nap in her teapot",
+                          rest: "🌿 sat down for a rest", collapse: "🥱 got so tired she fell asleep right where she was"}[e.kind] || "😴 slept";
+  }
+  return "";
+}
+function renderFeed(s){
+  const names = Object.fromEntries((s.npcs||[]).map(n => [n.id, n.name]));
+  const items = (s.events||[]).slice().reverse().map(e => {
+    const t = eventText(e, names);
+    return t ? `<li><time>${e.time ? (e.day ? "Day " + e.day + ", " : "") + e.time : ""}</time> ${t}</li>` : "";
+  }).join("");
+  $("feed").innerHTML = items || "<li>Waiting for her next move…</li>";
+}
+
 /* ---------- watching her live: replay each action ---------- */
 let lastSeq = null, queue = [], busy = false, gesture = null, gestureUntil = 0, faceTarget = null;
-let sayText = "", sayUntil = 0, nextWander = 0;
+let sayText = "", sayUntil = 0, nextWander = 0, sleepUntil = 0, sleepKind = null;
 const nowS = () => performance.now() / 1000;
 const wait = ms => new Promise(r => setTimeout(r, reduceMotion ? ms / 3 : ms));
 const arrived = () => new Promise(r => { const chk = () => path.length ? setTimeout(chk, 100) : r(); chk(); });
@@ -435,8 +475,9 @@ async function perform(e){
     case "leave":
       await walkTo([near(current, e.thing)]); say(`I'll leave a ${e.thing} here`); gest("look", 2200); await wait(2300); break;
     case "talk": case "together": {
-      if (c){ const p = c.g.position, d = lumi.position.clone().sub(p).setY(0).normalize().multiplyScalar(1.6);
-              await walkTo([p.clone().add(d).setY(spot(current).y || 0)]); faceTarget = p; }
+      if (c){ const p = c.g.position, home = P(spot(current)), d = lumi.position.clone().sub(p).setY(0).normalize().multiplyScalar(1.6);
+              if (p.clone().setY(home.y).distanceTo(home) < 4) await walkTo([p.clone().add(d).setY(home.y)]);  // don't wade into the pond
+              faceTarget = p; }
       say(e.text, 4200); gest(e.type === "talk" ? "wave" : "hop", 4000); await wait(4300);
       if (c && e.reply){ const name = c.label.textContent; c.label.textContent = `${name}: ${e.reply}`; c.label.classList.add("speaking");
                          await wait(Math.min(9000, 2500 + e.reply.length * 45)); c.label.textContent = name; c.label.classList.remove("speaking"); }
@@ -451,6 +492,14 @@ async function perform(e){
       say("📱 " + e.text, 3500); gest("write", 3500); await wait(3600); break;
     case "think":
       say("💭 " + e.text, Math.min(7000, 2000 + e.text.length * 40)); await wait(1800); break;
+    case "sleep": {
+      if (e.kind === "night" || e.kind === "nap") await walkTo(route(current, "teapot").concat(
+        current === "teapot" ? [P(spot("teapot"))] : []));
+      if (e.kind === "night" || e.kind === "nap") current = "teapot";
+      if (e.kind === "collapse"){ say("so… sleepy…", 2500); await wait(2500); }
+      const secs = {night: 30, nap: 15, rest: 8, collapse: 15}[e.kind] || 10;
+      sleepKind = e.kind; sleepUntil = nowS() + secs; await wait(secs * 1000);
+      sleepKind = null; say("*yaaawn*", 2500); gest("stretch", 2500); await wait(2600); break; }
   }
 }
 
@@ -492,16 +541,57 @@ function skyAt(h){
   }
   return new THREE.Color(0xA9D6F5);
 }
+/* night things: moon, stars, fireflies, a warm glow from her teapot */
+function starPositions(n){
+  const out = [];
+  for (let i = 0; i < n; i++){
+    const a = Math.random() * 6.283, b = Math.random() * 1.25;
+    out.push(Math.cos(a) * Math.sin(b) * 140, Math.cos(b) * 140 + 10, Math.sin(a) * Math.sin(b) * 140);
+  }
+  return out;
+}
+const stars = new THREE.Points(
+  new THREE.BufferGeometry().setAttribute("position", new THREE.Float32BufferAttribute(starPositions(600), 3)),
+  new THREE.PointsMaterial({color: 0xffffff, size: 0.9, transparent: true, opacity: 0, fog: false}));
+scene.add(stars);
+const moon = new THREE.Mesh(new THREE.SphereGeometry(4, 16, 12), new THREE.MeshBasicMaterial({color: 0xF4F1DE, fog: false, transparent: true, opacity: 0}));
+moon.position.set(-60, 70, -90); scene.add(moon);
+const homeGlow = new THREE.PointLight(0xFFC46B, 0, 14, 2); homeGlow.position.set(-11.5, 1.6, 8.6); scene.add(homeGlow);
+const flies = [];
+for (let i = 0; i < 36; i++){
+  const f = new THREE.Mesh(new THREE.SphereGeometry(0.07, 6, 4), new THREE.MeshBasicMaterial({color: 0xF7F09A, transparent: true, opacity: 0}));
+  const base = new THREE.Vector3(rnd(-18, 16), rnd(0.6, 3.5), rnd(-10, 14));
+  f.userData = {base, phase: rnd(0, 6.28), speed: rnd(0.3, 0.8)}; scene.add(f); flies.push(f);
+}
+
 let shownHour = 12;
+const C = h => new THREE.Color(h);
 function lightUp(dt){
   shownHour += (lastHour - shownHour) * Math.min(1, dt*0.5);
   if (Math.abs(lastHour - shownHour) > 12) shownHour = lastHour;
-  const h = shownHour, sky = skyAt(h);
+  const h = shownHour, sky = skyAt(h), t = clock.elapsedTime;
   scene.background = sky; scene.fog.color = sky; stage.style.background = "#" + sky.getHexString();
-  const day = Math.max(0, Math.sin((h-6)/12*Math.PI));
-  sun.intensity = 0.3 + day*0.7; hemi.intensity = 0.55 + day*0.3;
-  sun.position.set(Math.cos((h-6)/12*Math.PI)*40, 10 + day*40, 20);
-  windowLight.material.color.set(day < 0.2 ? 0xFFD27A : 0x3A2A20);
+  const day = Math.max(0, Math.sin((h-5)/15*Math.PI));                 // 0 at night, 1 around midday (light from 5 to 20)
+  const night = Math.max(0, Math.min(1, (0.25 - day) / 0.25));          // fades in after sunset
+  const golden = Math.max(0, 1 - Math.abs(day - 0.15) / 0.15) * (day > 0 ? 1 : 0);  // sunrise / sunset glow
+  // the sun by day (warm at sunrise and sunset), cool blue moonlight by night
+  sun.color.copy(C(0xFFF1D6).lerp(C(0xFFA15C), golden).lerp(C(0x8FA8E8), night));
+  sun.intensity = 0.12 + day * 0.88 + night * 0.18;
+  sun.position.set(night > 0.5 ? 30 : Math.cos((h-5)/15*Math.PI)*40, 10 + Math.max(day, night*0.8)*40, 20);
+  hemi.color.copy(C(0xFFFFFF).lerp(C(0x5A6FA8), night));
+  hemi.groundColor.copy(C(0x5D7A3A).lerp(C(0x1A2A22), night));
+  hemi.intensity = 0.28 + day * 0.5;
+  stars.material.opacity = night * 0.9;
+  overlay.style.setProperty("--tagfade", String(1 - night * 0.45));
+  moon.material.opacity = night;
+  homeGlow.intensity = night * 1.6;
+  windowLight.material.color.set(night > 0.3 ? 0xFFD27A : 0x3A2A20);
+  for (const f of flies){                                                 // fireflies drift and blink
+    const u = f.userData;
+    f.position.set(u.base.x + Math.sin(t*u.speed + u.phase)*1.2, u.base.y + Math.sin(t*u.speed*1.7 + u.phase)*0.4,
+                   u.base.z + Math.cos(t*u.speed + u.phase)*1.2);
+    f.material.opacity = night * (0.35 + 0.65 * Math.max(0, Math.sin(t*2 + u.phase*3)));
+  }
 }
 
 /* ---------- animation ---------- */
@@ -522,7 +612,7 @@ function frame(){
     walking = true;
   }
   // idle: little wanders around where she is, like a child who can't stand still
-  if (!busy && !queue.length && !path.length && !asleep && current && nowS() > nextWander){
+  if (!busy && !queue.length && !path.length && !asleep && nowS() > sleepUntil && current && nowS() > nextWander){
     path = [near(current, "wander" + Math.floor(t), 0.4 + Math.random() * 1.6)];
     nextWander = nowS() + 5 + Math.random() * 7;
   }
@@ -532,7 +622,9 @@ function frame(){
   legL.rotation.x = swing; legR.rotation.x = -swing;
   armL.rotation.x = -swing*0.8; armR.rotation.x = swing*0.8;
   armL.rotation.z = -0.25; armR.rotation.z = 0.25; head.rotation.x = 0;
-  if (asleep && !walking && !busy){
+  const napping = nowS() < sleepUntil && sleepKind !== "rest";
+  const sitting = nowS() < sleepUntil && sleepKind === "rest";
+  if ((asleep && !walking && !busy) || napping){
     rig.rotation.x = -Math.PI/2; rig.position.set(0, 0.18, 0.5);
   } else {
     rig.rotation.x = 0; rig.position.z = 0;
@@ -542,6 +634,8 @@ function frame(){
     if (g === "eat"){ armR.rotation.x = -1.9; armL.rotation.x = -1.6; head.rotation.x = 0.15 + Math.sin(t*14)*0.12; }
     if (g === "wave"){ armR.rotation.z = 2.6 + Math.sin(t*9)*0.35; }
     if (g === "write"){ head.rotation.x = 0.5; armR.rotation.x = -1.1; armL.rotation.x = -1.0; }
+    if (sitting && !walking){ rig.position.y = -0.22; legL.rotation.x = legR.rotation.x = -1.4; head.rotation.x = 0.2; }
+    if (g === "stretch"){ armL.rotation.z = -2.8; armR.rotation.z = 2.8; head.rotation.x = -0.3; }
     if (g === "hop"){ rig.position.y = Math.abs(Math.sin(t*6))*0.45; armL.rotation.z = -2.4; armR.rotation.z = 2.4;
                       legL.rotation.x = Math.sin(t*12)*0.3; legR.rotation.x = -Math.sin(t*12)*0.3; }
   }
@@ -558,8 +652,8 @@ function frame(){
   fadeBlockers();
   renderer.render(scene, camera);
 
-  const lying = asleep && !walking && !busy;
-  const line = nowS() < sayUntil ? sayText : lying ? "Zzz…" : mood;
+  const lying = (asleep && !walking && !busy) || napping;
+  const line = nowS() < sayUntil ? sayText : lying ? "Zzz…" : sitting ? "resting…" : mood;
   if ($("bubble").textContent !== line) $("bubble").textContent = line;
   place2D($("bubble"), lumi.position.clone().add(new THREE.Vector3(0, lying ? 0.9 : 1.6, 0)));
   for (const p of Object.values(placeTags)) place2D(p.el, p.pos);
@@ -582,6 +676,7 @@ async function refresh(){
     const s = await (await fetch(url("/api/state", "state.json"))).json();
     if (!s.awake){ $("where").textContent = STATIC ? "Lumi hasn’t woken up yet." : "Lumi hasn’t woken up yet. Start agent.py."; if (!world) setupWorld(s.places); return; }
     update(s);
+    renderFeed(s);
     $("learned").innerHTML = (s.knowledge||[]).slice().reverse().map(k =>
       `<li>${esc(k.belief)} <small>${esc(k.source)}</small></li>`).join("") || "<li>Nothing yet.</li>";
     $("core").innerHTML = (s.core_memories||[]).slice().reverse().map(c =>

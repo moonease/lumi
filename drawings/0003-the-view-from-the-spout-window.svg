@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <rect width="400" height="300" fill="white"/>
+  <!-- Teapot body -->
+  <circle cx="200" cy="150" r="80" fill="saddlebrown" stroke="black" stroke-width="10" stroke-linecap="round"/>
+  <!-- Spout -->
+  <path d="M200,150 Q230,100 260,120" fill="none" stroke="black" stroke-width="10" stroke-linecap="round"/>
+  <!-- Handle -->
+  <path d="M200,150 Q150,180 130,150" fill="none" stroke="black" stroke-width="10" stroke-linecap="round"/>
+  <!-- Lid -->
+  <circle cx="200" cy="60" r="20" fill="sienna" stroke="black" stroke-width="10" stroke-linecap="round"/>
+  <!-- Window -->
+  <rect x="240" y="100" width="30" height="40" fill="lightblue" stroke="black" stroke-width="8" stroke-linecap="round"/>
+  <!-- Beetle (shell) -->
+  <ellipse cx="320" cy="180" rx="30" ry="20" fill="green" stroke="black" stroke-width="8" stroke-linecap="round"/>
+  <!-- Beetle head -->
+  <circle cx="350" cy="180" r="10" fill="brown" stroke="black" stroke-width="6" stroke-linecap="round"/>
+  <!-- Beetle legs -->
+  <line x1="320" y1="190" x2="330" y2="210" stroke="black" stroke-width="6" stroke-linecap="round"/>
+  <line x1="330" y1="190" x2="340" y2="210" stroke="black" stroke-width="6" stroke-linecap="round"/>
+  <line x1="340" y1="190" x2="350" y2="210" stroke="black" stroke-width="6" stroke-linecap="round"/>
+  <line x1="350" y1="190" x2="360" y2="210" stroke="black" stroke-width="6" stroke-linecap="round"/>
+  <line x1="360" y1="190" x2="370" y2="210" stroke="black" stroke-width="6" stroke-linecap="round"/>
+  <line x1="370" y1="190" x2="380" y2="210" stroke="black" stroke-width="6" stroke-linecap="round"/>
+  <!-- Sun -->
+  <circle cx="380" cy="40" r="30" fill="yellow" stroke="orange" stroke-width="8" stroke-linecap="round"/>
+  <!-- Sun face -->
+  <circle cx="375" cy="50" r="5" fill="black"/>
+  <circle cx="385" cy="50" r="5" fill="black"/>
+  <path d="M375,60 Q380,70 385,60" fill="none" stroke="black" stroke-width="6" stroke-linecap="round"/>
+  <!-- Name LUMI -->
+  <text x="100" y="280" font-size="24" fill="black" stroke="black" stroke-width="2" stroke-linecap="round">LUMI</text>
+</svg>
