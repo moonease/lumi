@@ -1,22 +1,22 @@
 {
-  "updated": "2026-11-14T22:23+01:00",
-  "day": 1,
-  "hour": 23,
-  "location": "hedge",
+  "updated": "2026-11-14T22:34+01:00",
+  "day": 2,
+  "hour": 0,
+  "location": "shed",
   "weather": {
     "kind": "fog",
     "code": 45,
     "emoji": "🌫️",
     "label": "foggy",
-    "temp": -1.9,
+    "temp": -2.0,
     "precip": 0.0,
-    "wind": 4,
-    "cloud": 58,
+    "wind": 3,
+    "cloud": 60,
     "heavy": false,
     "wet": false,
     "place": "Garching",
     "real": true,
-    "fetched": "2026-11-14T22:00"
+    "fetched": "2026-11-14T22:28"
   },
   "season": "autumn",
   "wet": false,
@@ -71,7 +71,7 @@
       "desc": "A red-and-yellow leaf as big as a blanket. It crackles when you touch it.",
       "found": "Day 1, 22:00 (night)",
       "where": "The hedge",
-      "on_shelf": false
+      "on_shelf": true
     }
   ],
   "interests": [],
@@ -132,108 +132,7 @@
   ],
   "diary": [],
   "mind_changes": [],
-  "path": [
-    {
-      "day": 1,
-      "hour": 19,
-      "place": "teapot"
-    },
-    {
-      "day": 1,
-      "hour": 19,
-      "place": "teapot"
-    },
-    {
-      "day": 1,
-      "hour": 19,
-      "place": "teapot"
-    },
-    {
-      "day": 1,
-      "hour": 19,
-      "place": "teapot"
-    },
-    {
-      "day": 1,
-      "hour": 19,
-      "place": "teapot"
-    },
-    {
-      "day": 1,
-      "hour": 19,
-      "place": "teapot"
-    },
-    {
-      "day": 1,
-      "hour": 19,
-      "place": "teapot"
-    },
-    {
-      "day": 1,
-      "hour": 20,
-      "place": "teapot"
-    },
-    {
-      "day": 1,
-      "hour": 20,
-      "place": "teapot"
-    },
-    {
-      "day": 1,
-      "hour": 20,
-      "place": "flowerbed"
-    },
-    {
-      "day": 1,
-      "hour": 20,
-      "place": "flowerbed"
-    },
-    {
-      "day": 1,
-      "hour": 20,
-      "place": "vegetable_patch"
-    },
-    {
-      "day": 1,
-      "hour": 21,
-      "place": "hedge"
-    },
-    {
-      "day": 1,
-      "hour": 22,
-      "place": "hedge"
-    },
-    {
-      "day": 1,
-      "hour": 22,
-      "place": "hedge"
-    },
-    {
-      "day": 1,
-      "hour": 22,
-      "place": "hedge"
-    },
-    {
-      "day": 1,
-      "hour": 22,
-      "place": "hedge"
-    },
-    {
-      "day": 1,
-      "hour": 22,
-      "place": "hedge"
-    },
-    {
-      "day": 1,
-      "hour": 22,
-      "place": "hedge"
-    },
-    {
-      "day": 1,
-      "hour": 22,
-      "place": "hedge"
-    }
-  ],
+  "path": [],
   "loose": {
     "pond": [
       "pencil shaving"
