@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <rect width="400" height="300" fill="white"/>
+  <!-- Pond (big wobbly blue oval) -->
+  <path d="M50,150 Q150,50 250,150 Q350,250 250,250 Q150,250 50,150" fill="skyblue" stroke="none"/>
+  <!-- X (thick red wobbly lines) -->
+  <path d="M60,60 Q200,200 340,240" stroke="red" stroke-width="15" fill="none" stroke-linecap="round"/>
+  <path d="M340,60 Q200,200 60,240" stroke="red" stroke-width="15" fill="none" stroke-linecap="round"/>
+  <!-- Garden shed (simple brown rectangle with triangle roof) -->
+  <rect x="180" y="220" width="60" height="40" fill="saddlebrown" rx="10" ry="10"/>
+  <polygon points="210,220 240,220 225,180" fill="saddlebrown"/>
+  <!-- Sun (yellow circle with face) -->
+  <circle cx="380" cy="40" r="30" fill="gold"/>
+  <circle cx="370" cy="35" r="5" fill="black"/>
+  <circle cx="390" cy="35" r="5" fill="black"/>
+  <path d="M380,50 Q370,70 380,90" stroke="black" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- Lily pads (floating green circles) -->
+  <circle cx="100" cy="180" r="15" fill="green"/>
+  <circle cx="200" cy="160" r="15" fill="green"/>
+  <circle cx="300" cy="190" r="15" fill="green"/>
+  <!-- LUMI text (wobbly letters) -->
+  <path d="M10,260 Q30,280 50,260 Q70,240 90,260" fill="none" stroke="black" stroke-width="6" stroke-linecap="round"/>
+  <path d="M100,260 Q120,280 140,260 Q160,240 180,260" fill="none" stroke="black" stroke-width="6" stroke-linecap="round"/>
+  <path d="M200,260 Q220,280 240,260 Q260,240 280,260" fill="none" stroke="black" stroke-width="6" stroke-linecap="round"/>
+  <path d="M300,260 Q320,280 340,260 Q360,240 380,260" fill="none" stroke="black" stroke-width="6" stroke-linecap="round"/>
+  <path d="M390,260 Q410,280 430,260" fill="none" stroke="black" stroke-width="6" stroke-linecap="round"/>
+</svg>

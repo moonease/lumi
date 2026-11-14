@@ -1,22 +1,22 @@
 {
-  "updated": "2026-11-15T00:15+01:00",
+  "updated": "2026-11-15T00:44+01:00",
   "day": 2,
-  "hour": 2,
+  "hour": 4,
   "location": "shed",
   "weather": {
     "kind": "fog",
     "code": 45,
     "emoji": "🌫️",
     "label": "foggy",
-    "temp": -2.6,
+    "temp": -2.9,
     "precip": 0.0,
-    "wind": 3,
-    "cloud": 68,
+    "wind": 2,
+    "cloud": 75,
     "heavy": false,
     "wet": false,
     "place": "Garching",
     "real": true,
-    "fetched": "2026-11-14T23:34"
+    "fetched": "2026-11-15T00:15"
   },
   "season": "autumn",
   "wet": false,
@@ -70,6 +70,14 @@
       "emoji": "🗣️",
       "text": "Fennel insisted the phone could track the cat, but Tock said 'inventions need focus, not magic' and accidentally knocked over his twig sketch.",
       "kind": "gossip"
+    },
+    {
+      "day": 2,
+      "time": "03:00",
+      "emoji": "🖍️",
+      "text": "Lumi drew: a picture of the pond with an X where the map said",
+      "kind": "drawing",
+      "file": "0003-a-picture-of-the-pond-with-an-.svg"
     }
   ],
   "treasures": [
@@ -163,6 +171,16 @@
     {
       "day": 2,
       "hour": 1,
+      "place": "shed"
+    },
+    {
+      "day": 2,
+      "hour": 2,
+      "place": "shed"
+    },
+    {
+      "day": 2,
+      "hour": 3,
       "place": "shed"
     }
   ],
