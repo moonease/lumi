@@ -1,8 +1,8 @@
 {
-  "updated": "2026-11-14T21:47+01:00",
+  "updated": "2026-11-14T22:03+01:00",
   "day": 1,
   "hour": 23,
-  "location": "hedge",
+  "location": "shed",
   "weather": {
     "kind": "fog",
     "code": 45,
@@ -191,6 +191,16 @@
     {
       "day": 1,
       "hour": 21,
+      "place": "hedge"
+    },
+    {
+      "day": 1,
+      "hour": 22,
+      "place": "hedge"
+    },
+    {
+      "day": 1,
+      "hour": 22,
       "place": "hedge"
     },
     {
