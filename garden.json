@@ -1,8 +1,8 @@
 {
-  "updated": "2026-11-15T08:26+01:00",
-  "day": 4,
-  "hour": 22,
-  "location": "hedge",
+  "updated": "2026-11-15T08:37+01:00",
+  "day": 5,
+  "hour": 0,
+  "location": "teapot",
   "weather": {
     "kind": "fog",
     "code": 45,
@@ -251,7 +251,7 @@
     {
       "id": "bristle",
       "name": "Mrs. Bristle",
-      "trust": 89,
+      "trust": 91,
       "impression": "Mrs. Bristle is warm and holds my paw when I’m scared.",
       "mood": "worried",
       "busy_with": "checking the pumpkin hole for intruders",
@@ -346,78 +346,7 @@
     }
   ],
   "mind_changes": [],
-  "path": [
-    {
-      "day": 4,
-      "hour": 8,
-      "place": "teapot"
-    },
-    {
-      "day": 4,
-      "hour": 9,
-      "place": "teapot"
-    },
-    {
-      "day": 4,
-      "hour": 10,
-      "place": "teapot"
-    },
-    {
-      "day": 4,
-      "hour": 11,
-      "place": "teapot"
-    },
-    {
-      "day": 4,
-      "hour": 12,
-      "place": "hedge"
-    },
-    {
-      "day": 4,
-      "hour": 13,
-      "place": "teapot"
-    },
-    {
-      "day": 4,
-      "hour": 14,
-      "place": "teapot"
-    },
-    {
-      "day": 4,
-      "hour": 15,
-      "place": "teapot"
-    },
-    {
-      "day": 4,
-      "hour": 16,
-      "place": "teapot"
-    },
-    {
-      "day": 4,
-      "hour": 17,
-      "place": "teapot"
-    },
-    {
-      "day": 4,
-      "hour": 18,
-      "place": "teapot"
-    },
-    {
-      "day": 4,
-      "hour": 19,
-      "place": "hedge"
-    },
-    {
-      "day": 4,
-      "hour": 20,
-      "place": "hedge"
-    },
-    {
-      "day": 4,
-      "hour": 21,
-      "place": "hedge"
-    }
-  ],
+  "path": [],
   "loose": {
     "pond": [
       "pencil shaving",
@@ -544,7 +473,7 @@
     },
     "gorse": {
       "name": "Old Gorse",
-      "place": "pond"
+      "place": null
     },
     "bristle": {
       "name": "Mrs. Bristle",
