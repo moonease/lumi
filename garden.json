@@ -1,7 +1,7 @@
 {
-  "updated": "2026-11-15T06:26+01:00",
+  "updated": "2026-11-15T06:37+01:00",
   "day": 4,
-  "hour": 8,
+  "hour": 9,
   "location": "teapot",
   "weather": {
     "kind": "fog",
@@ -161,6 +161,14 @@
       "emoji": "😱",
       "text": "Lumi dreamed: The dug-up spot had glowing eyes and whispered my name. I ran to the teapot but the hedge twisted into a snake and hissed. Mrs. Bristle held my paw and the pond showed my face huge and screaming.",
       "kind": "dream"
+    },
+    {
+      "day": 4,
+      "time": "08:00",
+      "emoji": "🗣️",
+      "text": "Fennel hissed that Tock's 'clumsy contraption' fried his phone's battery, while Tock muttered about 'distracting gossip' as he tried to salvage his sketch from a puddle.",
+      "kind": "gossip",
+      "heard": false
     }
   ],
   "treasures": [
@@ -236,8 +244,8 @@
       "name": "Tock",
       "trust": 2,
       "impression": "Tock is a good friend. He helps me with paperclip tricks!",
-      "mood": "frazzled, determined",
-      "busy_with": "scraping twig bits from the pond mud",
+      "mood": "frustrated",
+      "busy_with": "mending a shattered gear from his latest invention",
       "caregiver": false
     },
     {
@@ -245,8 +253,8 @@
       "name": "Mrs. Bristle",
       "trust": 82,
       "impression": "Mrs. Bristle is kind. She helps me find twigs and tells stories!",
-      "mood": "gentle, worried",
-      "busy_with": "tucking the doll's blanket back into the teapot",
+      "mood": "worried",
+      "busy_with": "checking the pumpkin hole for intruders",
       "caregiver": true
     },
     {
@@ -254,17 +262,12 @@
       "name": "Old Gorse",
       "trust": 0,
       "impression": "Old Gorse is grumpy. He doesn’t care about my lily pad boat.",
-      "mood": "grumpy, intrigued",
-      "busy_with": "grumbling at the fog",
+      "mood": "grumpy",
+      "busy_with": "staring at fog through his mossy spectacles",
       "caregiver": false
     }
   ],
   "news": [
-    {
-      "when": "Day 1, 19:00 (evening)",
-      "text": "A giant dropped a pencil shaving in the pond.",
-      "place": "pond"
-    },
     {
       "when": "Day 1, 20:00 (evening)",
       "text": "The cat was prowling in the pond.",
@@ -309,6 +312,11 @@
       "when": "Day 3, 14:00 (afternoon)",
       "text": "A giant dropped a glass bead in the vegetable patch.",
       "place": "vegetable_patch"
+    },
+    {
+      "when": "Day 4, 08:00 (morning)",
+      "text": "Fennel hissed that Tock's 'clumsy contraption' fried his phone's battery, while Tock muttered about 'distracting gossip' as he tried to salvage his sketch from a puddle.",
+      "place": null
     }
   ],
   "diary": [
@@ -338,7 +346,13 @@
     }
   ],
   "mind_changes": [],
-  "path": [],
+  "path": [
+    {
+      "day": 4,
+      "hour": 8,
+      "place": "teapot"
+    }
+  ],
   "loose": {
     "pond": [
       "pencil shaving"
@@ -439,7 +453,7 @@
     },
     "tock": {
       "name": "Tock",
-      "place": null
+      "place": "flowerbed"
     },
     "crumb": {
       "name": "Crumb",
