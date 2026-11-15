@@ -1,7 +1,7 @@
 {
-  "updated": "2026-11-15T11:55+01:00",
+  "updated": "2026-11-15T12:06+01:00",
   "day": 6,
-  "hour": 0,
+  "hour": 1,
   "location": "teapot",
   "weather": {
     "kind": "cloudy",
@@ -331,8 +331,8 @@
       "name": "Tock",
       "trust": 2,
       "impression": "Tock is my friend and we built things together.",
-      "mood": "frustrated",
-      "busy_with": "drying his sketch with moss",
+      "mood": null,
+      "busy_with": null,
       "caregiver": false
     },
     {
@@ -340,8 +340,8 @@
       "name": "Mrs. Bristle",
       "trust": 92,
       "impression": "Mrs. Bristle helped me find twigs and was nice.",
-      "mood": "concerned",
-      "busy_with": "checking Pip's den",
+      "mood": null,
+      "busy_with": null,
       "caregiver": true
     },
     {
@@ -349,8 +349,8 @@
       "name": "Old Gorse",
       "trust": 0,
       "impression": "Old Gorse is grumpy and doesn’t care about lily pads.",
-      "mood": "grumpy",
-      "busy_with": "staring at the pond",
+      "mood": null,
+      "busy_with": null,
       "caregiver": false
     },
     {
@@ -358,8 +358,8 @@
       "name": "Pip",
       "trust": 4,
       "impression": "Pip is my new friend and we built together!",
-      "mood": "boisterous",
-      "busy_with": "building a throne from the coin",
+      "mood": null,
+      "busy_with": null,
       "caregiver": false
     },
     {
@@ -367,8 +367,8 @@
       "name": "Crumb",
       "trust": 0,
       "impression": "",
-      "mood": "nervous",
-      "busy_with": "counting glass beads",
+      "mood": null,
+      "busy_with": null,
       "caregiver": false
     }
   ],
@@ -458,7 +458,13 @@
     }
   ],
   "mind_changes": [],
-  "path": [],
+  "path": [
+    {
+      "day": 6,
+      "hour": 0,
+      "place": "teapot"
+    }
+  ],
   "loose": {
     "pond": [
       "pencil shaving",
