@@ -1,24 +1,24 @@
 {
-  "updated": "2026-11-15T23:25+01:00",
+  "updated": "2026-11-15T23:42+01:00",
   "day": 6,
-  "hour": 9,
+  "hour": 10,
   "location": "teapot",
   "weather": {
     "kind": "cloudy",
     "code": 3,
     "emoji": "☁️",
     "label": "grey and cloudy",
-    "temp": 1.7,
+    "temp": 1.6,
     "precip": 0.0,
     "wind": 5,
-    "cloud": 95,
+    "cloud": 98,
     "heavy": false,
     "wet": false,
     "place": "Garching",
     "real": true,
     "snowfall": 0.0,
     "snow_depth": 0.0,
-    "fetched": "2026-11-15T23:05"
+    "fetched": "2026-11-15T23:30"
   },
   "season": "autumn",
   "wet": false,
@@ -502,6 +502,11 @@
       "day": 6,
       "hour": 8,
       "place": "teapot"
+    },
+    {
+      "day": 6,
+      "hour": 9,
+      "place": "teapot"
     }
   ],
   "loose": {
@@ -525,6 +530,9 @@
     ],
     "windowsill": [
       "coin"
+    ],
+    "shed": [
+      "spider web"
     ]
   },
   "loose_items": {
@@ -589,6 +597,14 @@
     "windowsill": [
       {
         "name": "coin",
+        "from": null,
+        "gift": false,
+        "portable": false
+      }
+    ],
+    "shed": [
+      {
+        "name": "spider web",
         "from": null,
         "gift": false,
         "portable": false
