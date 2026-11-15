@@ -1,7 +1,7 @@
 {
-  "updated": "2026-11-15T07:25+01:00",
+  "updated": "2026-11-15T07:37+01:00",
   "day": 4,
-  "hour": 16,
+  "hour": 17,
   "location": "teapot",
   "weather": {
     "kind": "fog",
@@ -386,6 +386,11 @@
       "day": 4,
       "hour": 15,
       "place": "teapot"
+    },
+    {
+      "day": 4,
+      "hour": 16,
+      "place": "teapot"
     }
   ],
   "loose": {
@@ -499,7 +504,7 @@
     },
     "tock": {
       "name": "Tock",
-      "place": "flowerbed"
+      "place": null
     },
     "crumb": {
       "name": "Crumb",
