@@ -1,24 +1,24 @@
 {
-  "updated": "2026-11-15T09:41+01:00",
+  "updated": "2026-11-15T09:59+01:00",
   "day": 5,
-  "hour": 10,
+  "hour": 12,
   "location": "teapot",
   "weather": {
     "kind": "cloudy",
     "code": 3,
     "emoji": "☁️",
     "label": "grey and cloudy",
-    "temp": -2.1,
+    "temp": -0.8,
     "precip": 0.0,
-    "wind": 3,
-    "cloud": 79,
+    "wind": 4,
+    "cloud": 84,
     "heavy": false,
     "wet": false,
     "place": "Garching",
     "real": true,
     "snowfall": 0.0,
     "snow_depth": 0.0,
-    "fetched": "2026-11-15T09:11"
+    "fetched": "2026-11-15T09:43"
   },
   "season": "autumn",
   "wet": false,
@@ -287,11 +287,6 @@
   ],
   "news": [
     {
-      "when": "Day 2, 09:00 (morning)",
-      "text": "A giant left a doll's blanket in your teapot house.",
-      "place": "teapot"
-    },
-    {
       "when": "Day 3, 08:00 (morning)",
       "text": "Fennel hissed that Tock's 'clumsy inventions' ruined his phone-tracking plan, while Tock muttered about 'distracting gossip' as he tried to salvage his sketch.",
       "place": null
@@ -335,6 +330,11 @@
       "when": "Day 5, 00:00 (night)",
       "text": "Mrs. Bristle is a bit sad that Lumi forgot about: find me a sturdy twig from near the hedge so we can use it to knock down the berries",
       "place": null
+    },
+    {
+      "when": "Day 5, 11:00 (morning)",
+      "text": "A giant raked a leaf pile in the vegetable patch.",
+      "place": "vegetable_patch"
     }
   ],
   "diary": [
@@ -406,6 +406,16 @@
       "day": 5,
       "hour": 9,
       "place": "teapot"
+    },
+    {
+      "day": 5,
+      "hour": 10,
+      "place": "teapot"
+    },
+    {
+      "day": 5,
+      "hour": 11,
+      "place": "teapot"
     }
   ],
   "loose": {
@@ -424,7 +434,8 @@
       "dug-up spot"
     ],
     "vegetable_patch": [
-      "glass bead"
+      "glass bead",
+      "leaf pile"
     ],
     "windowsill": [
       "coin"
@@ -481,6 +492,12 @@
         "from": null,
         "gift": false,
         "portable": true
+      },
+      {
+        "name": "leaf pile",
+        "from": null,
+        "gift": false,
+        "portable": false
       }
     ],
     "windowsill": [
@@ -530,7 +547,7 @@
     },
     "crumb": {
       "name": "Crumb",
-      "place": null
+      "place": "shed"
     },
     "gorse": {
       "name": "Old Gorse",
