@@ -1,16 +1,16 @@
 {
-  "updated": "2026-11-15T06:37+01:00",
+  "updated": "2026-11-15T06:52+01:00",
   "day": 4,
-  "hour": 9,
+  "hour": 11,
   "location": "teapot",
   "weather": {
     "kind": "fog",
     "code": 45,
     "emoji": "🌫️",
     "label": "foggy",
-    "temp": -4.2,
+    "temp": -4.4,
     "precip": 0.0,
-    "wind": 2,
+    "wind": 1,
     "cloud": 100,
     "heavy": false,
     "wet": false,
@@ -18,7 +18,7 @@
     "real": true,
     "snowfall": 0.0,
     "snow_depth": 0.0,
-    "fetched": "2026-11-15T06:13"
+    "fetched": "2026-11-15T06:39"
   },
   "season": "autumn",
   "wet": false,
@@ -350,6 +350,16 @@
     {
       "day": 4,
       "hour": 8,
+      "place": "teapot"
+    },
+    {
+      "day": 4,
+      "hour": 9,
+      "place": "teapot"
+    },
+    {
+      "day": 4,
+      "hour": 10,
       "place": "teapot"
     }
   ],
