@@ -1,22 +1,22 @@
 {
-  "updated": "2026-11-15T01:20+01:00",
+  "updated": "2026-11-15T02:01+01:00",
   "day": 2,
-  "hour": 6,
-  "location": "shed",
+  "hour": 8,
+  "location": "hedge",
   "weather": {
     "kind": "fog",
     "code": 45,
     "emoji": "🌫️",
     "label": "foggy",
-    "temp": -3.2,
+    "temp": -2.8,
     "precip": 0.0,
-    "wind": 2,
-    "cloud": 84,
+    "wind": 1,
+    "cloud": 95,
     "heavy": false,
     "wet": false,
     "place": "Garching",
     "real": true,
-    "fetched": "2026-11-15T00:49"
+    "fetched": "2026-11-15T01:46"
   },
   "season": "autumn",
   "wet": false,
@@ -70,6 +70,13 @@
       "emoji": "🗣️",
       "text": "Fennel insisted the phone could track the cat, but Tock said 'inventions need focus, not magic' and accidentally knocked over his twig sketch.",
       "kind": "gossip"
+    },
+    {
+      "day": 2,
+      "time": "07:00",
+      "emoji": "✨",
+      "text": "Lumi found a treasure: twig.",
+      "kind": "treasure"
     }
   ],
   "treasures": [
@@ -79,6 +86,13 @@
       "found": "Day 1, 22:00 (night)",
       "where": "The hedge",
       "on_shelf": true
+    },
+    {
+      "name": "twig",
+      "desc": "A thin, crooked twig that snapped off the hedge. Just your size for a walking stick, or for poking things.",
+      "found": "Day 2, 07:00 (morning)",
+      "where": "The hedge",
+      "on_shelf": false
     }
   ],
   "interests": [],
@@ -140,9 +154,22 @@
       "when": "Day 2, 00:00 (night)",
       "text": "Fennel insisted the phone could track the cat, but Tock said 'inventions need focus, not magic' and accidentally knocked over his twig sketch.",
       "place": null
+    },
+    {
+      "when": "Day 2, 07:00 (morning)",
+      "text": "A magpie came looking for shiny things in the giants' windowsill.",
+      "place": "windowsill"
     }
   ],
-  "diary": [],
+  "diary": [
+    {
+      "day": 1,
+      "weather": "🌫️ foggy, -2.8°C",
+      "text": "I found a shiny silver hoop and thought it was a treasure! And then I looked at frogspawn and saw tiny movements inside the eggs. The pond was COLD and foggy, and I couldn’t find a twig. Why won’t the phone tell me where the cat is? I’m sleepy and my toes are numb. My teapot feels like home, but I wish I had a blanket.",
+      "drawing": "0002-the-big-crayon-stubs-with-pret.svg",
+      "dream": null
+    }
+  ],
   "mind_changes": [],
   "path": [
     {
@@ -194,6 +221,41 @@
       "day": 2,
       "hour": 5,
       "place": "shed"
+    },
+    {
+      "day": 2,
+      "hour": 6,
+      "place": "shed"
+    },
+    {
+      "day": 2,
+      "hour": 6,
+      "place": "shed"
+    },
+    {
+      "day": 2,
+      "hour": 7,
+      "place": "shed"
+    },
+    {
+      "day": 2,
+      "hour": 7,
+      "place": "shed"
+    },
+    {
+      "day": 2,
+      "hour": 7,
+      "place": "shed"
+    },
+    {
+      "day": 2,
+      "hour": 7,
+      "place": "hedge"
+    },
+    {
+      "day": 2,
+      "hour": 7,
+      "place": "hedge"
     }
   ],
   "loose": {
