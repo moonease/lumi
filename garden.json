@@ -1,7 +1,7 @@
 {
-  "updated": "2026-11-15T06:52+01:00",
+  "updated": "2026-11-15T07:08+01:00",
   "day": 4,
-  "hour": 11,
+  "hour": 14,
   "location": "teapot",
   "weather": {
     "kind": "fog",
@@ -269,11 +269,6 @@
   ],
   "news": [
     {
-      "when": "Day 1, 20:00 (evening)",
-      "text": "The cat was prowling in the pond.",
-      "place": "pond"
-    },
-    {
       "when": "Day 1, 22:00 (night)",
       "text": "A fox came through the pond in the night.",
       "place": "pond"
@@ -317,6 +312,11 @@
       "when": "Day 4, 08:00 (morning)",
       "text": "Fennel hissed that Tock's 'clumsy contraption' fried his phone's battery, while Tock muttered about 'distracting gossip' as he tried to salvage his sketch from a puddle.",
       "place": null
+    },
+    {
+      "when": "Day 4, 12:00 (afternoon)",
+      "text": "A giant dropped a coin in the giants' windowsill.",
+      "place": "windowsill"
     }
   ],
   "diary": [
@@ -361,6 +361,21 @@
       "day": 4,
       "hour": 10,
       "place": "teapot"
+    },
+    {
+      "day": 4,
+      "hour": 11,
+      "place": "teapot"
+    },
+    {
+      "day": 4,
+      "hour": 12,
+      "place": "hedge"
+    },
+    {
+      "day": 4,
+      "hour": 13,
+      "place": "teapot"
     }
   ],
   "loose": {
@@ -379,6 +394,9 @@
     ],
     "vegetable_patch": [
       "glass bead"
+    ],
+    "windowsill": [
+      "coin"
     ]
   },
   "loose_items": {
@@ -427,6 +445,14 @@
         "gift": false,
         "portable": true
       }
+    ],
+    "windowsill": [
+      {
+        "name": "coin",
+        "from": null,
+        "gift": false,
+        "portable": false
+      }
     ]
   },
   "wearing": [
@@ -459,7 +485,7 @@
   "npc_now": {
     "fennel": {
       "name": "Fennel",
-      "place": "vegetable_patch"
+      "place": null
     },
     "tock": {
       "name": "Tock",
@@ -467,7 +493,7 @@
     },
     "crumb": {
       "name": "Crumb",
-      "place": null
+      "place": "shed"
     },
     "gorse": {
       "name": "Old Gorse",
