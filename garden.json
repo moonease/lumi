@@ -1,22 +1,22 @@
 {
-  "updated": "2026-11-15T02:14+01:00",
+  "updated": "2026-11-15T02:25+01:00",
   "day": 2,
-  "hour": 9,
+  "hour": 10,
   "location": "hedge",
   "weather": {
     "kind": "fog",
     "code": 45,
     "emoji": "🌫️",
     "label": "foggy",
-    "temp": -2.8,
+    "temp": -3.0,
     "precip": 0.0,
-    "wind": 1,
-    "cloud": 95,
+    "wind": 2,
+    "cloud": 96,
     "heavy": false,
     "wet": false,
     "place": "Garching",
     "real": true,
-    "fetched": "2026-11-15T01:46"
+    "fetched": "2026-11-15T02:19"
   },
   "season": "autumn",
   "wet": false,
@@ -77,6 +77,14 @@
       "emoji": "✨",
       "text": "Lumi found a treasure: twig.",
       "kind": "treasure"
+    },
+    {
+      "day": 2,
+      "time": "09:00",
+      "emoji": "🎁",
+      "text": "A giant left a gift in your teapot house: doll's blanket.",
+      "kind": "gift",
+      "heard": false
     }
   ],
   "treasures": [
@@ -95,7 +103,26 @@
       "on_shelf": false
     }
   ],
-  "interests": [],
+  "interests": [
+    {
+      "topic": "frogs",
+      "score": 1,
+      "days": 1,
+      "obsession": false
+    },
+    {
+      "topic": "pond",
+      "score": 1,
+      "days": 1,
+      "obsession": false
+    },
+    {
+      "topic": "drawing",
+      "score": 1,
+      "days": 1,
+      "obsession": false
+    }
+  ],
   "fears": [],
   "favours": [
     {
@@ -109,7 +136,7 @@
       "id": "tock",
       "name": "Tock",
       "trust": 0,
-      "impression": "",
+      "impression": "Tock is smart and fun to play with",
       "mood": "determined",
       "busy_with": "building a raft from pencil shavings",
       "caregiver": false
@@ -118,7 +145,7 @@
       "id": "bristle",
       "name": "Mrs. Bristle",
       "trust": 78,
-      "impression": "she looks after me",
+      "impression": "Mrs. Bristle is nice and helps me find berries",
       "mood": "worried",
       "busy_with": "checking the hedge for Lumi",
       "caregiver": true
@@ -159,6 +186,11 @@
       "when": "Day 2, 07:00 (morning)",
       "text": "A magpie came looking for shiny things in the giants' windowsill.",
       "place": "windowsill"
+    },
+    {
+      "when": "Day 2, 09:00 (morning)",
+      "text": "A giant left a doll's blanket in your teapot house.",
+      "place": "teapot"
     }
   ],
   "diary": [
@@ -261,11 +293,19 @@
       "day": 2,
       "hour": 8,
       "place": "hedge"
+    },
+    {
+      "day": 2,
+      "hour": 9,
+      "place": "hedge"
     }
   ],
   "loose": {
     "pond": [
       "pencil shaving"
+    ],
+    "teapot": [
+      "doll's blanket"
     ]
   }
 }
