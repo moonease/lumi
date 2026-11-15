@@ -1,24 +1,24 @@
 {
-  "updated": "2026-11-15T09:10+01:00",
+  "updated": "2026-11-15T09:25+01:00",
   "day": 5,
-  "hour": 4,
+  "hour": 8,
   "location": "teapot",
   "weather": {
     "kind": "cloudy",
     "code": 3,
     "emoji": "☁️",
     "label": "grey and cloudy",
-    "temp": -3.7,
+    "temp": -2.1,
     "precip": 0.0,
     "wind": 3,
-    "cloud": 88,
+    "cloud": 79,
     "heavy": false,
     "wet": false,
     "place": "Garching",
     "real": true,
     "snowfall": 0.0,
     "snow_depth": 0.0,
-    "fetched": "2026-11-15T08:39"
+    "fetched": "2026-11-15T09:11"
   },
   "season": "autumn",
   "wet": false,
@@ -213,37 +213,37 @@
   "interests": [
     {
       "topic": "the hedge",
-      "score": 2,
-      "days": 1,
+      "score": 3,
+      "days": 2,
+      "obsession": false
+    },
+    {
+      "topic": "drawing",
+      "score": 1.64,
+      "days": 2,
       "obsession": false
     },
     {
       "topic": "blackberries",
-      "score": 2,
+      "score": 1.6,
       "days": 1,
       "obsession": false
     },
     {
       "topic": "teapot rest",
-      "score": 2,
+      "score": 1.6,
+      "days": 1,
+      "obsession": false
+    },
+    {
+      "topic": "smooth stones",
+      "score": 1,
       "days": 1,
       "obsession": false
     },
     {
       "topic": "frogs",
-      "score": 0.64,
-      "days": 1,
-      "obsession": false
-    },
-    {
-      "topic": "pond",
-      "score": 0.64,
-      "days": 1,
-      "obsession": false
-    },
-    {
-      "topic": "drawing",
-      "score": 0.64,
+      "score": 0.51,
       "days": 1,
       "obsession": false
     }
@@ -261,7 +261,7 @@
       "id": "tock",
       "name": "Tock",
       "trust": 2,
-      "impression": "Tock is smart and helps me with paperclip stuff.",
+      "impression": "Tock is nice and helps me with my ideas.",
       "mood": "frustrated",
       "busy_with": "drying his sketch with moss",
       "caregiver": false
@@ -270,7 +270,7 @@
       "id": "bristle",
       "name": "Mrs. Bristle",
       "trust": 86,
-      "impression": "Mrs. Bristle is warm and holds my paw when I’m scared.",
+      "impression": "Mrs. Bristle is warm and safe.",
       "mood": "concerned",
       "busy_with": "checking Pip's den",
       "caregiver": true
@@ -279,7 +279,7 @@
       "id": "gorse",
       "name": "Old Gorse",
       "trust": 0,
-      "impression": "Old Gorse is grumpy and doesn’t care about my boat ideas.",
+      "impression": "Old Gorse is grumpy but knows things.",
       "mood": "grumpy",
       "busy_with": "staring at the pond",
       "caregiver": false
@@ -361,6 +361,13 @@
         "text": "The dug-up spot had glowing eyes and whispered my name. I ran to the teapot but the hedge twisted into a snake and hissed. Mrs. Bristle held my paw and the pond showed my face huge and screaming.",
         "kind": "scary"
       }
+    },
+    {
+      "day": 4,
+      "weather": "☁️ grey and cloudy, -2.1°C",
+      "text": "Whoa! I DREAMED the dug-up spot had glowing eyes and whispered my name. And then the hedge turned into a SNAKE and hissed. Mrs. Bristle held my paw and the pond showed my face HUGE and screaming. I ate raspberries to stay warm but my toes were still COLD. I tried making a net with web and twig but it BROKE. Why did the pond show me screaming? I’m tired and my legs are cross with me. I just sat there and ate raspberry stash.",
+      "drawing": null,
+      "dream": null
     }
   ],
   "mind_changes": [],
@@ -383,6 +390,11 @@
     {
       "day": 5,
       "hour": 3,
+      "place": "teapot"
+    },
+    {
+      "day": 5,
+      "hour": 4,
       "place": "teapot"
     }
   ],
@@ -500,7 +512,7 @@
   "npc_now": {
     "fennel": {
       "name": "Fennel",
-      "place": null
+      "place": "vegetable_patch"
     },
     "tock": {
       "name": "Tock",
@@ -516,11 +528,11 @@
     },
     "bristle": {
       "name": "Mrs. Bristle",
-      "place": "hedge"
+      "place": null
     },
     "pip": {
       "name": "Pip",
-      "place": null
+      "place": "vegetable_patch"
     }
   },
   "friend_wearing": {
