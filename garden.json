@@ -1,24 +1,24 @@
 {
-  "updated": "2026-11-15T22:33+01:00",
+  "updated": "2026-11-15T23:11+01:00",
   "day": 6,
-  "hour": 2,
+  "hour": 8,
   "location": "teapot",
   "weather": {
     "kind": "cloudy",
     "code": 3,
     "emoji": "☁️",
     "label": "grey and cloudy",
-    "temp": 2.1,
+    "temp": 1.7,
     "precip": 0.0,
-    "wind": 6,
-    "cloud": 40,
+    "wind": 5,
+    "cloud": 95,
     "heavy": false,
     "wet": false,
     "place": "Garching",
     "real": true,
     "snowfall": 0.0,
     "snow_depth": 0.0,
-    "fetched": "2026-11-15T22:21"
+    "fetched": "2026-11-15T23:05"
   },
   "season": "autumn",
   "wet": false,
@@ -242,6 +242,13 @@
       "text": "Lumi drew: a pretend friend with thimble hat and blanket cloak",
       "kind": "drawing",
       "file": "0011-a-pretend-friend-with-thimble-.svg"
+    },
+    {
+      "day": 6,
+      "time": "08:00",
+      "emoji": "💛",
+      "text": "Lumi is getting obsessed with the hedge.",
+      "kind": "interest"
     }
   ],
   "treasures": [
@@ -276,37 +283,37 @@
   ],
   "interests": [
     {
-      "topic": "drawing",
-      "score": 2.64,
-      "days": 2,
-      "obsession": false
+      "topic": "the hedge",
+      "score": 3.4,
+      "days": 3,
+      "obsession": true
     },
     {
-      "topic": "the hedge",
-      "score": 2.4,
+      "topic": "drawing",
+      "score": 2.11,
       "days": 2,
       "obsession": false
     },
     {
       "topic": "blackberries",
-      "score": 1.28,
+      "score": 1.02,
       "days": 1,
       "obsession": false
     },
     {
       "topic": "teapot rest",
-      "score": 1.28,
+      "score": 1.02,
       "days": 1,
       "obsession": false
     },
     {
-      "topic": "building",
+      "topic": "seeds",
       "score": 1,
       "days": 1,
       "obsession": false
     },
     {
-      "topic": "finding stones",
+      "topic": "friends",
       "score": 1,
       "days": 1,
       "obsession": false
@@ -330,7 +337,7 @@
       "id": "tock",
       "name": "Tock",
       "trust": 2,
-      "impression": "Tock is my friend and we built things together.",
+      "impression": "Tock is smart but sometimes talks too fast. I like helping him with his paperclip.",
       "mood": null,
       "busy_with": null,
       "caregiver": false
@@ -338,8 +345,8 @@
     {
       "id": "bristle",
       "name": "Mrs. Bristle",
-      "trust": 92,
-      "impression": "Mrs. Bristle helped me find twigs and was nice.",
+      "trust": 94,
+      "impression": "Mrs. Bristle is grumpy but knows where things are. She helped me find the red button.",
       "mood": null,
       "busy_with": null,
       "caregiver": true
@@ -348,7 +355,7 @@
       "id": "gorse",
       "name": "Old Gorse",
       "trust": 0,
-      "impression": "Old Gorse is grumpy and doesn’t care about lily pads.",
+      "impression": "Old Gorse is mean and doesn't care about lily pads. He only likes fox tracks.",
       "mood": null,
       "busy_with": null,
       "caregiver": false
@@ -357,7 +364,7 @@
       "id": "pip",
       "name": "Pip",
       "trust": 4,
-      "impression": "Pip is my new friend and we built together!",
+      "impression": "Pip is nice and likes to build things with me. We planted a seed together.",
       "mood": null,
       "busy_with": null,
       "caregiver": false
@@ -366,7 +373,7 @@
       "id": "crumb",
       "name": "Crumb",
       "trust": 0,
-      "impression": "",
+      "impression": "Crumb is careful with beads. He warned me about the coin in the pond.",
       "mood": null,
       "busy_with": null,
       "caregiver": false
@@ -455,6 +462,13 @@
       "text": "Whoa! I DREAMED the dug-up spot had glowing eyes and whispered my name. And then the hedge turned into a SNAKE and hissed. Mrs. Bristle held my paw and the pond showed my face HUGE and screaming. I ate raspberries to stay warm but my toes were still COLD. I tried making a net with web and twig but it BROKE. Why did the pond show me screaming? I’m tired and my legs are cross with me. I just sat there and ate raspberry stash.",
       "drawing": null,
       "dream": null
+    },
+    {
+      "day": 5,
+      "weather": "☁️ grey and cloudy, 1.7°C",
+      "text": "I drew the hedge with a smooth stone for Tock. I found a seed packet and a glass bead. I made a frend named Pip! My acorn-cap hat is COOL. The sky is GREY and COLD. I drew a pretend frend with a thimble hat. Why is the sun hiding? I’m lonely but I’m CURIOUS.",
+      "drawing": "0011-a-pretend-friend-with-thimble-.svg",
+      "dream": null
     }
   ],
   "mind_changes": [],
@@ -467,6 +481,21 @@
     {
       "day": 6,
       "hour": 1,
+      "place": "teapot"
+    },
+    {
+      "day": 6,
+      "hour": 2,
+      "place": "teapot"
+    },
+    {
+      "day": 6,
+      "hour": 3,
+      "place": "teapot"
+    },
+    {
+      "day": 6,
+      "hour": 3,
       "place": "teapot"
     }
   ],
@@ -578,14 +607,14 @@
       "color": "#5E7D3A"
     },
     {
-      "name": "leaf raincoat",
-      "slot": "coat",
-      "color": "#C9792B"
-    },
-    {
       "name": "walnut-shell boots",
       "slot": "boots",
       "color": "#6A4A2E"
+    },
+    {
+      "name": "felt coat",
+      "slot": "coat",
+      "color": "#3F5E8C"
     },
     {
       "name": "dandelion scarf",
@@ -601,7 +630,7 @@
   "npc_now": {
     "fennel": {
       "name": "Fennel",
-      "place": null
+      "place": "vegetable_patch"
     },
     "tock": {
       "name": "Tock",
@@ -617,11 +646,11 @@
     },
     "bristle": {
       "name": "Mrs. Bristle",
-      "place": "hedge"
+      "place": null
     },
     "pip": {
       "name": "Pip",
-      "place": null
+      "place": "vegetable_patch"
     }
   },
   "friend_wearing": {
@@ -673,7 +702,7 @@
     },
     {
       "name": "leaf raincoat",
-      "where": "wearing"
+      "where": "wardrobe"
     },
     {
       "name": "walnut-shell boots",
@@ -681,7 +710,7 @@
     },
     {
       "name": "felt coat",
-      "where": "wardrobe"
+      "where": "wearing"
     },
     {
       "name": "dandelion scarf",
