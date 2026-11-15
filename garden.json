@@ -1,8 +1,8 @@
 {
-  "updated": "2026-11-15T06:01+01:00",
+  "updated": "2026-11-15T06:12+01:00",
   "day": 3,
-  "hour": 22,
-  "location": "vegetable_patch",
+  "hour": 23,
+  "location": "teapot",
   "weather": {
     "kind": "fog",
     "code": 45,
@@ -210,7 +210,7 @@
     {
       "id": "bristle",
       "name": "Mrs. Bristle",
-      "trust": 80,
+      "trust": 82,
       "impression": "Mrs. Bristle is nice and helps me find berries",
       "mood": "gentle, worried",
       "busy_with": "tucking the doll's blanket back into the teapot",
@@ -365,6 +365,11 @@
       "day": 3,
       "hour": 21,
       "place": "pond"
+    },
+    {
+      "day": 3,
+      "hour": 22,
+      "place": "teapot"
     }
   ],
   "loose": {
@@ -475,7 +480,7 @@
     },
     "gorse": {
       "name": "Old Gorse",
-      "place": "pond"
+      "place": null
     },
     "bristle": {
       "name": "Mrs. Bristle",
