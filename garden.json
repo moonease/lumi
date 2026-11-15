@@ -1,24 +1,24 @@
 {
-  "updated": "2026-11-15T10:09+01:00",
+  "updated": "2026-11-15T10:21+01:00",
   "day": 5,
-  "hour": 13,
-  "location": "teapot",
+  "hour": 14,
+  "location": "flowerbed",
   "weather": {
     "kind": "cloudy",
     "code": 3,
     "emoji": "☁️",
     "label": "grey and cloudy",
-    "temp": -0.8,
+    "temp": 0.7,
     "precip": 0.0,
-    "wind": 4,
-    "cloud": 84,
+    "wind": 5,
+    "cloud": 91,
     "heavy": false,
     "wet": false,
     "place": "Garching",
     "real": true,
     "snowfall": 0.0,
     "snow_depth": 0.0,
-    "fetched": "2026-11-15T09:43"
+    "fetched": "2026-11-15T10:11"
   },
   "season": "autumn",
   "wet": false,
@@ -420,6 +420,11 @@
     {
       "day": 5,
       "hour": 12,
+      "place": "teapot"
+    },
+    {
+      "day": 5,
+      "hour": 13,
       "place": "teapot"
     }
   ],
