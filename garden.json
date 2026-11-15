@@ -1,7 +1,7 @@
 {
-  "updated": "2026-11-15T03:40+01:00",
+  "updated": "2026-11-15T04:07+01:00",
   "day": 3,
-  "hour": 12,
+  "hour": 13,
   "location": "teapot",
   "weather": {
     "kind": "fog",
@@ -123,6 +123,14 @@
       "emoji": "👗",
       "text": "Lumi wore her felt coat, dandelion scarf, thistledown mittens for the first time.",
       "kind": "clothes"
+    },
+    {
+      "day": 3,
+      "time": "12:00",
+      "emoji": "🖍️",
+      "text": "Lumi drew: the treasure shelf with a fallen leaf and a twig",
+      "kind": "drawing",
+      "file": "0007-the-treasure-shelf-with-a-fall.svg"
     }
   ],
   "treasures": [
@@ -278,6 +286,11 @@
       "day": 3,
       "hour": 11,
       "place": "hedge"
+    },
+    {
+      "day": 3,
+      "hour": 12,
+      "place": "teapot"
     }
   ],
   "loose": {

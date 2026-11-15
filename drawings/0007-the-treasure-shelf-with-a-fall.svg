@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <rect width="400" height="300" fill="white"/>
+  <!-- Sun with face -->
+  <circle cx="350" cy="50" r="40" fill="yellow"/>
+  <circle cx="340" cy="45" r="5" fill="black"/>
+  <circle cx="360" cy="45" r="5" fill="black"/>
+  <path d="M345 60 Q350 70 355 60" fill="none" stroke="black" stroke-width="4" stroke-linecap="round"/>
+  <!-- Shelf -->
+  <path d="M100 150 Q120 140 140 150 Q160 160 180 150 Q200 140 220 150 Q240 160 260 150 Q280 140 300 150" fill="brown" stroke="brown" stroke-width="10" stroke-linecap="round"/>
+  <!-- Teapot -->
+  <rect x="150" y="100" width="100" height="100" rx="20" ry="20" fill="red" stroke="red" stroke-width="8" stroke-linecap="round"/>
+  <path d="M230 100 C240 80 260 70 270 90" fill="none" stroke="red" stroke-width="8" stroke-linecap="round"/>
+  <path d="M160 100 C130 80 110 70 130 90" fill="none" stroke="red" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="200" cy="80" r="10" fill="red" stroke="red" stroke-width="4"/>
+  <!-- Fallen leaf -->
+  <ellipse cx="200" cy="160" rx="30" ry="15" fill="green" stroke="green" stroke-width="6" stroke-linecap="round"/>
+  <!-- Twig -->
+  <path d="M250 170 Q260 165 280 170" fill="none" stroke="brown" stroke-width="10" stroke-linecap="round"/>
+  <!-- LUMI text -->
+  <text x="50" y="280" font-size="24" fill="blue" stroke="blue" stroke-width="2" stroke-linecap="round">LUMI</text>
+</svg>
