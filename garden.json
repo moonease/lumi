@@ -1,24 +1,24 @@
 {
-  "updated": "2026-11-15T08:37+01:00",
+  "updated": "2026-11-15T08:53+01:00",
   "day": 5,
-  "hour": 0,
+  "hour": 2,
   "location": "teapot",
   "weather": {
-    "kind": "fog",
-    "code": 45,
-    "emoji": "🌫️",
-    "label": "foggy",
-    "temp": -4.4,
+    "kind": "cloudy",
+    "code": 3,
+    "emoji": "☁️",
+    "label": "grey and cloudy",
+    "temp": -3.7,
     "precip": 0.0,
-    "wind": 4,
-    "cloud": 86,
+    "wind": 3,
+    "cloud": 88,
     "heavy": false,
     "wet": false,
     "place": "Garching",
     "real": true,
     "snowfall": 0.0,
     "snow_depth": 0.0,
-    "fetched": "2026-11-15T08:12"
+    "fetched": "2026-11-15T08:39"
   },
   "season": "autumn",
   "wet": false,
@@ -169,6 +169,29 @@
       "text": "Fennel hissed that Tock's 'clumsy contraption' fried his phone's battery, while Tock muttered about 'distracting gossip' as he tried to salvage his sketch from a puddle.",
       "kind": "gossip",
       "heard": false
+    },
+    {
+      "day": 5,
+      "time": "00:00",
+      "emoji": "☁️",
+      "text": "Clouds covered the sun. (real weather in Garching: grey and cloudy, -3.7°C)",
+      "kind": "weather"
+    },
+    {
+      "day": 5,
+      "time": "00:00",
+      "emoji": "🗣️",
+      "text": "Fennel hissed that Tock's 'clumsy contraption' fried his phone, while Tock muttered about 'distracting gossip' as he tried to salvage his sketch from a puddle.",
+      "kind": "gossip",
+      "heard": false
+    },
+    {
+      "day": 5,
+      "time": "01:00",
+      "emoji": "🖍️",
+      "text": "Lumi drew: the hedge with a smooth stone",
+      "kind": "drawing",
+      "file": "0010-the-hedge-with-a-smooth-stone.svg"
     }
   ],
   "treasures": [
@@ -228,11 +251,6 @@
   "fears": [],
   "favours": [
     {
-      "who": "Mrs. Bristle",
-      "ask": "find me a sturdy twig from near the hedge so we can use it to knock down the berries",
-      "done": false
-    },
-    {
       "who": "Tock",
       "ask": "find me a smooth stone",
       "done": false
@@ -245,16 +263,16 @@
       "trust": 2,
       "impression": "Tock is smart and helps me with paperclip stuff.",
       "mood": "frustrated",
-      "busy_with": "mending a shattered gear from his latest invention",
+      "busy_with": "drying his sketch with moss",
       "caregiver": false
     },
     {
       "id": "bristle",
       "name": "Mrs. Bristle",
-      "trust": 91,
+      "trust": 86,
       "impression": "Mrs. Bristle is warm and holds my paw when I’m scared.",
-      "mood": "worried",
-      "busy_with": "checking the pumpkin hole for intruders",
+      "mood": "concerned",
+      "busy_with": "checking Pip's den",
       "caregiver": true
     },
     {
@@ -263,21 +281,11 @@
       "trust": 0,
       "impression": "Old Gorse is grumpy and doesn’t care about my boat ideas.",
       "mood": "grumpy",
-      "busy_with": "staring at fog through his mossy spectacles",
+      "busy_with": "staring at the pond",
       "caregiver": false
     }
   ],
   "news": [
-    {
-      "when": "Day 2, 00:00 (night)",
-      "text": "Fennel insisted the phone could track the cat, but Tock said 'inventions need focus, not magic' and accidentally knocked over his twig sketch.",
-      "place": null
-    },
-    {
-      "when": "Day 2, 07:00 (morning)",
-      "text": "A magpie came looking for shiny things in the giants' windowsill.",
-      "place": "windowsill"
-    },
     {
       "when": "Day 2, 09:00 (morning)",
       "text": "A giant left a doll's blanket in your teapot house.",
@@ -317,6 +325,16 @@
       "when": "Day 4, 19:00 (evening)",
       "text": "A giant dropped a blue marble in the pond.",
       "place": "pond"
+    },
+    {
+      "when": "Day 5, 00:00 (night)",
+      "text": "Fennel hissed that Tock's 'clumsy contraption' fried his phone, while Tock muttered about 'distracting gossip' as he tried to salvage his sketch from a puddle.",
+      "place": null
+    },
+    {
+      "when": "Day 5, 00:00 (night)",
+      "text": "Mrs. Bristle is a bit sad that Lumi forgot about: find me a sturdy twig from near the hedge so we can use it to knock down the berries",
+      "place": null
     }
   ],
   "diary": [
@@ -346,7 +364,18 @@
     }
   ],
   "mind_changes": [],
-  "path": [],
+  "path": [
+    {
+      "day": 5,
+      "hour": 0,
+      "place": "teapot"
+    },
+    {
+      "day": 5,
+      "hour": 1,
+      "place": "teapot"
+    }
+  ],
   "loose": {
     "pond": [
       "pencil shaving",

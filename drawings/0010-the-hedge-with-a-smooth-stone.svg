@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <rect width="400" height="300" fill="white"/>
+  <rect y="0" width="400" height="100" fill="#87CEEB"/>
+  <rect y="200" width="400" height="100" fill="#228B22"/>
+  <!-- Teapot body -->
+  <circle cx="200" cy="180" r="60" fill="#D2B48C" stroke="black" stroke-width="8" stroke-linecap="round"/>
+  <!-- Teapot spout -->
+  <path d="M200,180 Q160,150 140,160" fill="none" stroke="black" stroke-width="8" stroke-linecap="round"/>
+  <!-- Teapot handle -->
+  <path d="M200,180 Q240,190 260,170" fill="none" stroke="black" stroke-width="8" stroke-linecap="round"/>
+  <!-- Teapot lid -->
+  <circle cx="200" cy="100" r="15" fill="#D2B48C" stroke="black" stroke-width="4" stroke-linecap="round"/>
+  <!-- Hedge (simple vertical shapes) -->
+  <rect x="150" y="150" width="10" height="50" fill="#228B22" stroke="black" stroke-width="4" stroke-linecap="round"/>
+  <rect x="160" y="140" width="10" height="60" fill="#228B22" stroke="black" stroke-width="4" stroke-linecap="round"/>
+  <rect x="170" y="130" width="10" height="70" fill="#228B22" stroke="black" stroke-width="4" stroke-linecap="round"/>
+  <rect x="180" y="120" width="10" height="80" fill="#228B22" stroke="black" stroke-width="4" stroke-linecap="round"/>
+  <!-- Smooth stone -->
+  <ellipse cx="200" cy="220" rx="30" ry="20" fill="#8B7500" stroke="black" stroke-width="4" stroke-linecap="round"/>
+  <!-- Flowers (simple circles with stems) -->
+  <circle cx="130" cy="190" r="10" fill="#FFD700" stroke="black" stroke-width="2" stroke-linecap="round"/>
+  <line x1="130" y1="190" x2="130" y2="210" stroke="black" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="270" cy="190" r="10" fill="#FFD700" stroke="black" stroke-width="2" stroke-linecap="round"/>
+  <line x1="270" y1="190" x2="270" y2="210" stroke="black" stroke-width="2" stroke-linecap="round"/>
+  <!-- Name "LUMI" in wobbly letters -->
+  <path d="M50,250 C60,240 70,230 80,250" fill="none" stroke="black" stroke-width="6" stroke-linecap="round"/>
+  <path d="M90,250 C100,240 110,230 120,250" fill="none" stroke="black" stroke-width="6" stroke-linecap="round"/>
+  <path d="M130,250 C140,240 150,230 160,250" fill="none" stroke="black" stroke-width="6" stroke-linecap="round"/>
+  <path d="M170,250 C180,240 190,230 200,250" fill="none" stroke="black" stroke-width="6" stroke-linecap="round"/>
+</svg>
