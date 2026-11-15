@@ -1,24 +1,24 @@
 {
-  "updated": "2026-11-15T05:43+01:00",
+  "updated": "2026-11-15T06:01+01:00",
   "day": 3,
-  "hour": 20,
-  "location": "pond",
+  "hour": 22,
+  "location": "vegetable_patch",
   "weather": {
     "kind": "fog",
     "code": 45,
     "emoji": "🌫️",
     "label": "foggy",
-    "temp": -3.5,
+    "temp": -4.1,
     "precip": 0.0,
     "wind": 2,
-    "cloud": 68,
+    "cloud": 99,
     "heavy": false,
     "wet": false,
     "place": "Garching",
     "real": true,
     "snowfall": 0.0,
     "snow_depth": 0.0,
-    "fetched": "2026-11-15T05:13"
+    "fetched": "2026-11-15T05:45"
   },
   "season": "autumn",
   "wet": false,
@@ -355,6 +355,16 @@
       "day": 3,
       "hour": 19,
       "place": "flowerbed"
+    },
+    {
+      "day": 3,
+      "hour": 20,
+      "place": "pond"
+    },
+    {
+      "day": 3,
+      "hour": 21,
+      "place": "pond"
     }
   ],
   "loose": {
@@ -469,7 +479,7 @@
     },
     "bristle": {
       "name": "Mrs. Bristle",
-      "place": "teapot"
+      "place": "hedge"
     },
     "pip": {
       "name": "Pip",
