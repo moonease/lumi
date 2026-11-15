@@ -1,24 +1,24 @@
 {
-  "updated": "2026-11-15T04:42+01:00",
+  "updated": "2026-11-15T04:59+01:00",
   "day": 3,
-  "hour": 14,
+  "hour": 16,
   "location": "flowerbed",
   "weather": {
     "kind": "fog",
     "code": 45,
     "emoji": "🌫️",
     "label": "foggy",
-    "temp": -4.2,
+    "temp": -3.9,
     "precip": 0.0,
-    "wind": 4,
-    "cloud": 100,
+    "wind": 3,
+    "cloud": 88,
     "heavy": false,
     "wet": false,
     "place": "Garching",
     "real": true,
     "snowfall": 0.0,
     "snow_depth": 0.0,
-    "fetched": "2026-11-15T04:12"
+    "fetched": "2026-11-15T04:44"
   },
   "season": "autumn",
   "wet": false,
@@ -183,13 +183,18 @@
       "who": "Mrs. Bristle",
       "ask": "find me a sturdy twig from near the hedge so we can use it to knock down the berries",
       "done": false
+    },
+    {
+      "who": "Tock",
+      "ask": "find me a smooth stone",
+      "done": false
     }
   ],
   "friends": [
     {
       "id": "tock",
       "name": "Tock",
-      "trust": 0,
+      "trust": 2,
       "impression": "Tock is smart and fun to play with",
       "mood": "frazzled, determined",
       "busy_with": "scraping twig bits from the pond mud",
@@ -206,11 +211,6 @@
     }
   ],
   "news": [
-    {
-      "when": "Day 1, 19:00 (evening)",
-      "text": "The cat was prowling in the flowerbed.",
-      "place": "flowerbed"
-    },
     {
       "when": "Day 1, 19:00 (evening)",
       "text": "A giant dropped a pencil shaving in the pond.",
@@ -255,6 +255,11 @@
       "when": "Day 3, 13:00 (afternoon)",
       "text": "Fennel says someone tiny has moved into the hole in the big pumpkin!",
       "place": null
+    },
+    {
+      "when": "Day 3, 14:00 (afternoon)",
+      "text": "A giant dropped a glass bead in the vegetable patch.",
+      "place": "vegetable_patch"
     }
   ],
   "diary": [
@@ -304,6 +309,16 @@
       "day": 3,
       "hour": 13,
       "place": "teapot"
+    },
+    {
+      "day": 3,
+      "hour": 14,
+      "place": "flowerbed"
+    },
+    {
+      "day": 3,
+      "hour": 15,
+      "place": "flowerbed"
     }
   ],
   "loose": {
@@ -319,6 +334,9 @@
     ],
     "flowerbed": [
       "dug-up spot"
+    ],
+    "vegetable_patch": [
+      "glass bead"
     ]
   },
   "loose_items": {
@@ -358,6 +376,14 @@
         "from": null,
         "gift": false,
         "portable": false
+      }
+    ],
+    "vegetable_patch": [
+      {
+        "name": "glass bead",
+        "from": null,
+        "gift": false,
+        "portable": true
       }
     ]
   },
@@ -403,7 +429,7 @@
     },
     "gorse": {
       "name": "Old Gorse",
-      "place": null
+      "place": "pond"
     },
     "bristle": {
       "name": "Mrs. Bristle",
