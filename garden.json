@@ -1,7 +1,7 @@
 {
-  "updated": "2026-11-15T10:21+01:00",
+  "updated": "2026-11-15T10:38+01:00",
   "day": 5,
-  "hour": 14,
+  "hour": 16,
   "location": "flowerbed",
   "weather": {
     "kind": "cloudy",
@@ -426,6 +426,16 @@
       "day": 5,
       "hour": 13,
       "place": "teapot"
+    },
+    {
+      "day": 5,
+      "hour": 14,
+      "place": "flowerbed"
+    },
+    {
+      "day": 5,
+      "hour": 15,
+      "place": "flowerbed"
     }
   ],
   "loose": {
@@ -568,7 +578,7 @@
     },
     "gorse": {
       "name": "Old Gorse",
-      "place": null
+      "place": "pond"
     },
     "bristle": {
       "name": "Mrs. Bristle",
