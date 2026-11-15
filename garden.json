@@ -1,7 +1,7 @@
 {
-  "updated": "2026-11-15T02:01+01:00",
+  "updated": "2026-11-15T02:14+01:00",
   "day": 2,
-  "hour": 8,
+  "hour": 9,
   "location": "hedge",
   "weather": {
     "kind": "fog",
@@ -255,6 +255,11 @@
     {
       "day": 2,
       "hour": 7,
+      "place": "hedge"
+    },
+    {
+      "day": 2,
+      "hour": 8,
       "place": "hedge"
     }
   ],
