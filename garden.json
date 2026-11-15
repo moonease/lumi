@@ -1,7 +1,7 @@
 {
-  "updated": "2026-11-15T09:59+01:00",
+  "updated": "2026-11-15T10:09+01:00",
   "day": 5,
-  "hour": 12,
+  "hour": 13,
   "location": "teapot",
   "weather": {
     "kind": "cloudy",
@@ -288,11 +288,6 @@
   "news": [
     {
       "when": "Day 3, 08:00 (morning)",
-      "text": "Fennel hissed that Tock's 'clumsy inventions' ruined his phone-tracking plan, while Tock muttered about 'distracting gossip' as he tried to salvage his sketch.",
-      "place": null
-    },
-    {
-      "when": "Day 3, 08:00 (morning)",
       "text": "A squirrel buried a nut in the flowerbed.",
       "place": "flowerbed"
     },
@@ -335,6 +330,11 @@
       "when": "Day 5, 11:00 (morning)",
       "text": "A giant raked a leaf pile in the vegetable patch.",
       "place": "vegetable_patch"
+    },
+    {
+      "when": "Day 5, 12:00 (afternoon)",
+      "text": "A giant raked a leaf pile in the flowerbed.",
+      "place": "flowerbed"
     }
   ],
   "diary": [
@@ -416,6 +416,11 @@
       "day": 5,
       "hour": 11,
       "place": "teapot"
+    },
+    {
+      "day": 5,
+      "hour": 12,
+      "place": "teapot"
     }
   ],
   "loose": {
@@ -431,7 +436,8 @@
       "piece of web"
     ],
     "flowerbed": [
-      "dug-up spot"
+      "dug-up spot",
+      "leaf pile"
     ],
     "vegetable_patch": [
       "glass bead",
@@ -481,6 +487,12 @@
     "flowerbed": [
       {
         "name": "dug-up spot",
+        "from": null,
+        "gift": false,
+        "portable": false
+      },
+      {
+        "name": "leaf pile",
         "from": null,
         "gift": false,
         "portable": false
@@ -539,7 +551,7 @@
   "npc_now": {
     "fennel": {
       "name": "Fennel",
-      "place": "vegetable_patch"
+      "place": null
     },
     "tock": {
       "name": "Tock",
