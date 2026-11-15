@@ -1,24 +1,24 @@
 {
-  "updated": "2026-11-15T11:34+01:00",
-  "day": 5,
-  "hour": 23,
-  "location": "hedge",
+  "updated": "2026-11-15T11:55+01:00",
+  "day": 6,
+  "hour": 0,
+  "location": "teapot",
   "weather": {
-    "kind": "clear",
-    "code": 1,
-    "emoji": "🌤️",
-    "label": "mostly clear",
-    "temp": 4.3,
+    "kind": "cloudy",
+    "code": 3,
+    "emoji": "☁️",
+    "label": "grey and cloudy",
+    "temp": 5.7,
     "precip": 0.0,
-    "wind": 2,
-    "cloud": 52,
+    "wind": 1,
+    "cloud": 73,
     "heavy": false,
     "wet": false,
     "place": "Garching",
     "real": true,
     "snowfall": 0.0,
     "snow_depth": 0.0,
-    "fetched": "2026-11-15T11:08"
+    "fetched": "2026-11-15T11:36"
   },
   "season": "autumn",
   "wet": false,
@@ -227,6 +227,21 @@
       "emoji": "👗",
       "text": "Lumi wore her acorn-cap hat, walnut-shell boots for the first time.",
       "kind": "clothes"
+    },
+    {
+      "day": 5,
+      "time": "23:00",
+      "emoji": "☁️",
+      "text": "Clouds covered the sun. (real weather in Garching: grey and cloudy, 5.7°C)",
+      "kind": "weather"
+    },
+    {
+      "day": 5,
+      "time": "23:00",
+      "emoji": "🖍️",
+      "text": "Lumi drew: a pretend friend with thimble hat and blanket cloak",
+      "kind": "drawing",
+      "file": "0011-a-pretend-friend-with-thimble-.svg"
     }
   ],
   "treasures": [
@@ -323,7 +338,7 @@
     {
       "id": "bristle",
       "name": "Mrs. Bristle",
-      "trust": 90,
+      "trust": 92,
       "impression": "Mrs. Bristle helped me find twigs and was nice.",
       "mood": "concerned",
       "busy_with": "checking Pip's den",
@@ -443,113 +458,7 @@
     }
   ],
   "mind_changes": [],
-  "path": [
-    {
-      "day": 5,
-      "hour": 0,
-      "place": "teapot"
-    },
-    {
-      "day": 5,
-      "hour": 1,
-      "place": "teapot"
-    },
-    {
-      "day": 5,
-      "hour": 2,
-      "place": "teapot"
-    },
-    {
-      "day": 5,
-      "hour": 3,
-      "place": "teapot"
-    },
-    {
-      "day": 5,
-      "hour": 4,
-      "place": "teapot"
-    },
-    {
-      "day": 5,
-      "hour": 8,
-      "place": "teapot"
-    },
-    {
-      "day": 5,
-      "hour": 9,
-      "place": "teapot"
-    },
-    {
-      "day": 5,
-      "hour": 10,
-      "place": "teapot"
-    },
-    {
-      "day": 5,
-      "hour": 11,
-      "place": "teapot"
-    },
-    {
-      "day": 5,
-      "hour": 12,
-      "place": "teapot"
-    },
-    {
-      "day": 5,
-      "hour": 13,
-      "place": "teapot"
-    },
-    {
-      "day": 5,
-      "hour": 14,
-      "place": "flowerbed"
-    },
-    {
-      "day": 5,
-      "hour": 15,
-      "place": "flowerbed"
-    },
-    {
-      "day": 5,
-      "hour": 16,
-      "place": "flowerbed"
-    },
-    {
-      "day": 5,
-      "hour": 16,
-      "place": "vegetable_patch"
-    },
-    {
-      "day": 5,
-      "hour": 17,
-      "place": "vegetable_patch"
-    },
-    {
-      "day": 5,
-      "hour": 18,
-      "place": "vegetable_patch"
-    },
-    {
-      "day": 5,
-      "hour": 19,
-      "place": "shed"
-    },
-    {
-      "day": 5,
-      "hour": 20,
-      "place": "shed"
-    },
-    {
-      "day": 5,
-      "hour": 21,
-      "place": "vegetable_patch"
-    },
-    {
-      "day": 5,
-      "hour": 22,
-      "place": "teapot"
-    }
-  ],
+  "path": [],
   "loose": {
     "pond": [
       "pencil shaving",
