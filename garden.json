@@ -1,24 +1,24 @@
 {
-  "updated": "2026-11-15T05:12+01:00",
+  "updated": "2026-11-15T05:29+01:00",
   "day": 3,
-  "hour": 17,
+  "hour": 19,
   "location": "flowerbed",
   "weather": {
     "kind": "fog",
     "code": 45,
     "emoji": "🌫️",
     "label": "foggy",
-    "temp": -3.9,
+    "temp": -3.5,
     "precip": 0.0,
-    "wind": 3,
-    "cloud": 88,
+    "wind": 2,
+    "cloud": 68,
     "heavy": false,
     "wet": false,
     "place": "Garching",
     "real": true,
     "snowfall": 0.0,
     "snow_depth": 0.0,
-    "fetched": "2026-11-15T04:44"
+    "fetched": "2026-11-15T05:13"
   },
   "season": "autumn",
   "wet": false,
@@ -139,6 +139,13 @@
       "text": "Lumi drew: the poppy seed-head with seeds raining out",
       "kind": "drawing",
       "file": "0008-the-poppy-seed-head-with-seeds.svg"
+    },
+    {
+      "day": 3,
+      "time": "18:00",
+      "emoji": "🗺️",
+      "text": "Lumi went to the giants' windowsill for the very first time.",
+      "kind": "first"
     }
   ],
   "treasures": [
@@ -324,6 +331,16 @@
       "day": 3,
       "hour": 16,
       "place": "flowerbed"
+    },
+    {
+      "day": 3,
+      "hour": 17,
+      "place": "flowerbed"
+    },
+    {
+      "day": 3,
+      "hour": 18,
+      "place": "flowerbed"
     }
   ],
   "loose": {
@@ -438,11 +455,11 @@
     },
     "bristle": {
       "name": "Mrs. Bristle",
-      "place": null
+      "place": "teapot"
     },
     "pip": {
       "name": "Pip",
-      "place": "vegetable_patch"
+      "place": null
     }
   },
   "friend_wearing": {
