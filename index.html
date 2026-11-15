@@ -230,7 +230,7 @@ function mesh(geo, color, x=0, y=0, z=0, parent=scene){
 }
 const rnd = (a,b) => a + Math.random()*(b-a);
 const GRASS = new THREE.Color(0x86B35A);
-const TUFTS = [], FLOWERS = [], PADS = [], LETTUCE = [], HEDGE = [];   // things that change with the seasons
+const TUFTS = [], FLOWERS = [], PADS = [], LETTUCE = [], HEDGE = [], IVY = [];   // things that change with the seasons
 
 /* ground + grass */
 const ground = mesh(new THREE.CircleGeometry(70, 40), 0x86B35A); ground.rotation.x = -Math.PI/2;
@@ -247,7 +247,7 @@ mesh(new THREE.BoxGeometry(7.6,0.4,0.3), 0xFFFFFF, 0.5, 10.8, -14);
 mesh(new THREE.BoxGeometry(6,0.35,1.4), 0xF4F0E6, 0.5, 4.97, -13.5);
 const pot = mesh(new THREE.CylinderGeometry(0.6,0.45,0.9,8), 0xB86A45, 2.4, 5.6, -13.6);
 for (let i=0;i<7;i++) mesh(new THREE.SphereGeometry(0.28,6,5), 0x4F8A3A, 2.4+rnd(-.4,.4), 6.2+rnd(0,.5), -13.6+rnd(-.3,.3));
-for (let i=0;i<70;i++) mesh(new THREE.SphereGeometry(rnd(.25,.45),5,4), [0x3F6B2E,0x4F7F38][i%2], -2.3+rnd(-1.1,1.1), rnd(0,9), -14.05);
+for (let i=0;i<70;i++) IVY.push(mesh(new THREE.SphereGeometry(rnd(.25,.45),5,4), [0x3F6B2E,0x4F7F38][i%2], -2.3+rnd(-1.1,1.1), rnd(0,9), -14.05));
 
 /* teapot house under the rosemary */
 const teapot = new THREE.Group(); teapot.position.set(-13,1.3,9); teapot.rotation.set(0,0.6,Math.PI/2-0.15); scene.add(teapot);
@@ -332,8 +332,10 @@ for (let i=0;i<10;i++) mesh(new THREE.SphereGeometry(0.22,6,5), 0x8E1F3E, -13+rn
 
 /* ---------- the seasons (garden.json "season", from the real date) ---------- */
 const LEAVES = [];                 // fallen leaves, autumn
-for (let i=0;i<180;i++){
-  const l = mesh(new THREE.BoxGeometry(rnd(.3,.5),0.03,rnd(.22,.35)), 0xD9572E, rnd(-30,30), 0.04, rnd(-12,30));
+for (let i=0;i<320;i++){
+  const near = i < 140;                       // drifts of leaves pile up under the hedge and along the wall
+  const x = near ? (i % 2 ? -15 + rnd(-7,7) : rnd(-20,20)) : rnd(-30,30), z = near ? (i % 2 ? -6 + rnd(-6,8) : -12 + rnd(0,3)) : rnd(-12,30);
+  const l = mesh(new THREE.BoxGeometry(rnd(.32,.6),0.03,rnd(.24,.42)), 0xD9572E, x, 0.04 + rnd(0,.04), z);
   l.rotation.set(rnd(-.15,.15), rnd(0,6.3), 0); l.castShadow = false; LEAVES.push(l);
 }
 const BLOSSOM = [];                // white blossom on the hedge, spring
@@ -345,6 +347,82 @@ for (let i=0;i<60;i++){
 const LIGHTS = [];                 // the giants' fairy lights in December
 [0xE5484D,0xF2C12E,0x4CAF50,0x3F8FD9].forEach((c,k) => { for (let i=0;i<5;i++)
   LIGHTS.push(mesh(new THREE.SphereGeometry(0.13,6,5), new THREE.MeshBasicMaterial({color:c}), -2.8+(i*4+k)*0.34, 10.4+Math.sin(i*4+k)*0.15, -13.9)); });
+const AUTUMN = new THREE.Group(); AUTUMN.visible = false; scene.add(AUTUMN);
+function smallPumpkin(x, z, r, color, ribs = true){
+  const g = new THREE.Group(); g.position.set(x, r*0.68, z); g.rotation.y = rnd(0, 6.3); AUTUMN.add(g);
+  const n = ribs ? 6 : 1;
+  for (let k=0;k<n;k++){                       // ribbed: a ring of squashed spheres
+    const a = k / n * Math.PI * 2, off = ribs ? r*0.32 : 0;
+    const s = mesh(new THREE.SphereGeometry(r*(ribs ? 0.72 : 1),10,8), color, Math.cos(a)*off, 0, Math.sin(a)*off, g); s.scale.y = 0.72;
+  }
+  mesh(new THREE.CylinderGeometry(r*0.08, r*0.12, r*0.45, 6), 0x5A4A2A, 0, r*0.72, 0, g).rotation.z = 0.25;
+  return g;
+}
+for (const [x,z,r,c,ribs] of [[7,-1.1,0.9,0xE8822A,1],[8.7,-0.5,0.6,0xF2A13A,1],[14.6,-4,1.0,0xD96A1E,1],[4.4,-4,0.7,0xEDE3C8,1],
+                               [15.2,-6.6,0.55,0x6E8B3D,0],[6.2,-9.2,0.75,0xE9C24A,0],[13,0.4,0.5,0xE07B24,1],[10,-9.4,0.6,0xC85A1E,1]])
+  smallPumpkin(x, z, r, c, !!ribs);
+for (let i=0;i<22;i++){                        // windfall apples rolled over the wall from next door
+  const x = rnd(-12,12), z = rnd(-12.8,-9) + (i%4===0 ? rnd(3,10) : 0);
+  const a = mesh(new THREE.SphereGeometry(rnd(.28,.38),9,7), [0xC8322B,0xB5281E,0xE0A030,0xD9572E][i%4], x, 0.3, z, AUTUMN);
+  mesh(new THREE.CylinderGeometry(0.02,0.02,0.15,4), 0x4A3A22, 0, 0.36, 0, a);
+}
+function toadstool(x, z, h, r, cap){
+  const g = new THREE.Group(); g.position.set(x, 0, z); AUTUMN.add(g);
+  mesh(new THREE.CylinderGeometry(r*0.25, r*0.32, h, 8), 0xF2EDE0, 0, h/2, 0, g);
+  const c = mesh(new THREE.SphereGeometry(r,12,8,0,Math.PI*2,0,Math.PI/2), cap, 0, h, 0, g); c.scale.y = 0.65;
+  if (cap === 0xD22B1E) for (let k=0;k<7;k++){ const a = rnd(0,6.3), b = rnd(0.25,1.1);
+    mesh(new THREE.SphereGeometry(r*0.1,5,4), 0xFFFFFF, Math.cos(a)*Math.sin(b)*r, h + Math.cos(b)*r*0.65, Math.sin(a)*Math.sin(b)*r, g); }
+}
+for (const [x,z,h,r,c] of [[-10.5,-2.5,0.9,0.6,0xD22B1E],[-11.2,-1.6,0.6,0.42,0xD22B1E],[-9.8,-1.9,0.45,0.3,0xD22B1E],
+                            [-18.5,0.5,0.7,0.5,0xD22B1E],[5.5,13.5,0.7,0.5,0xB07A45],[6,14.3,0.5,0.35,0xB07A45],
+                            [13.2,-5.8,0.5,0.4,0xC9A06A],[13.8,-6.2,0.35,0.28,0xC9A06A],[18.6,-10.6,0.45,0.35,0xC9A06A],
+                            [-16,8.5,0.5,0.38,0xB07A45]])
+  toadstool(x, z, h, r, c);
+for (let i=0;i<26;i++){                        // hazelnuts and acorns under the hedge
+  const n = mesh(new THREE.SphereGeometry(0.16,7,6), [0x8A5A2B,0x6A4A2E][i%2], -15+rnd(-6,6), 0.14, -6+rnd(-4,7), AUTUMN);
+  n.scale.y = 1.25; if (i%2) mesh(new THREE.SphereGeometry(0.17,7,4,0,Math.PI*2,0,Math.PI/2), 0x7A6A44, 0, 0.1, 0, n);
+}
+const LEAF_C = [0xD9572E,0xE3A33A,0xB5452A,0xC9792B,0xF2C14E,0x9A3A1E];
+for (const [x,z,r] of [[-9,6.5,1.9],[-18,-0.5,2.4],[2.5,-10.5,2.1]]){   // leaf piles to jump in
+  const m = mesh(new THREE.SphereGeometry(r,12,8), 0xC96A2A, x, 0, z, AUTUMN); m.scale.y = 0.45;
+  for (let k=0;k<45;k++){ const a = rnd(0,6.3), b = rnd(0,1.3);
+    const l = mesh(new THREE.BoxGeometry(rnd(.35,.6),0.04,rnd(.25,.4)), LEAF_C[k%6],
+                   x + Math.cos(a)*Math.sin(b)*r, Math.cos(b)*r*0.45 + 0.02, z + Math.sin(a)*Math.sin(b)*r, AUTUMN);
+    l.rotation.set(rnd(-.6,.6), rnd(0,6.3), rnd(-.6,.6)); }
+}
+const sheaf = new THREE.Group(); sheaf.position.set(17.2,0,0.2); AUTUMN.add(sheaf);   // a corn sheaf by the scarecrow
+for (let k=0;k<16;k++){ const a = k/16*Math.PI*2, h = rnd(4.5,5.5);
+  const s = mesh(new THREE.CylinderGeometry(0.07,0.09,h,4), [0xD9B86A,0xC9A458][k%2], Math.cos(a)*0.35, h/2, Math.sin(a)*0.35, sheaf);
+  s.rotation.set(Math.sin(a)*0.18, 0, -Math.cos(a)*0.18); }
+mesh(new THREE.TorusGeometry(0.42,0.08,6,14), 0x8A6A3A, 0,2.4,0, sheaf).rotation.x = Math.PI/2;
+mesh(new THREE.SphereGeometry(0.5,8,6), 0xE6B84A, 0.6,0.45,0.55, sheaf).scale.set(0.6,1.5,0.6);
+const basket = new THREE.Group(); basket.position.set(12.4,0,-11.2); AUTUMN.add(basket);   // a basket of apples by the shed
+mesh(new THREE.CylinderGeometry(1.05,0.8,0.9,14,1,true), new THREE.MeshLambertMaterial({color:0xA87A44, side:THREE.DoubleSide}), 0,0.45,0, basket);
+mesh(new THREE.TorusGeometry(1.05,0.08,6,18), 0x8A5E30, 0,0.9,0, basket).rotation.x = Math.PI/2;
+for (let k=0;k<9;k++) mesh(new THREE.SphereGeometry(0.33,9,7), [0xC8322B,0xE0A030,0xB5281E][k%3], rnd(-.55,.55), 0.85+rnd(0,.25), rnd(-.55,.55), basket);
+/* leaves drifting down from the hedge and over the wall */
+const FALLING = [];
+for (let i=0;i<46;i++){
+  const l = mesh(new THREE.BoxGeometry(0.42,0.02,0.3), LEAF_C[i%6], 0, -5, 0, AUTUMN); l.castShadow = false;
+  l.userData = {phase: rnd(0,6.3), speed: rnd(0.5,0.9), spin: rnd(1,2.5)}; FALLING.push(l); dropLeaf(l, true);
+}
+function dropLeaf(l, anywhere){
+  const fromHedge = Math.random() < 0.6;
+  l.position.set(fromHedge ? -15 + rnd(-5,5) : rnd(-12,12), anywhere ? rnd(0.5,7) : rnd(5,8), fromHedge ? -6 + rnd(-4,4) : -13 + rnd(0,2));
+}
+function autumnFall(dt, t){
+  if (!AUTUMN.visible || reduceMotion) return;
+  for (const l of FALLING){
+    const u = l.userData;
+    l.position.y -= u.speed * dt;
+    l.position.x += Math.sin(t * 1.3 + u.phase) * 0.9 * dt;
+    l.position.z += (Math.cos(t * 0.9 + u.phase) * 0.5 + 0.35) * dt;
+    l.rotation.set(Math.sin(t * u.spin + u.phase) * 0.9, t * 0.6 + u.phase, Math.cos(t * u.spin + u.phase) * 0.7);
+    if (l.position.y < 0.05) dropLeaf(l, false);
+  }
+}
+let seasonWarmth = 0;                      // golden autumn light
+
 const SEASON_LOOK = {
   spring: {grass:0x8CC05E, tufts:[0x7DBA55,0x8CC963,0x6EA84A], hedge:[0x4E8A3A,0x5E9A45,0x6BAA50], blossom:true,
            flowers:[0x9B6FD0,0xF4E04D,0xFFFFFF], flowerSize:0.4, flowerShow:1, sun:"none", pads:0x7DBA55, padSize:0.6,
@@ -352,10 +430,11 @@ const SEASON_LOOK = {
   summer: {grass:0x86B35A, tufts:[0x6E9A4F,0x7DAA55,0x5E8A42], hedge:[0x2F5A2B,0x3A6B32,0x2A4F26],
            flowers:null, flowerSize:1, flowerShow:1, sun:"bloom", pads:0x5E9A45, padSize:1,
            lettuce:1, lettuceShow:1, pumpkin:0x6E9A4F, pumpkinSize:0.55, leaves:0},
-  autumn: {grass:0x9AA35A, tufts:[0x9A9A55,0x8A8A4A,0xA8A060], hedge:[0x6B7A2E,0x8A6A2E,0x3A5A2E],
-           flowers:[0xE07B24,0xB06030,0x8A5A3A], flowerSize:0.85, flowerShow:0.3, deadShow:1, sun:"seed",
-           pads:0x9A8A45, padSize:0.9, lettuce:0.7, lettuceShow:0.3, pumpkin:0xE07B24, pumpkinSize:1, leaves:1,
-           leafColors:[0xD9572E,0xE3A33A,0xB5452A,0xC9792B]},
+  autumn: {grass:0x7F7A3E, tufts:[0xB0903E,0x96783A,0x7E7A3C,0xC0A050], hedge:[0xC8601E,0xD9A030,0x9A3A1E,0x6B7A2E,0xB8782A,0xE08A2E],
+           ivy:[0xB5301E,0xD9572E,0x8E2A1A,0xC8401E,0x4F7F38],
+           flowers:[0xE07B24,0xF2A93A,0x8E5BB5,0xC8322B], flowerSize:0.85, flowerShow:0.45, deadShow:1, sun:"seed",
+           pads:0xC0A040, padSize:0.9, lettuce:0.7, lettuceShow:0.3, pumpkin:0xE07B24, pumpkinSize:1, leaves:1,
+           leafColors:[0xD9572E,0xE3A33A,0xB5452A,0xC9792B,0xF2C14E,0x9A3A1E], harvest:true, warmth:0.3},
   winter: {grass:0x8E9A78, tufts:[0x8A8A6A,0x7A7A5A,0x9A9A7A], hedge:[0x4A4A3A,0x5A4A3A,0x3A4A30],
            flowerShow:0, deadShow:0.4, sun:"dead", pads:0x5E9A45, padSize:0, lettuceShow:0, lettuce:1,
            pumpkin:0x7A6A4A, pumpkinSize:0.6, pumpkinFlat:true, leaves:0.3, leafColors:[0x6A4A2E,0x7A5A3A]},
@@ -365,15 +444,18 @@ function applySeason(season){
   if (!SEASON_LOOK[season] || season === shownSeason) return;
   shownSeason = season; const p = SEASON_LOOK[season];
   GRASS.set(p.grass);
-  TUFTS.forEach((t,i) => t.material.color.set(p.tufts[i%3]));
-  HEDGE.forEach((h,i) => h.material.color.set(p.hedge[i%3]));
+  TUFTS.forEach((t,i) => t.material.color.set(p.tufts[i % p.tufts.length]));
+  HEDGE.forEach((h,i) => h.material.color.set(p.hedge[(i*7) % p.hedge.length]));
+  IVY.forEach((v,i) => v.material.color.set((p.ivy || [0x3F6B2E,0x4F7F38])[(i*3) % (p.ivy || [0,0]).length]));
+  AUTUMN.visible = !!p.harvest;
+  seasonWarmth = p.warmth || 0;
   BLOSSOM.forEach(b => b.visible = !!p.blossom);
   FLOWERS.forEach((f,i) => {
     const k = (i*7 % 10) / 10, alive = k < p.flowerShow, dead = !alive && k < (p.deadShow || 0);
     f.g.visible = alive || dead;
     f.g.scale.setScalar(alive ? p.flowerSize : 0.9);
     f.head.visible = alive; f.leaf.visible = alive;
-    if (alive) f.head.material.color.set(p.flowers ? p.flowers[i%3] : f.petal);
+    if (alive) f.head.material.color.set(p.flowers ? p.flowers[i % p.flowers.length] : f.petal);
     f.stem.material.color.set(alive ? 0x4F7F38 : 0x7A6A4A);
     f.center.material.color.set(alive ? 0x2B2B2B : 0x7A5A3A);         // dead: a dry brown seed-head
     f.center.scale.set(alive ? 1 : 0.8, alive ? 1 : 1.3, alive ? 1 : 0.8);
@@ -416,6 +498,7 @@ function updateSnowScene(cover){
   SNOWCAPS.forEach(m => m.visible = q >= 0.3);
   TUFTS.forEach((t,i) => t.visible = (i % 10) / 10 >= q * 0.9);        // grass disappears under the snow
   LEAVES.forEach(l => l.visible = l.userData.on && q < 0.5);
+  if (shownSeason === "autumn") AUTUMN.visible = q < 0.5;
 }
 
 /* ---------- Lumi ---------- */
@@ -831,6 +914,7 @@ function weatherFrame(dt, t){
   const lying = Math.min(1, (wx?.snow_depth || 0) / 2);        // real snow on the ground, 2 cm = all white
   snowCover += (Math.max(snowing && (wx?.temp ?? 5) <= 1.5 ? 0.6 : 0, lying) - snowCover) * Math.min(1, dt * 0.05);
   updateSnowScene(snowCover);
+  autumnFall(dt, t);
   puddleMat.opacity += ((wetGround ? 0.6 : 0) - puddleMat.opacity) * Math.min(1, dt * 0.3);
   const frosty = wx && (wx.temp ?? 5) <= 0 && garden && garden.hour < 11 ? 0.4 : 0;
   ground.material.color.copy(GRASS).lerp(FROST, frosty).lerp(WET_GRASS, wetGround ? 1 : 0).lerp(SNOWY, snowCover);
@@ -871,16 +955,16 @@ function lightUp(dt){
   if (flash) sky.lerp(C(0xE6EAFF), 0.75);
   scene.background = sky; scene.fog.color = sky; stage.style.background = "#" + sky.getHexString();
   // the sun by day (warm at sunrise and sunset), cool blue moonlight by night
-  sun.color.copy(C(0xFFF1D6).lerp(C(0xFFA15C), golden).lerp(C(0x8FA8E8), night));
+  sun.color.copy(C(0xFFF1D6).lerp(C(0xFFC27A), seasonWarmth).lerp(C(0xFFA15C), golden).lerp(C(0x8FA8E8), night));
   sun.intensity = (0.12 + day * 0.88 + night * 0.18) * (1 - ov * 0.55);
   sun.position.set(night > 0.5 ? 30 : Math.cos((h-5)/15*Math.PI)*40, 10 + Math.max(day, night*0.8)*40, 20);
   hemi.color.copy(C(0xFFFFFF).lerp(C(0x5A6FA8), night));
-  hemi.groundColor.copy(C(0x5D7A3A).lerp(C(0x1A2A22), night));
+  hemi.groundColor.copy(C(0x5D7A3A).lerp(C(0x8A5A2A), seasonWarmth).lerp(C(0x1A2A22), night));
   hemi.intensity = 0.28 + day * 0.5 + (flash ? 1.3 : 0);
   stars.material.opacity = night * 0.9 * (1 - ov);
   overlay.style.setProperty("--tagfade", String(1 - night * 0.45));
   moon.material.opacity = night * (1 - ov * 0.9);
-  const warm = !wx || ((wx.temp ?? 15) >= 12 && !WET.includes(wx.kind));   // no fireflies in the cold or the rain
+  const warm = (!wx || ((wx.temp ?? 15) >= 12 && !WET.includes(wx.kind))) && (shownSeason === "summer" || shownSeason === null);
   homeGlow.intensity = night * 1.6;
   windowLight.material.color.set(night > 0.3 ? 0xFFD27A : 0x3A2A20);
   for (const f of flies){                                                 // fireflies drift and blink
