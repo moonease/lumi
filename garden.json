@@ -1,7 +1,7 @@
 {
-  "updated": "2026-11-15T07:50+01:00",
+  "updated": "2026-11-15T08:10+01:00",
   "day": 4,
-  "hour": 19,
+  "hour": 20,
   "location": "hedge",
   "weather": {
     "kind": "fog",
@@ -269,11 +269,6 @@
   ],
   "news": [
     {
-      "when": "Day 1, 22:00 (night)",
-      "text": "A fox came through the pond in the night.",
-      "place": "pond"
-    },
-    {
       "when": "Day 2, 00:00 (night)",
       "text": "Fennel insisted the phone could track the cat, but Tock said 'inventions need focus, not magic' and accidentally knocked over his twig sketch.",
       "place": null
@@ -317,6 +312,11 @@
       "when": "Day 4, 12:00 (afternoon)",
       "text": "A giant dropped a coin in the giants' windowsill.",
       "place": "windowsill"
+    },
+    {
+      "when": "Day 4, 19:00 (evening)",
+      "text": "A giant dropped a blue marble in the pond.",
+      "place": "pond"
     }
   ],
   "diary": [
@@ -401,11 +401,17 @@
       "day": 4,
       "hour": 18,
       "place": "teapot"
+    },
+    {
+      "day": 4,
+      "hour": 19,
+      "place": "hedge"
     }
   ],
   "loose": {
     "pond": [
-      "pencil shaving"
+      "pencil shaving",
+      "blue marble"
     ],
     "teapot": [
       "doll's blanket"
@@ -431,6 +437,12 @@
         "from": null,
         "gift": false,
         "portable": true
+      },
+      {
+        "name": "blue marble",
+        "from": null,
+        "gift": false,
+        "portable": false
       }
     ],
     "teapot": [
@@ -518,7 +530,7 @@
     },
     "crumb": {
       "name": "Crumb",
-      "place": "shed"
+      "place": null
     },
     "gorse": {
       "name": "Old Gorse",
