@@ -206,7 +206,7 @@ const SPOTS = {
   vegetable_patch:{x:5.5,z:-2.5,y:0},  shed:{x:15,z:-7.5,y:0},  hedge:{x:-11,z:-4,y:0},
   windowsill:{x:0.5,z:-13.4,y:5.15, via:[{x:-2.3,z:-13,y:0},{x:-2.3,z:-13.2,y:5.15}]},
 };
-const CREATURE_SPOTS = {fennel:[1.6,1.2], tock:[1.5,-1], crumb:[1.4,1.2], gorse:[5.1,2.6], bristle:[1.6,1.2]};
+const CREATURE_SPOTS = {fennel:[1.6,1.2], tock:[1.5,-1], crumb:[1.4,1.2], gorse:[5.1,2.6], bristle:[1.6,1.2], pip:[1.0,2.6]};
 
 /* ---------- scene ---------- */
 const stage = $("stage"), overlay = $("overlay");
@@ -590,6 +590,23 @@ function looseModel(name){
   for (const s of [-1,1]) add(new THREE.TorusGeometry(0.1,0.03,6,12), 0xF2C12E, s*0.09,0.47,0).rotation.y = s*0.5;
   return g;
 }
+function dressFriend(id, wearing){
+  const c = creatures[id]; const fit = c?.g.userData.outfit; if (!fit) return;
+  for (const slot in fit) fit[slot].forEach(m => m.visible = false);
+  for (const w of wearing || []) for (const m of fit[w.slot] || []){ m.visible = true; if (w.color) m.material.color.set(w.color); }
+}
+function placeFriends(g){                // who is where right now, incl. a friend who came to find her
+  for (const [id, n] of Object.entries(g.npc_now || {})){
+    if (!creatures[id]) creatures[id] = {g: creature(id), label: tag(n.name, "creature"), loc: null};
+    const c = creatures[id];
+    if (n.place && c.loc !== n.place){
+      const base = spot(n.place), off = CREATURE_SPOTS[id] || [1.5,1.2];
+      c.g.position.set(base.x+off[0], base.y||0, base.z+off[1]); c.loc = n.place;
+    }
+    c.g.visible = !!n.place; c.label.style.visibility = n.place ? "visible" : "hidden";
+  }
+  for (const [id, wearing] of Object.entries(g.friend_wearing || {})) dressFriend(id, wearing);
+}
 function syncLoose(g){
   const items = g.loose_items || Object.fromEntries(Object.entries(g.loose || {}).map(([p, names]) => [p, names.map(n => ({name: n}))]));
   const want = new Set();
@@ -698,6 +715,39 @@ function creature(id){
       sp.lookAt(sp.position.x*3, sp.position.y*3, sp.position.z*3); sp.rotateX(Math.PI/2); }
     mesh(new THREE.ConeGeometry(0.25,0.55,8), 0xC9A88A, 0,0.25,0.95, g).rotation.x = Math.PI/2;
     mesh(new THREE.SphereGeometry(0.06,6,5), 0x111111, 0,0.27,1.22, g);
+  } else if (id === "pip"){        // a boy her own size, who lives in the pumpkin
+    const r = new THREE.Group(); r.scale.setScalar(0.75); g.add(r);
+    const skin = 0xF1C9A5, fit = {hat:[], scarf:[], top:[], coat:[], mittens:[], boots:[]};
+    const put = (slot, m) => { m.visible = false; fit[slot].push(m); return m; };
+    for (const s of [-1,1]){
+      mesh(new THREE.CylinderGeometry(0.075,0.075,0.42,8), 0x3A4F7A, s*0.09,0.21,0, r);                 // trousers
+      mesh(new THREE.SphereGeometry(0.085,8,6), 0x3A2A20, s*0.09,0.0,0.03, r).scale.set(1,0.6,1.5);    // shoes
+      put("boots", mesh(new THREE.CylinderGeometry(0.09,0.1,0.2,8), 0x4CAF50, s*0.09,0.08,0.01, r));
+      const arm = new THREE.Group(); arm.position.set(s*0.17,1.0,0); arm.rotation.z = s*0.3; r.add(arm);
+      mesh(new THREE.CylinderGeometry(0.048,0.048,0.36,8), skin, 0,-0.18,0, arm);
+      mesh(new THREE.CylinderGeometry(0.055,0.055,0.14,8), 0xE3A33A, 0,-0.06,0, arm);                  // t-shirt sleeve
+      put("top", mesh(new THREE.CylinderGeometry(0.06,0.06,0.26,8), 0x3F5E8C, 0,-0.13,0, arm));
+      put("coat", mesh(new THREE.CylinderGeometry(0.07,0.07,0.3,8), 0x8A5A2B, 0,-0.15,0, arm));
+      put("mittens", mesh(new THREE.SphereGeometry(0.066,8,6), 0xC8322B, 0,-0.38,0, arm));
+    }
+    mesh(new THREE.CylinderGeometry(0.15,0.19,0.55,12), 0xE3A33A, 0,0.68,0, r);                     // mustard t-shirt
+    put("top", mesh(new THREE.CylinderGeometry(0.16,0.2,0.5,12), 0x3F5E8C, 0,0.7,0, r));
+    put("coat", mesh(new THREE.CylinderGeometry(0.18,0.23,0.62,12), 0x8A5A2B, 0,0.66,0, r));
+    put("scarf", mesh(new THREE.TorusGeometry(0.14,0.05,8,18), 0xF2C12E, 0,0.98,0, r)).rotation.x = Math.PI/2;
+    put("scarf", mesh(new THREE.BoxGeometry(0.08,0.26,0.04), 0xF2C12E, -0.09,0.86,0.16, r)).rotation.z = -0.15;
+    const head = mesh(new THREE.SphereGeometry(0.25,16,12), skin, 0,1.24,0, r);
+    for (let i=0;i<9;i++){ const a = i/9*Math.PI*2;                                                // messy hair
+      mesh(new THREE.SphereGeometry(0.12,8,6), 0x6A4428, Math.cos(a)*0.14, 1.42+Math.random()*0.04, Math.sin(a)*0.14-0.04, r); }
+    for (const [x,z,rz] of [[0,0.02,0.2],[0.08,-0.05,-0.4],[-0.1,0,0.5]])
+      mesh(new THREE.ConeGeometry(0.05,0.18,5), 0x6A4428, x,1.55,z, r).rotation.z = rz;               // the bits that stick up
+    for (const s of [-1,1]){
+      mesh(new THREE.SphereGeometry(0.032,8,6), 0x222222, s*0.08,1.26,0.225, r);
+      for (let k=0;k<3;k++) mesh(new THREE.SphereGeometry(0.012,5,4), 0xB5703A, s*(0.1+k*0.03),1.19+(k%2)*0.02,0.215, r);  // freckles
+    }
+    mesh(new THREE.TorusGeometry(0.06,0.015,5,10,Math.PI), 0x8A3A2A, 0,1.16,0.23, r).rotation.z = Math.PI;   // grin
+    put("hat", mesh(new THREE.SphereGeometry(0.29,14,10,0,Math.PI*2,0,Math.PI*0.5), 0xC8322B, 0,1.3,0, r));
+    put("hat", mesh(new THREE.SphereGeometry(0.08,8,6), 0xFFFFFF, 0,1.6,0, r));                      // pompom
+    g.userData.outfit = fit;
   } else {                          // anyone new you add to world.json
     mesh(new THREE.SphereGeometry(0.5,10,8), 0xC9A0DC, 0,0.5,0, g);
   }
@@ -851,6 +901,9 @@ function thoughts(){
   for (const q of (s.questions || []).slice(-3)) out.push(q);
   for (const k of (s.knowledge || []).slice(-3)) out.push(k.belief);
   for (const f of g.friends || []) if (f.trust >= 40 && !f.caregiver) out.push(`I want to play with ${f.name}.`);
+  const pipHere = creatures.pip?.g.visible && creatures.pip.g.position.distanceTo(lumi.position) < 6;
+  const pn = garden?.npc_now?.pip?.name || "Pip";
+  if (pipHere) out.push(`${pn} is SO silly.`, "Race you!", "Bet I can jump higher!", "Let's make a secret club!");
   for (const [id, c] of Object.entries(creatures))
     if (c.g.visible && c.g.position.distanceTo(lumi.position) < 6) out.push(`Hi, ${c.label.textContent.split(":")[0]}!`);
   const fresh = out.filter(x => x && x !== lastThought);
@@ -1269,7 +1322,7 @@ function renderGarden(s, g){
     $("fresh").textContent = mins < 2 ? "Updated just now" : mins < 90 ? `Updated ${mins} min ago` : `Updated ${Math.round(mins / 60)} h ago`;
   }
   garden = g; drawPath(); dressLumi(g.wearing); applySeason(g.season); seasonalExtras(g);
-  if (world) syncLoose(g);
+  if (world){ syncLoose(g); placeFriends(g); }
   const today = g.highlights.filter(h => h.day === g.day);
   const bits = (today.length ? today : g.highlights.slice(-8)).slice().sort((a, b) => b.day - a.day || b.time.localeCompare(a.time));
   const picURL = f => (STATIC ? "drawings/" : "/drawings/") + encodeURIComponent(f);
