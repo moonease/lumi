@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <rect width="400" height="300" fill="white"/>
+  <!-- Poppy seed-head (large red circle) -->
+  <circle cx="200" cy="150" r="60" fill="red" stroke="black" stroke-width="8" stroke-linecap="round"/>
+  <!-- Seeds raining out (wobbly lines and small circles) -->
+  <path d="M200,150 Q220,100 240,80" fill="none" stroke="red" stroke-width="6" stroke-linecap="round"/>
+  <path d="M200,150 Q180,100 160,80" fill="none" stroke="red" stroke-width="6" stroke-linecap="round"/>
+  <path d="M200,150 Q210,130 230,110" fill="none" stroke="red" stroke-width="6" stroke-linecap="round"/>
+  <path d="M200,150 Q190,130 170,110" fill="none" stroke="red" stroke-width="6" stroke-linecap="round"/>
+  <!-- Seed clusters (uneven circles) -->
+  <circle cx="240" cy="80" r="10" fill="red" stroke="black" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="160" cy="80" r="10" fill="red" stroke="black" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="230" cy="110" r="8" fill="red" stroke="black" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="170" cy="110" r="8" fill="red" stroke="black" stroke-width="4" stroke-linecap="round"/>
+  <!-- Flowerbed (simple green shapes) -->
+  <ellipse cx="200" cy="250" rx="100" ry="30" fill="green" stroke="black" stroke-width="4" stroke-linecap="round"/>
+  <ellipse cx="150" cy="230" rx="20" ry="10" fill="green" stroke="black" stroke-width="4" stroke-linecap="round"/>
+  <ellipse cx="250" cy="230" rx="20" ry="10" fill="green" stroke="black" stroke-width="4" stroke-linecap="round"/>
+  <!-- Sun with face (yellow circle, wobbly rays) -->
+  <circle cx="350" cy="50" r="30" fill="yellow" stroke="black" stroke-width="4" stroke-linecap="round"/>
+  <path d="M350,50 Q380,20 400,50" fill="none" stroke="black" stroke-width="4" stroke-linecap="round"/>
+  <path d="M350,50 Q380,80 400,100" fill="none" stroke="black" stroke-width="4" stroke-linecap="round"/>
+  <path d="M350,50 Q320,20 300,50" fill="none" stroke="black" stroke-width="4" stroke-linecap="round"/>
+  <path d="M350,50 Q320,80 300,100" fill="none" stroke="black" stroke-width="4" stroke-linecap="round"/>
+  <!-- Sun face (simple black circle and smile) -->
+  <circle cx="355" cy="55" r="5" fill="black"/>
+  <path d="M355,70 Q360,75 355,80" fill="none" stroke="black" stroke-width="4" stroke-linecap="round"/>
+  <!-- LUMI in wobbly letters -->
+  <path d="M100,270 Q120,260 140,270" fill="none" stroke="black" stroke-width="6" stroke-linecap="round"/>
+  <path d="M140,270 Q160,260 180,270" fill="none" stroke="black" stroke-width="6" stroke-linecap="round"/>
+  <path d="M180,270 Q200,260 220,270" fill="none" stroke="black" stroke-width="6" stroke-linecap="round"/>
+  <path d="M220,270 Q240,260 260,270" fill="none" stroke="black" stroke-width="6" stroke-linecap="round"/>
+  <path d="M260,270 Q280,260 300,270" fill="none" stroke="black" stroke-width="6" stroke-linecap="round"/>
+</svg>

@@ -1,16 +1,16 @@
 {
-  "updated": "2026-11-15T04:07+01:00",
+  "updated": "2026-11-15T04:42+01:00",
   "day": 3,
-  "hour": 13,
-  "location": "teapot",
+  "hour": 14,
+  "location": "flowerbed",
   "weather": {
     "kind": "fog",
     "code": 45,
     "emoji": "🌫️",
     "label": "foggy",
-    "temp": -3.8,
+    "temp": -4.2,
     "precip": 0.0,
-    "wind": 2,
+    "wind": 4,
     "cloud": 100,
     "heavy": false,
     "wet": false,
@@ -18,7 +18,7 @@
     "real": true,
     "snowfall": 0.0,
     "snow_depth": 0.0,
-    "fetched": "2026-11-15T03:24"
+    "fetched": "2026-11-15T04:12"
   },
   "season": "autumn",
   "wet": false,
@@ -131,6 +131,14 @@
       "text": "Lumi drew: the treasure shelf with a fallen leaf and a twig",
       "kind": "drawing",
       "file": "0007-the-treasure-shelf-with-a-fall.svg"
+    },
+    {
+      "day": 3,
+      "time": "13:00",
+      "emoji": "🖍️",
+      "text": "Lumi drew: the poppy seed-head with seeds raining out",
+      "kind": "drawing",
+      "file": "0008-the-poppy-seed-head-with-seeds.svg"
     }
   ],
   "treasures": [
@@ -200,11 +208,6 @@
   "news": [
     {
       "when": "Day 1, 19:00 (evening)",
-      "text": "Fennel insisted the phone 'knows where the cat is,' but Tock refused to look, saying 'inventions need focus, not magic.'",
-      "place": null
-    },
-    {
-      "when": "Day 1, 19:00 (evening)",
       "text": "The cat was prowling in the flowerbed.",
       "place": "flowerbed"
     },
@@ -247,6 +250,11 @@
       "when": "Day 3, 08:00 (morning)",
       "text": "A squirrel buried a nut in the flowerbed.",
       "place": "flowerbed"
+    },
+    {
+      "when": "Day 3, 13:00 (afternoon)",
+      "text": "Fennel says someone tiny has moved into the hole in the big pumpkin!",
+      "place": null
     }
   ],
   "diary": [
@@ -290,6 +298,11 @@
     {
       "day": 3,
       "hour": 12,
+      "place": "teapot"
+    },
+    {
+      "day": 3,
+      "hour": 13,
       "place": "teapot"
     }
   ],
@@ -375,6 +388,66 @@
       "color": "#B9A7C9"
     }
   ],
+  "npc_now": {
+    "fennel": {
+      "name": "Fennel",
+      "place": null
+    },
+    "tock": {
+      "name": "Tock",
+      "place": "flowerbed"
+    },
+    "crumb": {
+      "name": "Crumb",
+      "place": "shed"
+    },
+    "gorse": {
+      "name": "Old Gorse",
+      "place": null
+    },
+    "bristle": {
+      "name": "Mrs. Bristle",
+      "place": null
+    },
+    "pip": {
+      "name": "Pip",
+      "place": "vegetable_patch"
+    }
+  },
+  "friend_wearing": {
+    "pip": [
+      {
+        "slot": "top",
+        "name": "blue jumper",
+        "color": "#3F5E8C"
+      },
+      {
+        "slot": "coat",
+        "name": "puffy blue coat",
+        "color": "#3F7FD9"
+      },
+      {
+        "slot": "scarf",
+        "name": "stripy yellow scarf",
+        "color": "#F2C12E"
+      },
+      {
+        "slot": "mittens",
+        "name": "red mittens",
+        "color": "#C8322B"
+      },
+      {
+        "slot": "hat",
+        "name": "red woolly beanie",
+        "color": "#C8322B"
+      },
+      {
+        "slot": "boots",
+        "name": "green wellies",
+        "color": "#4CAF50"
+      }
+    ]
+  },
   "wardrobe": [
     {
       "name": "summer dress",
