@@ -601,7 +601,11 @@ function placeFriends(g){                // who is where right now, incl. a frie
     const c = creatures[id];
     if (n.place && c.loc !== n.place){
       const base = spot(n.place), off = CREATURE_SPOTS[id] || [1.5,1.2];
-      c.g.position.set(base.x+off[0], base.y||0, base.z+off[1]); c.loc = n.place;
+      const end = new THREE.Vector3(base.x+off[0], base.y||0, base.z+off[1]);
+      if (c.loc && c.g.visible && world.places[c.loc]){                 // walk over, like a real visit
+        c.path = route(c.loc, n.place); c.path[c.path.length-1] = end;
+      } else { c.g.position.copy(end); c.path = []; }                 // just appeared: no walk to show
+      c.loc = n.place;
     }
     c.g.visible = !!n.place; c.label.style.visibility = n.place ? "visible" : "hidden";
   }
@@ -719,11 +723,13 @@ function creature(id){
     const r = new THREE.Group(); r.scale.setScalar(0.75); g.add(r);
     const skin = 0xF1C9A5, fit = {hat:[], scarf:[], top:[], coat:[], mittens:[], boots:[]};
     const put = (slot, m) => { m.visible = false; fit[slot].push(m); return m; };
+    const legs = [], arms = [];
     for (const s of [-1,1]){
-      mesh(new THREE.CylinderGeometry(0.075,0.075,0.42,8), 0x3A4F7A, s*0.09,0.21,0, r);                 // trousers
-      mesh(new THREE.SphereGeometry(0.085,8,6), 0x3A2A20, s*0.09,0.0,0.03, r).scale.set(1,0.6,1.5);    // shoes
-      put("boots", mesh(new THREE.CylinderGeometry(0.09,0.1,0.2,8), 0x4CAF50, s*0.09,0.08,0.01, r));
-      const arm = new THREE.Group(); arm.position.set(s*0.17,1.0,0); arm.rotation.z = s*0.3; r.add(arm);
+      const leg = new THREE.Group(); leg.position.set(s*0.09,0.42,0); r.add(leg); legs.push(leg);      // hip
+      mesh(new THREE.CylinderGeometry(0.075,0.075,0.42,8), 0x3A4F7A, 0,-0.21,0, leg);                  // trousers
+      mesh(new THREE.SphereGeometry(0.085,8,6), 0x3A2A20, 0,-0.42,0.03, leg).scale.set(1,0.6,1.5);     // shoes
+      put("boots", mesh(new THREE.CylinderGeometry(0.09,0.1,0.2,8), 0x4CAF50, 0,-0.34,0.01, leg));
+      const arm = new THREE.Group(); arm.position.set(s*0.17,1.0,0); arm.rotation.z = s*0.3; r.add(arm); arms.push(arm);
       mesh(new THREE.CylinderGeometry(0.048,0.048,0.36,8), skin, 0,-0.18,0, arm);
       mesh(new THREE.CylinderGeometry(0.055,0.055,0.14,8), 0xE3A33A, 0,-0.06,0, arm);                  // t-shirt sleeve
       put("top", mesh(new THREE.CylinderGeometry(0.06,0.06,0.26,8), 0x3F5E8C, 0,-0.13,0, arm));
@@ -747,7 +753,7 @@ function creature(id){
     mesh(new THREE.TorusGeometry(0.06,0.015,5,10,Math.PI), 0x8A3A2A, 0,1.16,0.23, r).rotation.z = Math.PI;   // grin
     put("hat", mesh(new THREE.SphereGeometry(0.29,14,10,0,Math.PI*2,0,Math.PI*0.5), 0xC8322B, 0,1.3,0, r));
     put("hat", mesh(new THREE.SphereGeometry(0.08,8,6), 0xFFFFFF, 0,1.6,0, r));                      // pompom
-    g.userData.outfit = fit;
+    g.userData.outfit = fit; g.userData.legs = legs; g.userData.arms = arms; g.userData.speed = 2.3;
   } else {                          // anyone new you add to world.json
     mesh(new THREE.SphereGeometry(0.5,10,8), 0xC9A0DC, 0,0.5,0, g);
   }
@@ -809,13 +815,13 @@ function update(s){
   mood = s.mood;
   for (const n of s.npcs){
     if (!creatures[n.id]) creatures[n.id] = {g: creature(n.id), label: tag(n.name, "creature"), loc: null};
-    if (creatures[n.id].loc !== n.location){
+    if (creatures[n.id].loc !== n.location && !garden?.npc_now){
       const base = spot(n.location), off = CREATURE_SPOTS[n.id] || [1.5,1.2];
       creatures[n.id].g.position.set(base.x+off[0], base.y||0, base.z+off[1]);
       creatures[n.id].loc = n.location;
     }
-    creatures[n.id].g.visible = n.present;
-    creatures[n.id].label.style.visibility = n.present ? "visible" : "hidden";
+    if (!garden?.npc_now){ creatures[n.id].g.visible = n.present;
+      creatures[n.id].label.style.visibility = n.present ? "visible" : "hidden"; }
   }
 }
 
@@ -954,6 +960,7 @@ async function perform(e){
       if (c){ const p = c.g.position, home = P(spot(current)), d = lumi.position.clone().sub(p).setY(0).normalize().multiplyScalar(1.6);
               if (p.clone().setY(home.y).distanceTo(home) < 4) await walkTo([p.clone().add(d).setY(home.y)]);  // don't wade into the pond
               faceTarget = p; }
+      if (c && e.type === "together") c.playUntil = nowS() + 4;        // he joins in
       say(e.text, 4200); gest(e.type === "talk" ? "wave" : "hop", 4000); await wait(4300);
       if (c && e.reply){ const name = c.label.textContent; c.label.textContent = `${name}: ${e.reply}`; c.label.classList.add("speaking");
                          await wait(Math.min(9000, 2500 + e.reply.length * 45)); c.label.textContent = name; c.label.classList.remove("speaking"); }
@@ -1269,8 +1276,34 @@ function frame(){
                       legL.rotation.x = Math.sin(t*12)*0.3; legR.rotation.x = -Math.sin(t*12)*0.3; }
   }
   for (const [id,c] of Object.entries(creatures)) if (c.g.visible){
-    c.g.position.y = Math.abs(Math.sin(t*1.5 + id.length))*0.08;
-    c.g.rotation.y = Math.atan2(lumi.position.x - c.g.position.x, lumi.position.z - c.g.position.z) * 0.6;
+    const u = c.g.userData;
+    if (u.legs && !c.path?.length && c.loc === current && !asleep){   // Pip is with her: he trails after her
+      const gap = c.g.position.clone().sub(lumi.position).setY(0);
+      if (gap.length() > 2.1){
+        const spotNear = lumi.position.clone().add(gap.normalize().multiplyScalar(1.3)).setY(lumi.position.y);
+        c.path = [spotNear];
+      }
+    }
+    const next = c.path?.[0];
+    if (c.playUntil > nowS() && !next){                              // playing together: he bounces along
+      c.g.position.y = Math.abs(Math.sin(t*6 + 1))*0.35;
+      c.g.rotation.y = Math.atan2(lumi.position.x - c.g.position.x, lumi.position.z - c.g.position.z);
+      if (u.arms){ u.arms[0].rotation.x = -2.2 + Math.sin(t*6)*0.3; u.arms[1].rotation.x = -2.2 - Math.sin(t*6)*0.3; }
+      continue;
+    }
+    if (next){                                                       // walking somewhere
+      const to = next.clone().sub(c.g.position).setY(0), d = to.length(), step = (u.speed || 1.6) * dt * (reduceMotion ? 6 : 1);
+      if (d <= step){ c.g.position.x = next.x; c.g.position.z = next.z; c.path.shift(); }
+      else { c.g.position.add(to.multiplyScalar(step / d)); c.g.rotation.y = Math.atan2(next.x - c.g.position.x, next.z - c.g.position.z); }
+      c.g.position.y = (next.y || 0) + Math.abs(Math.sin(t*10))*0.06;
+      if (u.legs){ u.legs[0].rotation.x = Math.sin(t*10)*0.55; u.legs[1].rotation.x = -Math.sin(t*10)*0.55;
+                   u.arms[0].rotation.x = -Math.sin(t*10)*0.5; u.arms[1].rotation.x = Math.sin(t*10)*0.5; }
+      c.label.style.visibility = "visible";
+    } else {
+      c.g.position.y = Math.abs(Math.sin(t*1.5 + id.length))*0.08;
+      c.g.rotation.y = Math.atan2(lumi.position.x - c.g.position.x, lumi.position.z - c.g.position.z) * 0.6;
+      if (u.legs){ u.legs.forEach(l => l.rotation.x *= 0.85); u.arms.forEach(a => a.rotation.x *= 0.85); }
+    }
   }
   weatherFrame(dt, t);
   lightUp(dt);

@@ -1,8 +1,8 @@
 {
-  "updated": "2026-11-15T10:57+01:00",
+  "updated": "2026-11-15T11:07+01:00",
   "day": 5,
-  "hour": 18,
-  "location": "vegetable_patch",
+  "hour": 20,
+  "location": "shed",
   "weather": {
     "kind": "cloudy",
     "code": 2,
@@ -275,6 +275,11 @@
       "who": "Tock",
       "ask": "find me a smooth stone",
       "done": false
+    },
+    {
+      "who": "Crumb",
+      "ask": "find me a piece of web",
+      "done": false
     }
   ],
   "friends": [
@@ -308,10 +313,19 @@
     {
       "id": "pip",
       "name": "Pip",
-      "trust": 2,
+      "trust": 4,
       "impression": "Pip is my new friend and we built together!",
       "mood": "boisterous",
       "busy_with": "building a throne from the coin",
+      "caregiver": false
+    },
+    {
+      "id": "crumb",
+      "name": "Crumb",
+      "trust": 0,
+      "impression": "",
+      "mood": "nervous",
+      "busy_with": "counting glass beads",
       "caregiver": false
     }
   ],
@@ -481,6 +495,16 @@
       "day": 5,
       "hour": 17,
       "place": "vegetable_patch"
+    },
+    {
+      "day": 5,
+      "hour": 18,
+      "place": "vegetable_patch"
+    },
+    {
+      "day": 5,
+      "hour": 19,
+      "place": "shed"
     }
   ],
   "loose": {
@@ -619,7 +643,7 @@
     },
     "crumb": {
       "name": "Crumb",
-      "place": "shed"
+      "place": null
     },
     "gorse": {
       "name": "Old Gorse",
@@ -627,11 +651,11 @@
     },
     "bristle": {
       "name": "Mrs. Bristle",
-      "place": null
+      "place": "teapot"
     },
     "pip": {
       "name": "Pip",
-      "place": "vegetable_patch"
+      "place": null
     }
   },
   "friend_wearing": {
