@@ -1,24 +1,24 @@
 {
-  "updated": "2026-11-15T12:06+01:00",
+  "updated": "2026-11-15T22:33+01:00",
   "day": 6,
-  "hour": 1,
+  "hour": 2,
   "location": "teapot",
   "weather": {
     "kind": "cloudy",
     "code": 3,
     "emoji": "☁️",
     "label": "grey and cloudy",
-    "temp": 5.7,
+    "temp": 2.1,
     "precip": 0.0,
-    "wind": 1,
-    "cloud": 73,
+    "wind": 6,
+    "cloud": 40,
     "heavy": false,
     "wet": false,
     "place": "Garching",
     "real": true,
     "snowfall": 0.0,
     "snow_depth": 0.0,
-    "fetched": "2026-11-15T11:36"
+    "fetched": "2026-11-15T22:21"
   },
   "season": "autumn",
   "wet": false,
@@ -463,6 +463,11 @@
       "day": 6,
       "hour": 0,
       "place": "teapot"
+    },
+    {
+      "day": 6,
+      "hour": 1,
+      "place": "teapot"
     }
   ],
   "loose": {
@@ -628,8 +633,23 @@
       },
       {
         "slot": "coat",
-        "name": "patched brown jacket",
-        "color": "#8A5A2B"
+        "name": "puffy blue coat",
+        "color": "#3F7FD9"
+      },
+      {
+        "slot": "scarf",
+        "name": "stripy yellow scarf",
+        "color": "#F2C12E"
+      },
+      {
+        "slot": "mittens",
+        "name": "red mittens",
+        "color": "#C8322B"
+      },
+      {
+        "slot": "hat",
+        "name": "red woolly beanie",
+        "color": "#C8322B"
       },
       {
         "slot": "boots",
