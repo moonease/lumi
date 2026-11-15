@@ -1,24 +1,24 @@
 {
-  "updated": "2026-11-15T10:38+01:00",
+  "updated": "2026-11-15T10:57+01:00",
   "day": 5,
-  "hour": 16,
-  "location": "flowerbed",
+  "hour": 18,
+  "location": "vegetable_patch",
   "weather": {
     "kind": "cloudy",
-    "code": 3,
-    "emoji": "☁️",
-    "label": "grey and cloudy",
-    "temp": 0.7,
+    "code": 2,
+    "emoji": "⛅",
+    "label": "partly cloudy",
+    "temp": 2.2,
     "precip": 0.0,
-    "wind": 5,
-    "cloud": 91,
+    "wind": 4,
+    "cloud": 80,
     "heavy": false,
     "wet": false,
     "place": "Garching",
     "real": true,
     "snowfall": 0.0,
     "snow_depth": 0.0,
-    "fetched": "2026-11-15T10:11"
+    "fetched": "2026-11-15T10:39"
   },
   "season": "autumn",
   "wet": false,
@@ -192,6 +192,20 @@
       "text": "Lumi drew: the hedge with a smooth stone",
       "kind": "drawing",
       "file": "0010-the-hedge-with-a-smooth-stone.svg"
+    },
+    {
+      "day": 5,
+      "time": "16:00",
+      "emoji": "👀",
+      "text": "Lumi saw Pip for the very first time.",
+      "kind": "friend"
+    },
+    {
+      "day": 5,
+      "time": "17:00",
+      "emoji": "✨",
+      "text": "Lumi found a treasure: seed packet.",
+      "kind": "treasure"
     }
   ],
   "treasures": [
@@ -208,42 +222,49 @@
       "found": "Day 2, 07:00 (morning)",
       "where": "The hedge",
       "on_shelf": true
+    },
+    {
+      "name": "seed packet",
+      "desc": "A torn paper packet with a few seeds left. The picture shows a blue flower.",
+      "found": "Day 5, 17:00 (afternoon)",
+      "where": "The vegetable patch",
+      "on_shelf": false
     }
   ],
   "interests": [
     {
-      "topic": "the hedge",
-      "score": 3,
+      "topic": "drawing",
+      "score": 2.64,
       "days": 2,
       "obsession": false
     },
     {
-      "topic": "drawing",
-      "score": 1.64,
+      "topic": "the hedge",
+      "score": 2.4,
       "days": 2,
       "obsession": false
     },
     {
       "topic": "blackberries",
-      "score": 1.6,
+      "score": 1.28,
       "days": 1,
       "obsession": false
     },
     {
       "topic": "teapot rest",
-      "score": 1.6,
+      "score": 1.28,
       "days": 1,
       "obsession": false
     },
     {
-      "topic": "smooth stones",
+      "topic": "building",
       "score": 1,
       "days": 1,
       "obsession": false
     },
     {
-      "topic": "frogs",
-      "score": 0.51,
+      "topic": "finding stones",
+      "score": 1,
       "days": 1,
       "obsession": false
     }
@@ -261,7 +282,7 @@
       "id": "tock",
       "name": "Tock",
       "trust": 2,
-      "impression": "Tock is nice and helps me with my ideas.",
+      "impression": "Tock is my friend and we built things together.",
       "mood": "frustrated",
       "busy_with": "drying his sketch with moss",
       "caregiver": false
@@ -270,7 +291,7 @@
       "id": "bristle",
       "name": "Mrs. Bristle",
       "trust": 86,
-      "impression": "Mrs. Bristle is warm and safe.",
+      "impression": "Mrs. Bristle helped me find twigs and was nice.",
       "mood": "concerned",
       "busy_with": "checking Pip's den",
       "caregiver": true
@@ -279,9 +300,18 @@
       "id": "gorse",
       "name": "Old Gorse",
       "trust": 0,
-      "impression": "Old Gorse is grumpy but knows things.",
+      "impression": "Old Gorse is grumpy and doesn’t care about lily pads.",
       "mood": "grumpy",
       "busy_with": "staring at the pond",
+      "caregiver": false
+    },
+    {
+      "id": "pip",
+      "name": "Pip",
+      "trust": 2,
+      "impression": "Pip is my new friend and we built together!",
+      "mood": "boisterous",
+      "busy_with": "building a throne from the coin",
       "caregiver": false
     }
   ],
@@ -436,6 +466,21 @@
       "day": 5,
       "hour": 15,
       "place": "flowerbed"
+    },
+    {
+      "day": 5,
+      "hour": 16,
+      "place": "flowerbed"
+    },
+    {
+      "day": 5,
+      "hour": 16,
+      "place": "vegetable_patch"
+    },
+    {
+      "day": 5,
+      "hour": 17,
+      "place": "vegetable_patch"
     }
   ],
   "loose": {
@@ -570,7 +615,7 @@
     },
     "tock": {
       "name": "Tock",
-      "place": "flowerbed"
+      "place": null
     },
     "crumb": {
       "name": "Crumb",
