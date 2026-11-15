@@ -37,6 +37,7 @@ header{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-be
 #bubble{position:absolute;z-index:2;transform:translate(-50%,-100%);max-width:260px;background:#FBFAF3;color:#233A22;
   font-family:"Gaegu",cursive;font-size:21px;line-height:1.15;padding:.45rem .8rem;border-radius:16px;
   box-shadow:0 2px 0 #C8D3BE;text-align:center}
+.tag.gift{background:#FFF4D6;color:#7A4A12;font-size:.72rem;border:1px solid #F2C12E}
 #bubble::after{content:"";position:absolute;left:50%;bottom:-9px;margin-left:-8px;border:8px solid transparent;border-top-color:#FBFAF3;border-bottom:0}
 .controls{position:absolute;right:12px;bottom:12px;display:flex;gap:.4rem}
 .controls button{pointer-events:auto}
@@ -499,6 +500,124 @@ function updateSnowScene(cover){
   TUFTS.forEach((t,i) => t.visible = (i % 10) / 10 >= q * 0.9);        // grass disappears under the snow
   LEAVES.forEach(l => l.visible = l.userData.on && q < 0.5);
   if (shownSeason === "autumn") AUTUMN.visible = q < 0.5;
+}
+
+/* ---------- things lying around: gifts, things the giants dropped, leaf piles, snowmen ---------- */
+const COLOR_WORD = {red:0xC8322B, blue:0x3F7FD9, green:0x4CAF50, yellow:0xF2C12E, pink:0xE79BB4, purple:0x8A5FA8,
+  white:0xF4F1EA, black:0x2A2A2A, orange:0xE07B24, brown:0x8A5A2B, grey:0x8A8A8A, gray:0x8A8A8A, gold:0xE8C547, golden:0xE8C547,
+  silver:0xC9CED6, rainbow:0xE07BB4};
+function colorOf(name, fallback){ for (const [w,c] of Object.entries(COLOR_WORD)) if (new RegExp("\\b"+w+"\\b","i").test(name)) return c; return fallback; }
+const LOOSE = {};                 // "place|name" -> {g, star, label}
+const GIFT_SLOTS = {teapot: [[-9.4,9.8],[-8.0,10.6],[-6.8,9.7],[-8.6,11.8],[-6.9,11.4],[-10.2,11.6]]};
+function looseModel(name){
+  const n = name.toLowerCase(), g = new THREE.Group(), c = d => colorOf(n, d);
+  const add = (geo, col, x=0, y=0, z=0) => mesh(geo, col, x, y, z, g);
+  if (/snowman/.test(n)){
+    add(new THREE.SphereGeometry(1.5,14,10), 0xF7FAFC, 0,1.3,0); add(new THREE.SphereGeometry(1.05,14,10), 0xF7FAFC, 0,3.3,0);
+    add(new THREE.SphereGeometry(0.72,12,9), 0xF7FAFC, 0,4.85,0);
+    add(new THREE.ConeGeometry(0.14,0.8,8), 0xE07B24, 0,4.85,0.95).rotation.x = Math.PI/2;
+    for (const s of [-1,1]) add(new THREE.SphereGeometry(0.09,6,5), 0x222222, s*0.25,5.05,0.62);
+    for (const y of [2.9,3.3,3.7]) add(new THREE.SphereGeometry(0.09,6,5), 0x222222, 0,y,1.0);
+    return g;
+  }
+  if (/leaf pile/.test(n)){
+    const m = add(new THREE.SphereGeometry(1.6,12,8), 0xC96A2A); m.scale.y = 0.45;
+    for (let k=0;k<30;k++){ const a = rnd(0,6.3), b = rnd(0,1.3);
+      add(new THREE.BoxGeometry(rnd(.35,.55),0.04,rnd(.25,.4)), [0xD9572E,0xE3A33A,0xB5452A,0xF2C14E][k%4],
+          Math.cos(a)*Math.sin(b)*1.6, Math.cos(b)*0.72, Math.sin(a)*Math.sin(b)*1.6).rotation.set(rnd(-.6,.6), rnd(0,6), 0); }
+    return g;
+  }
+  if (/seed ball/.test(n)){
+    add(new THREE.CylinderGeometry(0.02,0.02,1.2,4), 0x8A6A44, 0,3.1,0);
+    add(new THREE.SphereGeometry(0.45,10,8), 0xC9A06A, 0,2.4,0);
+    for (let k=0;k<14;k++) add(new THREE.SphereGeometry(0.07,5,4), 0x3A2A1A, rnd(-.35,.35), 2.4+rnd(-.35,.35), rnd(-.35,.35));
+    return g;
+  }
+  if (/blanket|quilt|shawl|towel/.test(n)){
+    const col = c(0xE79BB4);
+    add(new THREE.BoxGeometry(0.9,0.12,0.65), col, 0,0.06,0);
+    add(new THREE.BoxGeometry(0.9,0.1,0.65), new THREE.Color(col).offsetHSL(0,0,0.12).getHex(), 0,0.17,0);
+    for (let k=0;k<3;k++) add(new THREE.BoxGeometry(0.92,0.13,0.06), 0xFFFFFF, 0,0.12,-0.2+k*0.2);
+    return g;
+  }
+  if (/bottle cap/.test(n)){
+    add(new THREE.CylinderGeometry(0.55,0.55,0.18,18), c(0xC8322B), 0,0.09,0);
+    add(new THREE.OctahedronGeometry(0.2,0), 0xFFFFFF, 0,0.2,0).scale.set(1,0.15,1);
+    return g;
+  }
+  if (/\bhat\b|\bcap\b|bonnet|beanie|hood/.test(n)){
+    add(new THREE.SphereGeometry(0.28,12,8,0,Math.PI*2,0,Math.PI/2), c(0x3F7FD9), 0,0.05,0);
+    add(new THREE.CylinderGeometry(0.4,0.4,0.04,14), c(0x3F7FD9), 0,0.05,0);
+    add(new THREE.SphereGeometry(0.08,6,5), 0xFFFFFF, 0,0.34,0);
+    return g;
+  }
+  if (/scarf/.test(n)){ add(new THREE.TorusGeometry(0.3,0.08,8,16), c(0xC8322B), 0,0.08,0).rotation.x = Math.PI/2;
+    add(new THREE.BoxGeometry(0.14,0.06,0.5), c(0xC8322B), 0.3,0.05,0.3); return g; }
+  if (/mitten|glove/.test(n)){ for (const s of [-1,1]) add(new THREE.SphereGeometry(0.17,9,7), c(0xB9A7C9), s*0.2,0.14,0).scale.set(1,0.7,1.3); return g; }
+  if (/boot|shoe|sock|slipper/.test(n)){ for (const s of [-1,1]){ add(new THREE.CylinderGeometry(0.1,0.12,0.3,8), c(0x6A4A2E), s*0.16,0.15,0);
+    add(new THREE.BoxGeometry(0.2,0.1,0.3), c(0x6A4A2E), s*0.16,0.05,0.1); } return g; }
+  if (/coat|jacket|jumper|sweater|cardigan|dress/.test(n)){
+    add(new THREE.BoxGeometry(0.7,0.1,0.55), c(0x5E7D3A), 0,0.05,0); add(new THREE.BoxGeometry(0.25,0.08,0.5), c(0x5E7D3A), -0.45,0.04,0.05).rotation.y = 0.3;
+    add(new THREE.BoxGeometry(0.25,0.08,0.5), c(0x5E7D3A), 0.45,0.04,0.05).rotation.y = -0.3; return g; }
+  if (/button/.test(n)){ add(new THREE.CylinderGeometry(0.3,0.3,0.08,16), c(0xC8322B), 0,0.04,0);
+    for (const [x,z] of [[-.08,-.08],[.08,-.08],[-.08,.08],[.08,.08]]) add(new THREE.CylinderGeometry(0.035,0.035,0.1,6), 0x2A2A2A, x,0.05,z); return g; }
+  if (/marble/.test(n)){ add(new THREE.SphereGeometry(0.5,16,12), new THREE.MeshPhongMaterial({color:c(0x7FB6F2), transparent:true, opacity:0.7, shininess:90}), 0,0.5,0);
+    add(new THREE.TorusGeometry(0.22,0.05,6,16), 0x2A5FD9, 0,0.5,0).rotation.set(0.6,0.4,0); return g; }
+  if (/bead/.test(n)){ add(new THREE.TorusGeometry(0.16,0.11,10,16), c(0xC8322B), 0,0.2,0).rotation.y = Math.PI/2; return g; }
+  if (/sequin|coin/.test(n)){ add(new THREE.CylinderGeometry(/coin/.test(n) ? 0.5 : 0.22, /coin/.test(n) ? 0.5 : 0.22, 0.05, 20),
+    new THREE.MeshPhongMaterial({color:c(0xE8C547), shininess:120}), 0,0.03,0); return g; }
+  if (/googly|eye/.test(n)){ add(new THREE.CylinderGeometry(0.3,0.3,0.08,18), 0xFFFFFF, 0,0.04,0); add(new THREE.SphereGeometry(0.13,10,8), 0x111111, 0.06,0.09,0.05).scale.y = 0.4; return g; }
+  if (/lego|brick/.test(n)){ add(new THREE.BoxGeometry(0.9,0.45,0.45), c(0xC8322B), 0,0.23,0);
+    for (let k=0;k<4;k++) for (const z of [-.11,.11]) add(new THREE.CylinderGeometry(0.08,0.08,0.08,10), c(0xC8322B), -0.33+k*0.22,0.49,z); return g; }
+  if (/dino/.test(n)){ const b = add(new THREE.SphereGeometry(0.5,12,9), c(0x4CAF50), 0,0.6,0); b.scale.set(1.4,0.8,0.8);
+    add(new THREE.SphereGeometry(0.28,10,8), c(0x4CAF50), 0.75,0.95,0); add(new THREE.ConeGeometry(0.15,0.6,6), c(0x4CAF50), -0.75,0.55,0).rotation.z = 1.9;
+    for (const [x,z] of [[-.3,-.2],[-.3,.2],[.3,-.2],[.3,.2]]) add(new THREE.CylinderGeometry(0.09,0.09,0.4,6), c(0x4CAF50), x,0.2,z); return g; }
+  if (/clip|pin/.test(n)){ const t = add(new THREE.TorusGeometry(0.22,0.025,6,20), /hair/.test(n) ? 0xE79BB4 : 0xC9CED6, 0,0.03,0); t.rotation.x = Math.PI/2; t.scale.set(2,1,1); return g; }
+  if (/tea ?bag/.test(n)){ add(new THREE.BoxGeometry(0.5,0.08,0.4), 0xC9A06A, 0,0.04,0); add(new THREE.BoxGeometry(0.03,0.02,0.6), 0xF4F1EA, 0,0.05,0.5); return g; }
+  if (/shaving/.test(n)){ add(new THREE.TorusGeometry(0.25,0.06,6,16,5), 0xE07B24, 0,0.06,0).rotation.x = Math.PI/2; return g; }
+  if (/foil|wrapper/.test(n)){ add(new THREE.IcosahedronGeometry(0.25,0), new THREE.MeshPhongMaterial({color:0xC9CED6, shininess:120, flatShading:true}), 0,0.22,0); return g; }
+  if (/seed|nut|acorn|bean/.test(n)){ add(new THREE.SphereGeometry(0.16,8,6), c(0x6A4A2E), 0,0.12,0).scale.set(1,0.8,1.6); return g; }
+  if (/feather/.test(n)){ add(new THREE.SphereGeometry(0.12,8,6), c(0xF4F1EA), 0,0.04,0).scale.set(1,0.15,5); return g; }
+  if (/flower|petal|daisy|rose/.test(n)){ add(new THREE.CylinderGeometry(0.03,0.03,0.6,5), 0x4F7F38, 0,0.3,0);
+    for (let k=0;k<6;k++){ const a = k/6*6.28; add(new THREE.SphereGeometry(0.1,6,5), c(0xF4F1EA), Math.cos(a)*0.13,0.6,Math.sin(a)*0.13).scale.y = 0.4; }
+    add(new THREE.SphereGeometry(0.07,6,5), 0xF2C12E, 0,0.62,0); return g; }
+  if (/ball/.test(n)){ add(new THREE.SphereGeometry(0.4,14,10), c(0xE5484D), 0,0.4,0); return g; }
+  if (/book|card|letter|note/.test(n)){ add(new THREE.BoxGeometry(0.6,0.1,0.45), c(0x3F7FD9), 0,0.05,0); add(new THREE.BoxGeometry(0.56,0.08,0.43), 0xF4F1EA, 0.02,0.06,0); return g; }
+  // anything else: a little wrapped present
+  const col = c([0xE5484D,0x3F7FD9,0x8A5FA8,0x4CAF50][hash(n) % 4]);
+  add(new THREE.BoxGeometry(0.5,0.4,0.5), col, 0,0.2,0);
+  add(new THREE.BoxGeometry(0.52,0.42,0.1), 0xF2C12E, 0,0.2,0); add(new THREE.BoxGeometry(0.1,0.42,0.52), 0xF2C12E, 0,0.2,0);
+  for (const s of [-1,1]) add(new THREE.TorusGeometry(0.1,0.03,6,12), 0xF2C12E, s*0.09,0.47,0).rotation.y = s*0.5;
+  return g;
+}
+function syncLoose(g){
+  const items = g.loose_items || Object.fromEntries(Object.entries(g.loose || {}).map(([p, names]) => [p, names.map(n => ({name: n}))]));
+  const want = new Set();
+  for (const [place, list] of Object.entries(items)) list.forEach((it, idx) => {
+    const key = place + "|" + it.name; want.add(key);
+    if (LOOSE[key]) return;
+    const slot = GIFT_SLOTS[place]?.[idx % GIFT_SLOTS[place].length];   // the teapot is crowded: use its free patch of grass
+    const obj = looseModel(it.name), pos = slot ? new THREE.Vector3(slot[0], 0, slot[1])
+                                                 : near(place, "thing:" + it.name, 1.4 + (hash(it.name) % 100) / 70);
+    obj.position.copy(pos); obj.rotation.y = (hash(it.name) % 628) / 100; scene.add(obj);
+    if (!/snowman|leaf pile|seed ball/i.test(it.name)) obj.scale.setScalar(it.gift ? 1.6 : 1.25);   // easy to spot
+    obj.traverse(o => { if (o.isMesh) o.castShadow = true; });
+    const entry = {g: obj, star: null, label: null};
+    if (it.gift){                                        // a gift waits for her: a little bobbing star and a tag
+      entry.star = mesh(new THREE.OctahedronGeometry(0.14,0), new THREE.MeshBasicMaterial({color:0xFFE680}), pos.x, pos.y + 1.1, pos.z);
+      entry.label = tag("🎁 " + it.name + (it.from ? ` · from ${it.from}` : ""), "gift");
+    }
+    LOOSE[key] = entry;
+  });
+  for (const [key, e] of Object.entries(LOOSE)) if (!want.has(key)){       // she picked it up (or the snow melted)
+    scene.remove(e.g); if (e.star) scene.remove(e.star); if (e.label) e.label.remove(); delete LOOSE[key];
+  }
+}
+function looseFrame(t){
+  for (const e of Object.values(LOOSE)){
+    if (e.star){ e.star.rotation.y = t * 2; e.star.position.y = e.g.position.y + 1.1 + Math.sin(t * 3) * 0.12; }
+    if (e.label) place2D(e.label, e.g.position.clone().add(new THREE.Vector3(0, 1.6, 0)));
+  }
 }
 
 /* ---------- Lumi ---------- */
@@ -1116,6 +1235,7 @@ function frame(){
   $("bubble").hidden = !line;
   place2D($("bubble"), lumi.position.clone().add(new THREE.Vector3(0, lying ? 0.9 : 1.6, 0)));
   for (const p of Object.values(placeTags)) place2D(p.el, p.pos);
+  looseFrame(t);
   for (const c of Object.values(creatures)) if (c.g.visible) place2D(c.label, c.g.position.clone().add(new THREE.Vector3(0,1.9,0)));
   requestAnimationFrame(frame);
 }
@@ -1149,6 +1269,7 @@ function renderGarden(s, g){
     $("fresh").textContent = mins < 2 ? "Updated just now" : mins < 90 ? `Updated ${mins} min ago` : `Updated ${Math.round(mins / 60)} h ago`;
   }
   garden = g; drawPath(); dressLumi(g.wearing); applySeason(g.season); seasonalExtras(g);
+  if (world) syncLoose(g);
   const today = g.highlights.filter(h => h.day === g.day);
   const bits = (today.length ? today : g.highlights.slice(-8)).slice().sort((a, b) => b.day - a.day || b.time.localeCompare(a.time));
   const picURL = f => (STATIC ? "drawings/" : "/drawings/") + encodeURIComponent(f);
