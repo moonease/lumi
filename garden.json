@@ -1,23 +1,24 @@
 {
-  "updated": "2026-11-15T02:52+01:00",
-  "day": 2,
-  "hour": 11,
+  "updated": "2026-11-15T03:04+01:00",
+  "day": 3,
+  "hour": 9,
   "location": "hedge",
   "weather": {
     "kind": "fog",
     "code": 45,
     "emoji": "🌫️",
     "label": "foggy",
-    "temp": -3.0,
+    "temp": -3.7,
     "precip": 0.0,
-    "wind": 2,
-    "cloud": 96,
+    "wind": 1,
+    "cloud": 99,
     "heavy": false,
     "wet": false,
     "place": "Garching",
     "real": true,
-    "fetched": "2026-11-15T02:19",
-    "snow_depth": 0.0
+    "snowfall": 0.0,
+    "snow_depth": 0.0,
+    "fetched": "2026-11-15T02:57"
   },
   "season": "autumn",
   "wet": false,
@@ -107,6 +108,21 @@
       "emoji": "👗",
       "text": "Lumi wore her mossy jumper, leaf raincoat for the first time.",
       "kind": "clothes"
+    },
+    {
+      "day": 3,
+      "time": "08:00",
+      "emoji": "🗣️",
+      "text": "Fennel hissed that Tock's 'clumsy inventions' ruined his phone-tracking plan, while Tock muttered about 'distracting gossip' as he tried to salvage his sketch.",
+      "kind": "gossip",
+      "heard": false
+    },
+    {
+      "day": 3,
+      "time": "08:00",
+      "emoji": "👗",
+      "text": "Lumi wore her felt coat, dandelion scarf, thistledown mittens for the first time.",
+      "kind": "clothes"
     }
   ],
   "treasures": [
@@ -159,17 +175,17 @@
       "name": "Tock",
       "trust": 0,
       "impression": "Tock is smart and fun to play with",
-      "mood": "determined",
-      "busy_with": "building a raft from pencil shavings",
+      "mood": "frazzled, determined",
+      "busy_with": "scraping twig bits from the pond mud",
       "caregiver": false
     },
     {
       "id": "bristle",
       "name": "Mrs. Bristle",
-      "trust": 78,
+      "trust": 80,
       "impression": "Mrs. Bristle is nice and helps me find berries",
-      "mood": "worried",
-      "busy_with": "checking the hedge for Lumi",
+      "mood": "gentle, worried",
+      "busy_with": "tucking the doll's blanket back into the teapot",
       "caregiver": true
     }
   ],
@@ -213,6 +229,16 @@
       "when": "Day 2, 09:00 (morning)",
       "text": "A giant left a doll's blanket in your teapot house.",
       "place": "teapot"
+    },
+    {
+      "when": "Day 3, 08:00 (morning)",
+      "text": "Fennel hissed that Tock's 'clumsy inventions' ruined his phone-tracking plan, while Tock muttered about 'distracting gossip' as he tried to salvage his sketch.",
+      "place": null
+    },
+    {
+      "when": "Day 3, 08:00 (morning)",
+      "text": "A squirrel buried a nut in the flowerbed.",
+      "place": "flowerbed"
     }
   ],
   "diary": [
@@ -222,118 +248,20 @@
       "text": "I found a shiny silver hoop and thought it was a treasure! And then I looked at frogspawn and saw tiny movements inside the eggs. The pond was COLD and foggy, and I couldn’t find a twig. Why won’t the phone tell me where the cat is? I’m sleepy and my toes are numb. My teapot feels like home, but I wish I had a blanket.",
       "drawing": "0002-the-big-crayon-stubs-with-pret.svg",
       "dream": null
+    },
+    {
+      "day": 2,
+      "weather": "🌫️ foggy, -3.7°C",
+      "text": "I found a twig! It was all pointy and brown. I kept it in my teapot. It's my treasure! A spider spun a web round and round. I watched it for a long time. It was so fast! Mrs. Bristle gave me new clothes! Acorn-cap hat, mossy jumper, leaf raincoat, walnut boots, felt coat, dandelion scarf, thistledown mittens. I wore the mossy jumper and leaf raincoat. They were WARM and COZY! I tried to build tools with frost and screws. But they broke. I tried again. They broke again. I'm too cold and tired. My legs are cross with me. Why won't the tools work? Maybe the frost is too slippery. Time to go home. I'm sleepy. I'll dream about the spider's web and my twig treasure.",
+      "drawing": null,
+      "dream": null
     }
   ],
   "mind_changes": [],
   "path": [
     {
-      "day": 2,
-      "hour": 0,
-      "place": "shed"
-    },
-    {
-      "day": 2,
-      "hour": 1,
-      "place": "shed"
-    },
-    {
-      "day": 2,
-      "hour": 1,
-      "place": "shed"
-    },
-    {
-      "day": 2,
-      "hour": 1,
-      "place": "shed"
-    },
-    {
-      "day": 2,
-      "hour": 2,
-      "place": "shed"
-    },
-    {
-      "day": 2,
-      "hour": 3,
-      "place": "shed"
-    },
-    {
-      "day": 2,
-      "hour": 3,
-      "place": "shed"
-    },
-    {
-      "day": 2,
-      "hour": 4,
-      "place": "shed"
-    },
-    {
-      "day": 2,
-      "hour": 5,
-      "place": "shed"
-    },
-    {
-      "day": 2,
-      "hour": 5,
-      "place": "shed"
-    },
-    {
-      "day": 2,
-      "hour": 6,
-      "place": "shed"
-    },
-    {
-      "day": 2,
-      "hour": 6,
-      "place": "shed"
-    },
-    {
-      "day": 2,
-      "hour": 7,
-      "place": "shed"
-    },
-    {
-      "day": 2,
-      "hour": 7,
-      "place": "shed"
-    },
-    {
-      "day": 2,
-      "hour": 7,
-      "place": "shed"
-    },
-    {
-      "day": 2,
-      "hour": 7,
-      "place": "hedge"
-    },
-    {
-      "day": 2,
-      "hour": 7,
-      "place": "hedge"
-    },
-    {
-      "day": 2,
+      "day": 3,
       "hour": 8,
-      "place": "hedge"
-    },
-    {
-      "day": 2,
-      "hour": 9,
-      "place": "hedge"
-    },
-    {
-      "day": 2,
-      "hour": 10,
-      "place": "hedge"
-    },
-    {
-      "day": 2,
-      "hour": 10,
-      "place": "hedge"
-    },
-    {
-      "day": 2,
-      "hour": 10,
       "place": "teapot"
     }
   ],
@@ -347,6 +275,9 @@
     "hedge": [
       "spider web",
       "piece of web"
+    ],
+    "flowerbed": [
+      "dug-up spot"
     ]
   },
   "wearing": [
@@ -361,9 +292,19 @@
       "color": "#5E7D3A"
     },
     {
-      "name": "leaf raincoat",
+      "name": "felt coat",
       "slot": "coat",
-      "color": "#C9792B"
+      "color": "#3F5E8C"
+    },
+    {
+      "name": "dandelion scarf",
+      "slot": "scarf",
+      "color": "#F1EBDC"
+    },
+    {
+      "name": "thistledown mittens",
+      "slot": "mittens",
+      "color": "#B9A7C9"
     }
   ],
   "wardrobe": [
@@ -381,7 +322,7 @@
     },
     {
       "name": "leaf raincoat",
-      "where": "wearing"
+      "where": "wardrobe"
     },
     {
       "name": "walnut-shell boots",
@@ -389,15 +330,15 @@
     },
     {
       "name": "felt coat",
-      "where": "wardrobe"
+      "where": "wearing"
     },
     {
       "name": "dandelion scarf",
-      "where": "wardrobe"
+      "where": "wearing"
     },
     {
       "name": "thistledown mittens",
-      "where": "wardrobe"
+      "where": "wearing"
     }
   ]
 }
