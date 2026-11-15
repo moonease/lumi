@@ -1,7 +1,7 @@
 {
-  "updated": "2026-11-15T02:25+01:00",
+  "updated": "2026-11-15T02:52+01:00",
   "day": 2,
-  "hour": 10,
+  "hour": 11,
   "location": "hedge",
   "weather": {
     "kind": "fog",
@@ -16,7 +16,8 @@
     "wet": false,
     "place": "Garching",
     "real": true,
-    "fetched": "2026-11-15T02:19"
+    "fetched": "2026-11-15T02:19",
+    "snow_depth": 0.0
   },
   "season": "autumn",
   "wet": false,
@@ -85,6 +86,27 @@
       "text": "A giant left a gift in your teapot house: doll's blanket.",
       "kind": "gift",
       "heard": false
+    },
+    {
+      "day": 2,
+      "time": "10:00",
+      "emoji": "🕸️",
+      "text": "A spider is spinning a new web, round and round and round, right in front of you.",
+      "kind": "world"
+    },
+    {
+      "day": 2,
+      "time": "10:00",
+      "emoji": "🧺",
+      "text": "Mrs. Bristle brought Lumi new clothes for autumn: acorn-cap hat, mossy jumper, leaf raincoat, walnut-shell boots, felt coat, dandelion scarf, thistledown mittens.",
+      "kind": "clothes"
+    },
+    {
+      "day": 2,
+      "time": "10:00",
+      "emoji": "👗",
+      "text": "Lumi wore her mossy jumper, leaf raincoat for the first time.",
+      "kind": "clothes"
     }
   ],
   "treasures": [
@@ -100,7 +122,7 @@
       "desc": "A thin, crooked twig that snapped off the hedge. Just your size for a walking stick, or for poking things.",
       "found": "Day 2, 07:00 (morning)",
       "where": "The hedge",
-      "on_shelf": false
+      "on_shelf": true
     }
   ],
   "interests": [
@@ -298,6 +320,21 @@
       "day": 2,
       "hour": 9,
       "place": "hedge"
+    },
+    {
+      "day": 2,
+      "hour": 10,
+      "place": "hedge"
+    },
+    {
+      "day": 2,
+      "hour": 10,
+      "place": "hedge"
+    },
+    {
+      "day": 2,
+      "hour": 10,
+      "place": "teapot"
     }
   ],
   "loose": {
@@ -306,6 +343,61 @@
     ],
     "teapot": [
       "doll's blanket"
+    ],
+    "hedge": [
+      "spider web",
+      "piece of web"
     ]
-  }
+  },
+  "wearing": [
+    {
+      "name": "summer dress",
+      "slot": "dress",
+      "color": "#C8322B"
+    },
+    {
+      "name": "mossy jumper",
+      "slot": "top",
+      "color": "#5E7D3A"
+    },
+    {
+      "name": "leaf raincoat",
+      "slot": "coat",
+      "color": "#C9792B"
+    }
+  ],
+  "wardrobe": [
+    {
+      "name": "summer dress",
+      "where": "wearing"
+    },
+    {
+      "name": "acorn-cap hat",
+      "where": "wardrobe"
+    },
+    {
+      "name": "mossy jumper",
+      "where": "wearing"
+    },
+    {
+      "name": "leaf raincoat",
+      "where": "wearing"
+    },
+    {
+      "name": "walnut-shell boots",
+      "where": "wardrobe"
+    },
+    {
+      "name": "felt coat",
+      "where": "wardrobe"
+    },
+    {
+      "name": "dandelion scarf",
+      "where": "wardrobe"
+    },
+    {
+      "name": "thistledown mittens",
+      "where": "wardrobe"
+    }
+  ]
 }

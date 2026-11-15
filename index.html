@@ -633,11 +633,10 @@ function setupWorld(places){
 function update(s){
   if (!world) setupWorld(s.places);
   if (current === null){ lumi.position.copy(P(spot(s.location))); current = s.location; }
-  lastHour = s.hour;
+  lastHour = s.hour; lastS = s; updateFeel(s);
   if (s.events) onEvents(s.events);
   if (!busy && !queue.length && s.location !== current){ path = route(current, s.location); current = s.location; }
   asleep = s.location === "teapot" && (s.hour >= 22 || s.hour < 6);
-  $("bubble").hidden = false;
   mood = s.mood;
   for (const n of s.npcs){
     if (!creatures[n.id]) creatures[n.id] = {g: creature(n.id), label: tag(n.name, "creature"), loc: null};
@@ -693,7 +692,62 @@ const nowS = () => performance.now() / 1000;
 const wait = ms => new Promise(r => setTimeout(r, reduceMotion ? ms / 3 : ms));
 const arrived = () => new Promise(r => { const chk = () => path.length ? setTimeout(chk, 100) : r(); chk(); });
 function say(text, ms = 3500){ sayText = text; sayUntil = nowS() + ms / 1000; }
-function gest(name, ms){ gesture = name; gestureUntil = nowS() + ms / 1000; }
+let gestureStart = 0, gestureLen = 1;
+function gest(name, ms){ gesture = name; gestureUntil = nowS() + ms / 1000; gestureStart = nowS(); gestureLen = ms / 1000; }
+
+/* ---------- her inner life: how she feels shows in her body, and little thoughts come and go ---------- */
+let lastS = null, nextThought = 0, lastThought = "";
+const feel = {tired: false, hungry: false, lonely: false, scared: false, bored: false, happy: false, cold: false};
+function updateFeel(s){
+  const n = s.needs || {}, m = (s.mood || "").toLowerCase(), w = wx || {};
+  feel.tired = (n.energy ?? 60) < 30 || /tired|sleepy/.test(m);
+  feel.hungry = (n.fullness ?? 60) < 30 || /hungry/.test(m);
+  feel.lonely = (n.social ?? 60) < 30 || /lonely/.test(m);
+  feel.scared = (n.comfort ?? 60) < 25 || /scared|nervous/.test(m);
+  feel.bored = (s.boredom ?? 0) > 60 || /bored|grumpy/.test(m);
+  feel.happy = (s.happiness ?? 50) > 65 || /happy|excited|giggl/.test(m);
+  const warm = (garden?.wearing || []).filter(c => c.slot !== "dress").length;
+  feel.cold = (w.temp ?? 12) < 4 && current !== "teapot" && warm < 2;
+}
+const pick = a => a[Math.floor(Math.random() * a.length)];
+function thoughts(){
+  const s = lastS || {}, g = garden || {}, w = wx || {}, out = [];
+  if (feel.tired) out.push("*yaaawn*", "My legs are sleepy…", "I want my glove bed.");
+  if (feel.hungry) out.push("My tummy is rumbling…", "I could eat a WHOLE blackberry.");
+  if (feel.lonely) out.push("Where is everybody?", "I wish someone would play with me.");
+  if (feel.scared) out.push("I feel so small…", "*holds the red button tight*");
+  if (feel.bored) out.push("Hmm… what now?", "Boooored.", "What's over there?");
+  if (feel.happy) out.push("♪ la la la ♪", "Hee hee!", "Today is a good day!");
+  if (feel.cold) out.push("Brrr! My nose is cold.", "My breath makes little clouds!");
+  if (w.kind === "fog") out.push("Where did the giants' house go?");
+  if (w.kind === "snow") out.push("Snowflakes as big as my hand!");
+  if ((w.snow_depth || 0) >= 1) out.push("Crunch, crunch, crunch.");
+  if (WET.includes(w.kind)) out.push("Plip… plop…");
+  if (w.kind === "clear" && lastHour >= 8 && lastHour < 18) out.push("The sun is warm on my face.");
+  if (g.season === "autumn") out.push("Crunchy leaves!", "Everything is orange!", "That pumpkin is a mountain.");
+  if (g.season === "winter") out.push("Everything is asleep.");
+  if (g.season === "spring") out.push("Little green shoots!");
+  if (g.season === "summer") out.push("Bees as big as aeroplanes!");
+  for (const c of g.wearing || []) if (c.slot !== "dress") out.push(`I like my ${c.name}.`);
+  for (const q of (s.questions || []).slice(-3)) out.push(q);
+  for (const k of (s.knowledge || []).slice(-3)) out.push(k.belief);
+  for (const f of g.friends || []) if (f.trust >= 40 && !f.caregiver) out.push(`I want to play with ${f.name}.`);
+  for (const [id, c] of Object.entries(creatures))
+    if (c.g.visible && c.g.position.distanceTo(lumi.position) < 6) out.push(`Hi, ${c.label.textContent.split(":")[0]}!`);
+  const fresh = out.filter(x => x && x !== lastThought);
+  return fresh.length ? fresh : ["Hmm…"];
+}
+function pickFidget(){
+  const options = [["lookaround", 2600], ["crouch", 3000], ["stretch", 1800]];
+  if (feel.happy) options.push(["twirl", 1400], ["dance", 3200], ["hop", 1800]);
+  if (feel.tired) options.push(["yawn", 2400], ["yawn", 2400], ["sitdown", 6000]);
+  if (feel.bored) options.push(["kick", 2200], ["sigh", 2500], ["kick", 2200]);
+  if (feel.cold) options.push(["shiver", 3000], ["hug", 3500], ["shiver", 3000]);
+  if (feel.scared) options.push(["lookaround", 2600], ["hug", 3500]);
+  if (["snow", "rain", "drizzle"].includes(wx?.kind) && current !== "teapot" && current !== "shed") options.push(["skyward", 3000]);
+  if (!feel.tired && !feel.cold) options.push(["twirl", 1400]);
+  return pick(options);
+}
 function hash(str){ let h = 0; for (const c of str) h = (h * 31 + c.charCodeAt(0)) | 0; return Math.abs(h); }
 function near(placeId, key, radius){
   const s = spot(placeId), h = hash(key);
@@ -741,6 +795,7 @@ async function perform(e){
     case "phone":
       say("📱 " + e.text, 3500); gest("write", 3500); await wait(3600); break;
     case "think":
+      if (/\*\*|the user|reasoning|^action:/i.test(e.text)) break;          // a model's plan, not a child's thought
       say("💭 " + e.text, Math.min(7000, 2000 + e.text.length * 40)); await wait(1800); break;
     case "world": case "weather":
       say({cat: "Eek! The CAT!", fox: "A f-f-fox…", owl: "Who’s there?", mower: "So LOUD!", ball: "WHOA!", magpie: "Hey! Shoo!",
@@ -984,7 +1039,8 @@ function frame(){
   if (path.length){
     const next = path[0], d = next.clone().sub(lumi.position);
     const climbing = Math.abs(d.y) > 0.01 && Math.hypot(d.x, d.z) < 0.5;
-    const step = (climbing ? 1.6 : 2.8) * dt * (reduceMotion ? 6 : 1);
+    const pace = feel.tired ? 0.65 : feel.happy ? 1.2 : 1;
+    const step = (climbing ? 1.6 : 2.8) * pace * dt * (reduceMotion ? 6 : 1);
     if (d.length() <= step){ lumi.position.copy(next); path.shift(); }
     else {
       lumi.position.add(d.normalize().multiplyScalar(step));
@@ -993,9 +1049,15 @@ function frame(){
     walking = true;
   }
   // idle: little wanders around where she is, like a child who can't stand still
-  if (!busy && !queue.length && !path.length && !asleep && nowS() > sleepUntil && current && nowS() > nextWander){
-    path = [near(current, "wander" + Math.floor(t), 0.4 + Math.random() * 1.6)];
-    nextWander = nowS() + 5 + Math.random() * 7;
+  const idle = !busy && !queue.length && !path.length && !asleep && current;
+  if (idle && nowS() > sleepUntil && nowS() > nextWander && nowS() > gestureUntil){
+    if (Math.random() < (feel.tired ? 0.25 : feel.bored ? 0.55 : 0.45)) path = [near(current, "wander" + Math.floor(t), 0.4 + Math.random() * 1.6)];
+    else if (!reduceMotion){ const [name, ms] = pickFidget(); gest(name, ms); }
+    nextWander = nowS() + (feel.tired ? 8 : 4) + Math.random() * 7;
+  }
+  if (idle && nowS() > nextThought && nowS() > sayUntil){
+    lastThought = pick(thoughts()); say(lastThought, 2600 + lastThought.length * 45);
+    nextThought = nowS() + 9 + Math.random() * 12;
   }
   const g = nowS() < gestureUntil && !walking ? gesture : null;
   if (faceTarget && !walking) lumi.rotation.y = Math.atan2(faceTarget.x - lumi.position.x, faceTarget.z - lumi.position.z);
@@ -1008,7 +1070,7 @@ function frame(){
   if ((asleep && !walking && !busy) || napping){
     rig.rotation.x = -Math.PI/2; rig.position.set(0, 0.18, 0.5);
   } else {
-    rig.rotation.x = 0; rig.position.z = 0;
+    rig.rotation.x = 0; rig.position.z = 0; rig.position.x = 0; rig.rotation.y = 0; rig.rotation.z = 0;
     rig.position.y = walking ? Math.abs(Math.sin(t*10))*0.05 : Math.sin(t*2)*0.015;
     head.rotation.y = walking || g ? 0 : Math.sin(t*0.5)*0.4;
     if (g === "look"){ head.rotation.x = 0.35; rig.rotation.x = 0.15; armR.rotation.x = -0.6; }
@@ -1017,6 +1079,20 @@ function frame(){
     if (g === "write"){ head.rotation.x = 0.5; armR.rotation.x = -1.1; armL.rotation.x = -1.0; }
     if (sitting && !walking){ rig.position.y = -0.22; legL.rotation.x = legR.rotation.x = -1.4; head.rotation.x = 0.2; }
     if (g === "stretch"){ armL.rotation.z = -2.8; armR.rotation.z = 2.8; head.rotation.x = -0.3; }
+    const gp = Math.min(1, (nowS() - gestureStart) / gestureLen);              // 0 → 1 through the gesture
+    if (!g && !walking && feel.tired) head.rotation.x = 0.22;                   // droopy when tired
+    if (g === "lookaround"){ head.rotation.y = Math.sin(t*3.2)*0.9; }
+    if (g === "crouch"){ rig.position.y = -0.17; legL.rotation.x = legR.rotation.x = -0.9; head.rotation.x = 0.65; armR.rotation.x = -0.9 + Math.sin(t*6)*0.15; }
+    if (g === "twirl"){ rig.rotation.y = gp * Math.PI * 2; armL.rotation.z = -1.4; armR.rotation.z = 1.4; }
+    if (g === "dance"){ rig.position.y = Math.abs(Math.sin(t*8))*0.12; rig.rotation.z = Math.sin(t*4)*0.15;
+                        armL.rotation.z = -1.6 - Math.sin(t*8)*0.4; armR.rotation.z = 1.6 + Math.sin(t*8)*0.4; }
+    if (g === "yawn"){ const k = Math.sin(gp * Math.PI); armL.rotation.z = -0.25 - k*2.4; armR.rotation.z = 0.25 + k*2.4; head.rotation.x = -0.45*k; }
+    if (g === "sitdown"){ rig.position.y = -0.22; legL.rotation.x = legR.rotation.x = -1.4; head.rotation.x = 0.25; }
+    if (g === "kick"){ legR.rotation.x = -Math.max(0, Math.sin(t*6))*0.9; head.rotation.x = 0.3; }
+    if (g === "sigh"){ head.rotation.x = 0.4; armL.rotation.z = -0.08; armR.rotation.z = 0.08; rig.position.y = -0.03 + Math.sin(gp*Math.PI)*0.04; }
+    if (g === "shiver"){ rig.position.x = Math.sin(t*55)*0.014; armL.rotation.x = -1.1; armR.rotation.x = -1.1; armL.rotation.z = 0.55; armR.rotation.z = -0.55; }
+    if (g === "hug"){ armL.rotation.x = -1.2; armR.rotation.x = -1.2; armL.rotation.z = 0.6; armR.rotation.z = -0.6; head.rotation.x = 0.25; }
+    if (g === "skyward"){ head.rotation.x = -0.65; armL.rotation.z = -1.7; armR.rotation.z = 1.7; rig.position.y = Math.abs(Math.sin(t*4))*0.08; }
     if (g === "hop"){ rig.position.y = Math.abs(Math.sin(t*6))*0.45; armL.rotation.z = -2.4; armR.rotation.z = 2.4;
                       legL.rotation.x = Math.sin(t*12)*0.3; legR.rotation.x = -Math.sin(t*12)*0.3; }
   }
@@ -1035,8 +1111,9 @@ function frame(){
   renderer.render(scene, camera);
 
   const lying = (asleep && !walking && !busy) || napping;
-  const line = nowS() < sayUntil ? sayText : lying ? "Zzz…" : sitting ? "resting…" : mood;
+  const line = nowS() < sayUntil && !lying ? sayText : lying ? "Zzz…" : "";
   if ($("bubble").textContent !== line) $("bubble").textContent = line;
+  $("bubble").hidden = !line;
   place2D($("bubble"), lumi.position.clone().add(new THREE.Vector3(0, lying ? 0.9 : 1.6, 0)));
   for (const p of Object.values(placeTags)) place2D(p.el, p.pos);
   for (const c of Object.values(creatures)) if (c.g.visible) place2D(c.label, c.g.position.clone().add(new THREE.Vector3(0,1.9,0)));
