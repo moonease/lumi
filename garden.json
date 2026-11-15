@@ -1,8 +1,8 @@
 {
-  "updated": "2026-11-15T07:37+01:00",
+  "updated": "2026-11-15T07:50+01:00",
   "day": 4,
-  "hour": 17,
-  "location": "teapot",
+  "hour": 19,
+  "location": "hedge",
   "weather": {
     "kind": "fog",
     "code": 45,
@@ -11,14 +11,14 @@
     "temp": -4.4,
     "precip": 0.0,
     "wind": 2,
-    "cloud": 100,
+    "cloud": 95,
     "heavy": false,
     "wet": false,
     "place": "Garching",
     "real": true,
     "snowfall": 0.0,
     "snow_depth": 0.0,
-    "fetched": "2026-11-15T07:10"
+    "fetched": "2026-11-15T07:39"
   },
   "season": "autumn",
   "wet": false,
@@ -391,6 +391,16 @@
       "day": 4,
       "hour": 16,
       "place": "teapot"
+    },
+    {
+      "day": 4,
+      "hour": 17,
+      "place": "teapot"
+    },
+    {
+      "day": 4,
+      "hour": 18,
+      "place": "teapot"
     }
   ],
   "loose": {
@@ -516,11 +526,11 @@
     },
     "bristle": {
       "name": "Mrs. Bristle",
-      "place": null
+      "place": "teapot"
     },
     "pip": {
       "name": "Pip",
-      "place": "vegetable_patch"
+      "place": null
     }
   },
   "friend_wearing": {
