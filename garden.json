@@ -1,7 +1,7 @@
 {
-  "updated": "2026-11-15T08:53+01:00",
+  "updated": "2026-11-15T09:10+01:00",
   "day": 5,
-  "hour": 2,
+  "hour": 4,
   "location": "teapot",
   "weather": {
     "kind": "cloudy",
@@ -373,6 +373,16 @@
     {
       "day": 5,
       "hour": 1,
+      "place": "teapot"
+    },
+    {
+      "day": 5,
+      "hour": 2,
+      "place": "teapot"
+    },
+    {
+      "day": 5,
+      "hour": 3,
       "place": "teapot"
     }
   ],
