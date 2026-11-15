@@ -1,7 +1,7 @@
 {
-  "updated": "2026-11-15T07:08+01:00",
+  "updated": "2026-11-15T07:25+01:00",
   "day": 4,
-  "hour": 14,
+  "hour": 16,
   "location": "teapot",
   "weather": {
     "kind": "fog",
@@ -10,7 +10,7 @@
     "label": "foggy",
     "temp": -4.4,
     "precip": 0.0,
-    "wind": 1,
+    "wind": 2,
     "cloud": 100,
     "heavy": false,
     "wet": false,
@@ -18,7 +18,7 @@
     "real": true,
     "snowfall": 0.0,
     "snow_depth": 0.0,
-    "fetched": "2026-11-15T06:39"
+    "fetched": "2026-11-15T07:10"
   },
   "season": "autumn",
   "wet": false,
@@ -190,37 +190,37 @@
   "interests": [
     {
       "topic": "the hedge",
-      "score": 1,
+      "score": 2,
       "days": 1,
       "obsession": false
     },
     {
       "topic": "blackberries",
-      "score": 1,
+      "score": 2,
       "days": 1,
       "obsession": false
     },
     {
       "topic": "teapot rest",
-      "score": 1,
+      "score": 2,
       "days": 1,
       "obsession": false
     },
     {
       "topic": "frogs",
-      "score": 0.8,
+      "score": 0.64,
       "days": 1,
       "obsession": false
     },
     {
       "topic": "pond",
-      "score": 0.8,
+      "score": 0.64,
       "days": 1,
       "obsession": false
     },
     {
       "topic": "drawing",
-      "score": 0.8,
+      "score": 0.64,
       "days": 1,
       "obsession": false
     }
@@ -243,7 +243,7 @@
       "id": "tock",
       "name": "Tock",
       "trust": 2,
-      "impression": "Tock is a good friend. He helps me with paperclip tricks!",
+      "impression": "Tock is smart and helps me with paperclip stuff.",
       "mood": "frustrated",
       "busy_with": "mending a shattered gear from his latest invention",
       "caregiver": false
@@ -252,7 +252,7 @@
       "id": "bristle",
       "name": "Mrs. Bristle",
       "trust": 82,
-      "impression": "Mrs. Bristle is kind. She helps me find twigs and tells stories!",
+      "impression": "Mrs. Bristle is warm and holds my paw when I’m scared.",
       "mood": "worried",
       "busy_with": "checking the pumpkin hole for intruders",
       "caregiver": true
@@ -261,7 +261,7 @@
       "id": "gorse",
       "name": "Old Gorse",
       "trust": 0,
-      "impression": "Old Gorse is grumpy. He doesn’t care about my lily pad boat.",
+      "impression": "Old Gorse is grumpy and doesn’t care about my boat ideas.",
       "mood": "grumpy",
       "busy_with": "staring at fog through his mossy spectacles",
       "caregiver": false
@@ -375,6 +375,16 @@
     {
       "day": 4,
       "hour": 13,
+      "place": "teapot"
+    },
+    {
+      "day": 4,
+      "hour": 14,
+      "place": "teapot"
+    },
+    {
+      "day": 4,
+      "hour": 15,
       "place": "teapot"
     }
   ],
@@ -497,7 +507,7 @@
     },
     "gorse": {
       "name": "Old Gorse",
-      "place": null
+      "place": "pond"
     },
     "bristle": {
       "name": "Mrs. Bristle",
