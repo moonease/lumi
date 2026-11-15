@@ -1,24 +1,24 @@
 {
-  "updated": "2026-11-15T11:07+01:00",
+  "updated": "2026-11-15T11:34+01:00",
   "day": 5,
-  "hour": 20,
-  "location": "shed",
+  "hour": 23,
+  "location": "hedge",
   "weather": {
-    "kind": "cloudy",
-    "code": 2,
-    "emoji": "⛅",
-    "label": "partly cloudy",
-    "temp": 2.2,
+    "kind": "clear",
+    "code": 1,
+    "emoji": "🌤️",
+    "label": "mostly clear",
+    "temp": 4.3,
     "precip": 0.0,
-    "wind": 4,
-    "cloud": 80,
+    "wind": 2,
+    "cloud": 52,
     "heavy": false,
     "wet": false,
     "place": "Garching",
     "real": true,
     "snowfall": 0.0,
     "snow_depth": 0.0,
-    "fetched": "2026-11-15T10:39"
+    "fetched": "2026-11-15T11:08"
   },
   "season": "autumn",
   "wet": false,
@@ -206,6 +206,27 @@
       "emoji": "✨",
       "text": "Lumi found a treasure: seed packet.",
       "kind": "treasure"
+    },
+    {
+      "day": 5,
+      "time": "20:00",
+      "emoji": "🌤️",
+      "text": "The sun came out. (real weather in Garching: mostly clear, 4.3°C)",
+      "kind": "weather"
+    },
+    {
+      "day": 5,
+      "time": "21:00",
+      "emoji": "✨",
+      "text": "Lumi found a treasure: glass bead.",
+      "kind": "treasure"
+    },
+    {
+      "day": 5,
+      "time": "22:00",
+      "emoji": "👗",
+      "text": "Lumi wore her acorn-cap hat, walnut-shell boots for the first time.",
+      "kind": "clothes"
     }
   ],
   "treasures": [
@@ -228,7 +249,14 @@
       "desc": "A torn paper packet with a few seeds left. The picture shows a blue flower.",
       "found": "Day 5, 17:00 (afternoon)",
       "where": "The vegetable patch",
-      "on_shelf": false
+      "on_shelf": true
+    },
+    {
+      "name": "glass bead",
+      "desc": "A red glass bead. If you look through the hole, it's like a telescope.",
+      "found": "Day 5, 21:00 (evening)",
+      "where": "The vegetable patch",
+      "on_shelf": true
     }
   ],
   "interests": [
@@ -295,7 +323,7 @@
     {
       "id": "bristle",
       "name": "Mrs. Bristle",
-      "trust": 86,
+      "trust": 90,
       "impression": "Mrs. Bristle helped me find twigs and was nice.",
       "mood": "concerned",
       "busy_with": "checking Pip's den",
@@ -330,11 +358,6 @@
     }
   ],
   "news": [
-    {
-      "when": "Day 3, 08:00 (morning)",
-      "text": "A squirrel buried a nut in the flowerbed.",
-      "place": "flowerbed"
-    },
     {
       "when": "Day 3, 13:00 (afternoon)",
       "text": "Fennel says someone tiny has moved into the hole in the big pumpkin!",
@@ -379,6 +402,11 @@
       "when": "Day 5, 12:00 (afternoon)",
       "text": "A giant raked a leaf pile in the flowerbed.",
       "place": "flowerbed"
+    },
+    {
+      "when": "Day 5, 22:00 (night)",
+      "text": "A fox came through the pond in the night.",
+      "place": "pond"
     }
   ],
   "diary": [
@@ -505,6 +533,21 @@
       "day": 5,
       "hour": 19,
       "place": "shed"
+    },
+    {
+      "day": 5,
+      "hour": 20,
+      "place": "shed"
+    },
+    {
+      "day": 5,
+      "hour": 21,
+      "place": "vegetable_patch"
+    },
+    {
+      "day": 5,
+      "hour": 22,
+      "place": "teapot"
     }
   ],
   "loose": {
@@ -524,7 +567,6 @@
       "leaf pile"
     ],
     "vegetable_patch": [
-      "glass bead",
       "leaf pile"
     ],
     "windowsill": [
@@ -584,12 +626,6 @@
     ],
     "vegetable_patch": [
       {
-        "name": "glass bead",
-        "from": null,
-        "gift": false,
-        "portable": true
-      },
-      {
         "name": "leaf pile",
         "from": null,
         "gift": false,
@@ -612,6 +648,11 @@
       "color": "#C8322B"
     },
     {
+      "name": "acorn-cap hat",
+      "slot": "hat",
+      "color": "#8A5A2B"
+    },
+    {
       "name": "mossy jumper",
       "slot": "top",
       "color": "#5E7D3A"
@@ -620,6 +661,11 @@
       "name": "leaf raincoat",
       "slot": "coat",
       "color": "#C9792B"
+    },
+    {
+      "name": "walnut-shell boots",
+      "slot": "boots",
+      "color": "#6A4A2E"
     },
     {
       "name": "dandelion scarf",
@@ -647,11 +693,11 @@
     },
     "gorse": {
       "name": "Old Gorse",
-      "place": "pond"
+      "place": null
     },
     "bristle": {
       "name": "Mrs. Bristle",
-      "place": "teapot"
+      "place": "hedge"
     },
     "pip": {
       "name": "Pip",
@@ -667,23 +713,8 @@
       },
       {
         "slot": "coat",
-        "name": "puffy blue coat",
-        "color": "#3F7FD9"
-      },
-      {
-        "slot": "scarf",
-        "name": "stripy yellow scarf",
-        "color": "#F2C12E"
-      },
-      {
-        "slot": "mittens",
-        "name": "red mittens",
-        "color": "#C8322B"
-      },
-      {
-        "slot": "hat",
-        "name": "red woolly beanie",
-        "color": "#C8322B"
+        "name": "patched brown jacket",
+        "color": "#8A5A2B"
       },
       {
         "slot": "boots",
@@ -699,7 +730,7 @@
     },
     {
       "name": "acorn-cap hat",
-      "where": "wardrobe"
+      "where": "wearing"
     },
     {
       "name": "mossy jumper",
@@ -711,7 +742,7 @@
     },
     {
       "name": "walnut-shell boots",
-      "where": "wardrobe"
+      "where": "wearing"
     },
     {
       "name": "felt coat",
