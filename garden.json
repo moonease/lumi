@@ -1,7 +1,7 @@
 {
-  "updated": "2026-11-15T04:59+01:00",
+  "updated": "2026-11-15T05:12+01:00",
   "day": 3,
-  "hour": 16,
+  "hour": 17,
   "location": "flowerbed",
   "weather": {
     "kind": "fog",
@@ -319,6 +319,11 @@
       "day": 3,
       "hour": 15,
       "place": "flowerbed"
+    },
+    {
+      "day": 3,
+      "hour": 16,
+      "place": "flowerbed"
     }
   ],
   "loose": {
@@ -421,7 +426,7 @@
     },
     "tock": {
       "name": "Tock",
-      "place": "flowerbed"
+      "place": null
     },
     "crumb": {
       "name": "Crumb",
