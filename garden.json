@@ -1,24 +1,24 @@
 {
-  "updated": "2026-11-15T03:16+01:00",
+  "updated": "2026-11-15T03:40+01:00",
   "day": 3,
-  "hour": 10,
-  "location": "hedge",
+  "hour": 12,
+  "location": "teapot",
   "weather": {
     "kind": "fog",
     "code": 45,
     "emoji": "🌫️",
     "label": "foggy",
-    "temp": -3.7,
+    "temp": -3.8,
     "precip": 0.0,
-    "wind": 1,
-    "cloud": 99,
+    "wind": 2,
+    "cloud": 100,
     "heavy": false,
     "wet": false,
     "place": "Garching",
     "real": true,
     "snowfall": 0.0,
     "snow_depth": 0.0,
-    "fetched": "2026-11-15T02:57"
+    "fetched": "2026-11-15T03:24"
   },
   "season": "autumn",
   "wet": false,
@@ -268,6 +268,16 @@
       "day": 3,
       "hour": 9,
       "place": "hedge"
+    },
+    {
+      "day": 3,
+      "hour": 10,
+      "place": "hedge"
+    },
+    {
+      "day": 3,
+      "hour": 11,
+      "place": "hedge"
     }
   ],
   "loose": {
@@ -285,6 +295,46 @@
       "dug-up spot"
     ]
   },
+  "loose_items": {
+    "pond": [
+      {
+        "name": "pencil shaving",
+        "from": null,
+        "gift": false,
+        "portable": true
+      }
+    ],
+    "teapot": [
+      {
+        "name": "doll's blanket",
+        "from": "Munisa",
+        "gift": true,
+        "portable": true
+      }
+    ],
+    "hedge": [
+      {
+        "name": "spider web",
+        "from": null,
+        "gift": false,
+        "portable": false
+      },
+      {
+        "name": "piece of web",
+        "from": null,
+        "gift": false,
+        "portable": true
+      }
+    ],
+    "flowerbed": [
+      {
+        "name": "dug-up spot",
+        "from": null,
+        "gift": false,
+        "portable": false
+      }
+    ]
+  },
   "wearing": [
     {
       "name": "summer dress",
@@ -297,9 +347,9 @@
       "color": "#5E7D3A"
     },
     {
-      "name": "felt coat",
+      "name": "leaf raincoat",
       "slot": "coat",
-      "color": "#3F5E8C"
+      "color": "#C9792B"
     },
     {
       "name": "dandelion scarf",
@@ -327,7 +377,7 @@
     },
     {
       "name": "leaf raincoat",
-      "where": "wardrobe"
+      "where": "wearing"
     },
     {
       "name": "walnut-shell boots",
@@ -335,7 +385,7 @@
     },
     {
       "name": "felt coat",
-      "where": "wearing"
+      "where": "wardrobe"
     },
     {
       "name": "dandelion scarf",
