@@ -1,8 +1,8 @@
 {
-  "updated": "2026-11-15T05:29+01:00",
+  "updated": "2026-11-15T05:43+01:00",
   "day": 3,
-  "hour": 19,
-  "location": "flowerbed",
+  "hour": 20,
+  "location": "pond",
   "weather": {
     "kind": "fog",
     "code": 45,
@@ -215,6 +215,15 @@
       "mood": "gentle, worried",
       "busy_with": "tucking the doll's blanket back into the teapot",
       "caregiver": true
+    },
+    {
+      "id": "gorse",
+      "name": "Old Gorse",
+      "trust": 0,
+      "impression": "",
+      "mood": "grumpy, intrigued",
+      "busy_with": "grumbling at the fog",
+      "caregiver": false
     }
   ],
   "news": [
@@ -341,6 +350,11 @@
       "day": 3,
       "hour": 18,
       "place": "flowerbed"
+    },
+    {
+      "day": 3,
+      "hour": 19,
+      "place": "flowerbed"
     }
   ],
   "loose": {
@@ -447,7 +461,7 @@
     },
     "crumb": {
       "name": "Crumb",
-      "place": "shed"
+      "place": null
     },
     "gorse": {
       "name": "Old Gorse",
