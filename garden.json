@@ -1,7 +1,7 @@
 {
-  "updated": "2026-11-15T08:10+01:00",
+  "updated": "2026-11-15T08:26+01:00",
   "day": 4,
-  "hour": 20,
+  "hour": 22,
   "location": "hedge",
   "weather": {
     "kind": "fog",
@@ -10,15 +10,15 @@
     "label": "foggy",
     "temp": -4.4,
     "precip": 0.0,
-    "wind": 2,
-    "cloud": 95,
+    "wind": 4,
+    "cloud": 86,
     "heavy": false,
     "wet": false,
     "place": "Garching",
     "real": true,
     "snowfall": 0.0,
     "snow_depth": 0.0,
-    "fetched": "2026-11-15T07:39"
+    "fetched": "2026-11-15T08:12"
   },
   "season": "autumn",
   "wet": false,
@@ -251,7 +251,7 @@
     {
       "id": "bristle",
       "name": "Mrs. Bristle",
-      "trust": 82,
+      "trust": 89,
       "impression": "Mrs. Bristle is warm and holds my paw when I’m scared.",
       "mood": "worried",
       "busy_with": "checking the pumpkin hole for intruders",
@@ -406,6 +406,16 @@
       "day": 4,
       "hour": 19,
       "place": "hedge"
+    },
+    {
+      "day": 4,
+      "hour": 20,
+      "place": "hedge"
+    },
+    {
+      "day": 4,
+      "hour": 21,
+      "place": "hedge"
     }
   ],
   "loose": {
@@ -538,7 +548,7 @@
     },
     "bristle": {
       "name": "Mrs. Bristle",
-      "place": "teapot"
+      "place": "hedge"
     },
     "pip": {
       "name": "Pip",
