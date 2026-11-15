@@ -1,24 +1,24 @@
 {
-  "updated": "2026-11-15T06:12+01:00",
-  "day": 3,
-  "hour": 23,
+  "updated": "2026-11-15T06:26+01:00",
+  "day": 4,
+  "hour": 8,
   "location": "teapot",
   "weather": {
     "kind": "fog",
     "code": 45,
     "emoji": "🌫️",
     "label": "foggy",
-    "temp": -4.1,
+    "temp": -4.2,
     "precip": 0.0,
     "wind": 2,
-    "cloud": 99,
+    "cloud": 100,
     "heavy": false,
     "wet": false,
     "place": "Garching",
     "real": true,
     "snowfall": 0.0,
     "snow_depth": 0.0,
-    "fetched": "2026-11-15T05:45"
+    "fetched": "2026-11-15T06:13"
   },
   "season": "autumn",
   "wet": false,
@@ -146,6 +146,21 @@
       "emoji": "🗺️",
       "text": "Lumi went to the giants' windowsill for the very first time.",
       "kind": "first"
+    },
+    {
+      "day": 3,
+      "time": "23:00",
+      "emoji": "🖍️",
+      "text": "Lumi drew: treasure shelf with twig and leaf",
+      "kind": "drawing",
+      "file": "0009-treasure-shelf-with-twig-and-l.svg"
+    },
+    {
+      "day": 4,
+      "time": "08:00",
+      "emoji": "😱",
+      "text": "Lumi dreamed: The dug-up spot had glowing eyes and whispered my name. I ran to the teapot but the hedge twisted into a snake and hissed. Mrs. Bristle held my paw and the pond showed my face huge and screaming.",
+      "kind": "dream"
     }
   ],
   "treasures": [
@@ -166,20 +181,38 @@
   ],
   "interests": [
     {
-      "topic": "frogs",
+      "topic": "the hedge",
       "score": 1,
+      "days": 1,
+      "obsession": false
+    },
+    {
+      "topic": "blackberries",
+      "score": 1,
+      "days": 1,
+      "obsession": false
+    },
+    {
+      "topic": "teapot rest",
+      "score": 1,
+      "days": 1,
+      "obsession": false
+    },
+    {
+      "topic": "frogs",
+      "score": 0.8,
       "days": 1,
       "obsession": false
     },
     {
       "topic": "pond",
-      "score": 1,
+      "score": 0.8,
       "days": 1,
       "obsession": false
     },
     {
       "topic": "drawing",
-      "score": 1,
+      "score": 0.8,
       "days": 1,
       "obsession": false
     }
@@ -202,7 +235,7 @@
       "id": "tock",
       "name": "Tock",
       "trust": 2,
-      "impression": "Tock is smart and fun to play with",
+      "impression": "Tock is a good friend. He helps me with paperclip tricks!",
       "mood": "frazzled, determined",
       "busy_with": "scraping twig bits from the pond mud",
       "caregiver": false
@@ -211,7 +244,7 @@
       "id": "bristle",
       "name": "Mrs. Bristle",
       "trust": 82,
-      "impression": "Mrs. Bristle is nice and helps me find berries",
+      "impression": "Mrs. Bristle is kind. She helps me find twigs and tells stories!",
       "mood": "gentle, worried",
       "busy_with": "tucking the doll's blanket back into the teapot",
       "caregiver": true
@@ -220,7 +253,7 @@
       "id": "gorse",
       "name": "Old Gorse",
       "trust": 0,
-      "impression": "",
+      "impression": "Old Gorse is grumpy. He doesn’t care about my lily pad boat.",
       "mood": "grumpy, intrigued",
       "busy_with": "grumbling at the fog",
       "caregiver": false
@@ -292,86 +325,20 @@
       "text": "I found a twig! It was all pointy and brown. I kept it in my teapot. It's my treasure! A spider spun a web round and round. I watched it for a long time. It was so fast! Mrs. Bristle gave me new clothes! Acorn-cap hat, mossy jumper, leaf raincoat, walnut boots, felt coat, dandelion scarf, thistledown mittens. I wore the mossy jumper and leaf raincoat. They were WARM and COZY! I tried to build tools with frost and screws. But they broke. I tried again. They broke again. I'm too cold and tired. My legs are cross with me. Why won't the tools work? Maybe the frost is too slippery. Time to go home. I'm sleepy. I'll dream about the spider's web and my twig treasure.",
       "drawing": null,
       "dream": null
+    },
+    {
+      "day": 3,
+      "weather": "🌫️ foggy, -4.2°C",
+      "text": "Mrs. Bristle found me and I slept in my glove bed. I wore my felt coat and dandelion scarf. I drew the treasure shelf with a leaf and twig. The fog was COLD and I saw the giants' windowsill. Why do the seeds rain down from the poppy? I need to rest now.",
+      "drawing": "0009-treasure-shelf-with-twig-and-l.svg",
+      "dream": {
+        "text": "The dug-up spot had glowing eyes and whispered my name. I ran to the teapot but the hedge twisted into a snake and hissed. Mrs. Bristle held my paw and the pond showed my face huge and screaming.",
+        "kind": "scary"
+      }
     }
   ],
   "mind_changes": [],
-  "path": [
-    {
-      "day": 3,
-      "hour": 8,
-      "place": "teapot"
-    },
-    {
-      "day": 3,
-      "hour": 9,
-      "place": "hedge"
-    },
-    {
-      "day": 3,
-      "hour": 10,
-      "place": "hedge"
-    },
-    {
-      "day": 3,
-      "hour": 11,
-      "place": "hedge"
-    },
-    {
-      "day": 3,
-      "hour": 12,
-      "place": "teapot"
-    },
-    {
-      "day": 3,
-      "hour": 13,
-      "place": "teapot"
-    },
-    {
-      "day": 3,
-      "hour": 14,
-      "place": "flowerbed"
-    },
-    {
-      "day": 3,
-      "hour": 15,
-      "place": "flowerbed"
-    },
-    {
-      "day": 3,
-      "hour": 16,
-      "place": "flowerbed"
-    },
-    {
-      "day": 3,
-      "hour": 17,
-      "place": "flowerbed"
-    },
-    {
-      "day": 3,
-      "hour": 18,
-      "place": "flowerbed"
-    },
-    {
-      "day": 3,
-      "hour": 19,
-      "place": "flowerbed"
-    },
-    {
-      "day": 3,
-      "hour": 20,
-      "place": "pond"
-    },
-    {
-      "day": 3,
-      "hour": 21,
-      "place": "pond"
-    },
-    {
-      "day": 3,
-      "hour": 22,
-      "place": "teapot"
-    }
-  ],
+  "path": [],
   "loose": {
     "pond": [
       "pencil shaving"
@@ -468,7 +435,7 @@
   "npc_now": {
     "fennel": {
       "name": "Fennel",
-      "place": null
+      "place": "vegetable_patch"
     },
     "tock": {
       "name": "Tock",
@@ -484,11 +451,11 @@
     },
     "bristle": {
       "name": "Mrs. Bristle",
-      "place": "hedge"
+      "place": null
     },
     "pip": {
       "name": "Pip",
-      "place": null
+      "place": "vegetable_patch"
     }
   },
   "friend_wearing": {
