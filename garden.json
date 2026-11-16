@@ -1,8 +1,8 @@
 {
-  "updated": "2026-11-15T23:42+01:00",
+  "updated": "2026-11-16T09:35+01:00",
   "day": 6,
-  "hour": 10,
-  "location": "teapot",
+  "hour": 11,
+  "location": "hedge",
   "weather": {
     "kind": "cloudy",
     "code": 3,
@@ -507,6 +507,11 @@
       "day": 6,
       "hour": 9,
       "place": "teapot"
+    },
+    {
+      "day": 6,
+      "hour": 10,
+      "place": "teapot"
     }
   ],
   "loose": {
@@ -628,14 +633,14 @@
       "color": "#5E7D3A"
     },
     {
+      "name": "leaf raincoat",
+      "slot": "coat",
+      "color": "#C9792B"
+    },
+    {
       "name": "walnut-shell boots",
       "slot": "boots",
       "color": "#6A4A2E"
-    },
-    {
-      "name": "felt coat",
-      "slot": "coat",
-      "color": "#3F5E8C"
     },
     {
       "name": "dandelion scarf",
@@ -723,7 +728,7 @@
     },
     {
       "name": "leaf raincoat",
-      "where": "wardrobe"
+      "where": "wearing"
     },
     {
       "name": "walnut-shell boots",
@@ -731,7 +736,7 @@
     },
     {
       "name": "felt coat",
-      "where": "wearing"
+      "where": "wardrobe"
     },
     {
       "name": "dandelion scarf",
