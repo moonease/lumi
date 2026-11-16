@@ -1,24 +1,24 @@
 {
-  "updated": "2026-11-16T09:35+01:00",
+  "updated": "2026-11-16T09:59+01:00",
   "day": 6,
-  "hour": 11,
+  "hour": 12,
   "location": "hedge",
   "weather": {
     "kind": "cloudy",
     "code": 3,
     "emoji": "☁️",
     "label": "grey and cloudy",
-    "temp": 1.6,
+    "temp": 9.0,
     "precip": 0.0,
-    "wind": 5,
-    "cloud": 98,
+    "wind": 21,
+    "cloud": 42,
     "heavy": false,
     "wet": false,
     "place": "Garching",
     "real": true,
     "snowfall": 0.0,
     "snow_depth": 0.0,
-    "fetched": "2026-11-15T23:30"
+    "fetched": "2026-11-16T09:40"
   },
   "season": "autumn",
   "wet": false,
@@ -249,6 +249,13 @@
       "emoji": "💛",
       "text": "Lumi is getting obsessed with the hedge.",
       "kind": "interest"
+    },
+    {
+      "day": 6,
+      "time": "11:00",
+      "emoji": "✨",
+      "text": "Lumi found a treasure: piece of web.",
+      "kind": "treasure"
     }
   ],
   "treasures": [
@@ -279,6 +286,13 @@
       "found": "Day 5, 21:00 (evening)",
       "where": "The vegetable patch",
       "on_shelf": true
+    },
+    {
+      "name": "piece of web",
+      "desc": "A piece of web. You got it yourself!",
+      "found": "Day 6, 11:00 (morning)",
+      "where": "The hedge",
+      "on_shelf": false
     }
   ],
   "interests": [
@@ -512,6 +526,11 @@
       "day": 6,
       "hour": 10,
       "place": "teapot"
+    },
+    {
+      "day": 6,
+      "hour": 11,
+      "place": "hedge"
     }
   ],
   "loose": {
@@ -523,8 +542,7 @@
       "doll's blanket"
     ],
     "hedge": [
-      "spider web",
-      "piece of web"
+      "spider web"
     ],
     "flowerbed": [
       "dug-up spot",
@@ -569,12 +587,6 @@
         "from": null,
         "gift": false,
         "portable": false
-      },
-      {
-        "name": "piece of web",
-        "from": null,
-        "gift": false,
-        "portable": true
       }
     ],
     "flowerbed": [
@@ -664,7 +676,7 @@
     },
     "crumb": {
       "name": "Crumb",
-      "place": null
+      "place": "shed"
     },
     "gorse": {
       "name": "Old Gorse",
@@ -688,23 +700,8 @@
       },
       {
         "slot": "coat",
-        "name": "puffy blue coat",
-        "color": "#3F7FD9"
-      },
-      {
-        "slot": "scarf",
-        "name": "stripy yellow scarf",
-        "color": "#F2C12E"
-      },
-      {
-        "slot": "mittens",
-        "name": "red mittens",
-        "color": "#C8322B"
-      },
-      {
-        "slot": "hat",
-        "name": "red woolly beanie",
-        "color": "#C8322B"
+        "name": "patched brown jacket",
+        "color": "#8A5A2B"
       },
       {
         "slot": "boots",
