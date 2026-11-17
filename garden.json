@@ -1,16 +1,16 @@
 {
-  "updated": "2026-11-17T08:42+01:00",
+  "updated": "2026-11-17T17:09+01:00",
   "day": 6,
-  "hour": 13,
-  "location": "teapot",
+  "hour": 14,
+  "location": "hedge",
   "weather": {
     "kind": "rain",
     "code": 61,
     "emoji": "🌧️",
     "label": "light rain",
-    "temp": 7.7,
-    "precip": 0.4,
-    "wind": 14,
+    "temp": 10.8,
+    "precip": 0.5,
+    "wind": 12,
     "cloud": 100,
     "heavy": false,
     "wet": true,
@@ -18,7 +18,7 @@
     "real": true,
     "snowfall": 0.0,
     "snow_depth": 0.0,
-    "fetched": "2026-11-16T23:03"
+    "fetched": "2026-11-17T13:05"
   },
   "season": "autumn",
   "wet": false,
@@ -548,6 +548,11 @@
       "day": 6,
       "hour": 12,
       "place": "teapot"
+    },
+    {
+      "day": 6,
+      "hour": 13,
+      "place": "teapot"
     }
   ],
   "loose": {
@@ -669,14 +674,14 @@
       "color": "#5E7D3A"
     },
     {
-      "name": "leaf raincoat",
-      "slot": "coat",
-      "color": "#C9792B"
-    },
-    {
       "name": "walnut-shell boots",
       "slot": "boots",
       "color": "#6A4A2E"
+    },
+    {
+      "name": "felt coat",
+      "slot": "coat",
+      "color": "#3F5E8C"
     },
     {
       "name": "dandelion scarf",
@@ -749,7 +754,7 @@
     },
     {
       "name": "leaf raincoat",
-      "where": "wearing"
+      "where": "wardrobe"
     },
     {
       "name": "walnut-shell boots",
@@ -757,7 +762,7 @@
     },
     {
       "name": "felt coat",
-      "where": "wardrobe"
+      "where": "wearing"
     },
     {
       "name": "dandelion scarf",
