@@ -1,28 +1,28 @@
 {
-  "updated": "2026-11-16T09:59+01:00",
+  "updated": "2026-11-17T08:42+01:00",
   "day": 6,
-  "hour": 12,
-  "location": "hedge",
+  "hour": 13,
+  "location": "teapot",
   "weather": {
-    "kind": "cloudy",
-    "code": 3,
-    "emoji": "☁️",
-    "label": "grey and cloudy",
-    "temp": 9.0,
-    "precip": 0.0,
-    "wind": 21,
-    "cloud": 42,
+    "kind": "rain",
+    "code": 61,
+    "emoji": "🌧️",
+    "label": "light rain",
+    "temp": 7.7,
+    "precip": 0.4,
+    "wind": 14,
+    "cloud": 100,
     "heavy": false,
-    "wet": false,
+    "wet": true,
     "place": "Garching",
     "real": true,
     "snowfall": 0.0,
     "snow_depth": 0.0,
-    "fetched": "2026-11-16T09:40"
+    "fetched": "2026-11-16T23:03"
   },
   "season": "autumn",
   "wet": false,
-  "wet_ground": false,
+  "wet_ground": true,
   "highlights": [
     {
       "day": 1,
@@ -256,6 +256,13 @@
       "emoji": "✨",
       "text": "Lumi found a treasure: piece of web.",
       "kind": "treasure"
+    },
+    {
+      "day": 6,
+      "time": "12:00",
+      "emoji": "🌧️",
+      "text": "It started to rain! (real weather in Garching: light rain, 7.7°C)",
+      "kind": "weather"
     }
   ],
   "treasures": [
@@ -292,7 +299,7 @@
       "desc": "A piece of web. You got it yourself!",
       "found": "Day 6, 11:00 (morning)",
       "where": "The hedge",
-      "on_shelf": false
+      "on_shelf": true
     }
   ],
   "interests": [
@@ -395,11 +402,6 @@
   ],
   "news": [
     {
-      "when": "Day 3, 13:00 (afternoon)",
-      "text": "Fennel says someone tiny has moved into the hole in the big pumpkin!",
-      "place": null
-    },
-    {
       "when": "Day 3, 14:00 (afternoon)",
       "text": "A giant dropped a glass bead in the vegetable patch.",
       "place": "vegetable_patch"
@@ -443,6 +445,11 @@
       "when": "Day 5, 22:00 (night)",
       "text": "A fox came through the pond in the night.",
       "place": "pond"
+    },
+    {
+      "when": "Day 6, 12:00 (afternoon)",
+      "text": "A giant dropped a tea bag in under the garden shed.",
+      "place": "shed"
     }
   ],
   "diary": [
@@ -531,6 +538,16 @@
       "day": 6,
       "hour": 11,
       "place": "hedge"
+    },
+    {
+      "day": 6,
+      "hour": 12,
+      "place": "hedge"
+    },
+    {
+      "day": 6,
+      "hour": 12,
+      "place": "teapot"
     }
   ],
   "loose": {
@@ -555,7 +572,8 @@
       "coin"
     ],
     "shed": [
-      "spider web"
+      "spider web",
+      "tea bag"
     ]
   },
   "loose_items": {
@@ -625,6 +643,12 @@
         "from": null,
         "gift": false,
         "portable": false
+      },
+      {
+        "name": "tea bag",
+        "from": null,
+        "gift": false,
+        "portable": false
       }
     ]
   },
@@ -668,7 +692,7 @@
   "npc_now": {
     "fennel": {
       "name": "Fennel",
-      "place": "vegetable_patch"
+      "place": null
     },
     "tock": {
       "name": "Tock",
@@ -700,8 +724,8 @@
       },
       {
         "slot": "coat",
-        "name": "patched brown jacket",
-        "color": "#8A5A2B"
+        "name": "yellow raincoat",
+        "color": "#F2C12E"
       },
       {
         "slot": "boots",
