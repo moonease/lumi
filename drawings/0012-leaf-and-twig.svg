@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <rect width="400" height="300" fill="white"/>
+  <rect y="250" height="50" width="400" fill="green"/>
+  <rect y="0" height="100" width="400" fill="#87CEEB"/>
+  <path d="M200,150 Q250,100 300,150 Q250,200 200,150" fill="none" stroke="green" stroke-width="15" stroke-linecap="round"/>
+  <path d="M200,150 Q220,130 240,150 Q220,170 200,150" fill="none" stroke="brown" stroke-width="10" stroke-linecap="round"/>
+  <path d="M240,150 Q260,130 280,150 Q260,170 240,150" fill="none" stroke="brown" stroke-width="10" stroke-linecap="round"/>
+  <path d="M200,100 Q220,80 240,100 Q220,120 200,100" fill="none" stroke="green" stroke-width="10" stroke-linecap="round"/>
+  <path d="M240,100 Q260,80 280,100 Q260,120 240,100" fill="none" stroke="green" stroke-width="10" stroke-linecap="round"/>
+  <path d="M200,50 Q220,30 240,50 Q220,70 200,50" fill="none" stroke="green" stroke-width="8" stroke-linecap="round"/>
+  <path d="M240,50 Q260,30 280,50 Q260,70 240,50" fill="none" stroke="green" stroke-width="8" stroke-linecap="round"/>
+  <path d="M200,150 Q220,130 240,150 Q220,170 200,150" fill="none" stroke="brown" stroke-width="10" stroke-linecap="round"/>
+  <path d="M240,150 Q260,130 280,150 Q260,170 240,150" fill="none" stroke="brown" stroke-width="10" stroke-linecap="round"/>
+  <path d="M200,100 Q220,80 240,100 Q220,120 200,100" fill="none" stroke="green" stroke-width="10" stroke-linecap="round"/>
+  <path d="M240,100 Q260,80 280,100 Q260,120 240,100" fill="none" stroke="green" stroke-width="10" stroke-linecap="round"/>
+  <path d="M200,50 Q220,30 240,50 Q220,70 200,50" fill="none" stroke="green" stroke-width="8" stroke-linecap="round"/>
+  <path d="M240,50 Q260,30 280,50 Q260,70 240,50" fill="none" stroke="green" stroke-width="8" stroke-linecap="round"/>
+  <path d="M200,150 Q220,130 240,150 Q220,170 200,150" fill="none" stroke="brown" stroke-width="10" stroke-linecap="round"/>
+  <path d="M240,150 Q260,130 280,150 Q260,170 240,150" fill="none" stroke="brown" stroke-width="10" stroke-linecap="round"/>
+  <path d="M200,100 Q220,80 240,100 Q220,120 200,100" fill="none" stroke="green" stroke-width="10" stroke-linecap="round"/>
+  <path d="M240,100 Q260,80 280,100 Q260,120 240,100" fill="none" stroke="green" stroke-width="10" stroke-linecap="round"/>
+  <path d="M200,50 Q220,30 240,50 Q220,70 200,50" fill="none" stroke="green" stroke-width="8" stroke-linecap="round"/>
+  <path d="M240,50 Q260,30 280,50 Q260,70 240,50" fill="none" stroke="green" stroke-width="8" stroke-linecap="round"/>
+</svg>
