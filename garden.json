@@ -1,24 +1,24 @@
 {
-  "updated": "2026-11-21T14:22+01:00",
+  "updated": "2026-11-21T14:42+01:00",
   "day": 6,
-  "hour": 18,
+  "hour": 20,
   "location": "hedge",
   "weather": {
     "kind": "cloudy",
-    "code": 3,
-    "emoji": "☁️",
-    "label": "grey and cloudy",
+    "code": 2,
+    "emoji": "⛅",
+    "label": "partly cloudy",
     "temp": 5.7,
     "precip": 0.0,
     "wind": 11,
-    "cloud": 100,
+    "cloud": 92,
     "heavy": false,
     "wet": false,
     "place": "Garching",
     "real": true,
     "snowfall": 0.0,
     "snow_depth": 0.0,
-    "fetched": "2026-11-21T13:51"
+    "fetched": "2026-11-21T14:27"
   },
   "season": "autumn",
   "wet": false,
@@ -426,7 +426,7 @@
     {
       "id": "pip",
       "name": "Pip",
-      "trust": 8,
+      "trust": 10,
       "impression": "Pip is nice and likes to build things with me. We planted a seed together.",
       "mood": null,
       "busy_with": null,
@@ -443,11 +443,6 @@
     }
   ],
   "news": [
-    {
-      "when": "Day 4, 08:00 (morning)",
-      "text": "Fennel hissed that Tock's 'clumsy contraption' fried his phone's battery, while Tock muttered about 'distracting gossip' as he tried to salvage his sketch from a puddle.",
-      "place": null
-    },
     {
       "when": "Day 4, 12:00 (afternoon)",
       "text": "A giant dropped a coin in the giants' windowsill.",
@@ -492,6 +487,11 @@
       "when": "Day 6, 15:00 (afternoon)",
       "text": "A magpie came looking for shiny things in the flowerbed.",
       "place": "flowerbed"
+    },
+    {
+      "when": "Day 6, 19:00 (evening)",
+      "text": "A giant dropped a hair clip in under the garden shed.",
+      "place": "shed"
     }
   ],
   "diary": [
@@ -620,6 +620,16 @@
       "day": 6,
       "hour": 17,
       "place": "hedge"
+    },
+    {
+      "day": 6,
+      "hour": 18,
+      "place": "hedge"
+    },
+    {
+      "day": 6,
+      "hour": 19,
+      "place": "hedge"
     }
   ],
   "loose": {
@@ -646,7 +656,8 @@
     ],
     "shed": [
       "spider web",
-      "tea bag"
+      "tea bag",
+      "hair clip"
     ]
   },
   "loose_items": {
@@ -728,6 +739,12 @@
         "from": null,
         "gift": false,
         "portable": false
+      },
+      {
+        "name": "hair clip",
+        "from": null,
+        "gift": false,
+        "portable": false
       }
     ]
   },
@@ -779,7 +796,7 @@
     },
     "crumb": {
       "name": "Crumb",
-      "place": "shed"
+      "place": null
     },
     "gorse": {
       "name": "Old Gorse",
@@ -787,11 +804,11 @@
     },
     "bristle": {
       "name": "Mrs. Bristle",
-      "place": null
+      "place": "teapot"
     },
     "pip": {
       "name": "Pip",
-      "place": "vegetable_patch"
+      "place": null
     }
   },
   "friend_wearing": {
