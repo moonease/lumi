@@ -1,7 +1,7 @@
 {
-  "updated": "2026-11-21T14:02+01:00",
+  "updated": "2026-11-21T14:22+01:00",
   "day": 6,
-  "hour": 17,
+  "hour": 18,
   "location": "hedge",
   "weather": {
     "kind": "cloudy",
@@ -293,6 +293,13 @@
       "emoji": "☁️",
       "text": "Clouds covered the sun. (real weather in Garching: grey and cloudy, 5.7°C)",
       "kind": "weather"
+    },
+    {
+      "day": 6,
+      "time": "17:00",
+      "emoji": "📱",
+      "text": "Lumi looked up “how deep to plant seeds” and now thinks: Seeds need to be planted deep in the dirt, like as deep as my thumb. Then they will grow into big plants.",
+      "kind": "phone"
     }
   ],
   "treasures": [
@@ -608,6 +615,11 @@
       "day": 6,
       "hour": 16,
       "place": "hedge"
+    },
+    {
+      "day": 6,
+      "hour": 17,
+      "place": "hedge"
     }
   ],
   "loose": {
@@ -623,7 +635,8 @@
     ],
     "flowerbed": [
       "dug-up spot",
-      "leaf pile"
+      "leaf pile",
+      "robin feather"
     ],
     "vegetable_patch": [
       "leaf pile"
@@ -679,6 +692,12 @@
         "from": null,
         "gift": false,
         "portable": false
+      },
+      {
+        "name": "robin feather",
+        "from": null,
+        "gift": false,
+        "portable": true
       }
     ],
     "vegetable_patch": [
@@ -772,7 +791,7 @@
     },
     "pip": {
       "name": "Pip",
-      "place": "hedge"
+      "place": "vegetable_patch"
     }
   },
   "friend_wearing": {
